@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Osama Badr — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #f4f2ed;
+  --surface: #fdfcfa;
+  --surface-2: #eceae4;
+  --ink: #1c1b18;
+  --ink-2: #5a5850;
+  --ink-3: #9a9890;
+  --border: rgba(28,27,24,0.1);
+  --border-strong: rgba(28,27,24,0.2);
+  --accent: #c95f2a;
+  --accent-light: #fdf0e8;
+  --accent-border: rgba(201,95,42,0.22);
+  --serif: 'DM Serif Display', Georgia, serif;
+  --sans: 'DM Sans', system-ui, sans-serif;
+  --mono: 'DM Mono', monospace;
+  --r: 10px;
+  --r-lg: 16px;
+}
+
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--sans);
+  background: var(--bg);
+  color: var(--ink);
+  font-size: 15px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.page { max-width: 860px; margin: 0 auto; padding: 0 2rem 6rem; }
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 0;
+  margin-bottom: 4rem;
+  border-bottom: 0.5px solid var(--border-strong);
+  position: sticky;
+  top: 0;
+  background: var(--bg);
+  z-index: 10;
+}
+.nav-name { font-family: var(--serif); font-size: 18px; }
+.nav-links { display: flex; gap: 1.75rem; }
+.nav-links a { font-size: 13px; color: var(--ink-2); text-decoration: none; }
+.nav-links a:hover { color: var(--accent); }
+.nav-contact { font-size: 13px; color: var(--ink-2); text-decoration: none; }
+.nav-contact:hover { color: var(--accent); }
+
+.hero { margin-bottom: 4rem; animation: fadeUp 0.5s ease both; }
+.hero-eyebrow {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: var(--accent);
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+.hero h1 {
+  font-family: var(--serif);
+  font-size: clamp(36px, 6vw, 56px);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin-bottom: 1.5rem;
+}
+.hero h1 em { font-style: italic; color: var(--accent); }
+.hero-summary {
+  font-size: 16px;
+  line-height: 1.8;
+  color: var(--ink-2);
+  max-width: 600px;
+  margin-bottom: 2rem;
+}
+.hero-contact { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+.hero-contact a {
+  font-size: 13px;
+  font-family: var(--mono);
+  color: var(--ink-3);
+  text-decoration: none;
+  border-bottom: 0.5px solid var(--border-strong);
+  padding-bottom: 1px;
+}
+.hero-contact a:hover { color: var(--accent); border-color: var(--accent); }
+
+.section { margin-bottom: 5rem; }
+.section-label {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.section-label::after {
+  content: '';
+  flex: 1;
+  height: 0.5px;
+  background: var(--border-strong);
+}
+
+.stat-strip {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 1px;
+  background: var(--border-strong);
+  border: 0.5px solid var(--border-strong);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  margin-bottom: 4.5rem;
+  animation: fadeUp 0.5s 0.08s ease both;
+}
+.stat { background: var(--surface); padding: 1.25rem 1rem; text-align: center; }
+.stat-num { font-family: var(--serif); font-size: 28px; color: var(--ink); line-height: 1; margin-bottom: 4px; }
+.stat-label { font-size: 11px; color: var(--ink-3); line-height: 1.4; }
+
+.timeline { position: relative; padding-left: 1.5rem; }
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 8px; bottom: 0;
+  width: 1px;
+  background: var(--border-strong);
+}
+.tl-block { position: relative; margin-bottom: 3rem; }
+.tl-dot {
+  position: absolute;
+  left: -1.5rem; top: 8px;
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--accent);
+  transform: translateX(-3px);
+  box-shadow: 0 0 0 3px var(--bg);
+}
+.tl-period {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.07em;
+  color: var(--accent);
+  margin-bottom: 3px;
+}
+.tl-role { font-size: 16px; font-weight: 500; color: var(--ink); margin-bottom: 2px; }
+.tl-company { font-size: 13px; color: var(--ink-3); margin-bottom: 1.25rem; }
+
+.tl-card {
+  background: var(--surface);
+  border: 0.5px solid var(--border);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+}
+.card-sublabel {
+  padding: 0.6rem 1.25rem;
+  border-bottom: 0.5px solid var(--border);
+  font-size: 11px;
+  font-family: var(--mono);
+  letter-spacing: 0.07em;
+  color: var(--ink-3);
+  background: var(--surface-2);
+}
+.ach-block {
+  padding: 1rem 1.25rem;
+  border-bottom: 0.5px solid var(--border);
+}
+.ach-title { font-size: 13px; font-weight: 500; color: var(--ink); margin-bottom: 0.6rem; }
+
+.wshr {
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  gap: 2px 8px;
+  font-size: 12px;
+  line-height: 1.65;
+}
+.wl {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.05em;
+  color: var(--ink-3);
+  padding-top: 2px;
+}
+.wv { color: var(--ink-2); }
+.wv strong { color: var(--ink); font-weight: 500; }
+
+.tag-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  padding: 0.75rem 1.25rem;
+  border-top: 0.5px solid var(--border);
+}
+.tag {
+  font-size: 11px;
+  font-family: var(--mono);
+  padding: 2px 8px;
+  border-radius: 20px;
+  background: var(--surface-2);
+  color: var(--ink-3);
+  border: 0.5px solid var(--border);
+}
+.tag.hi {
+  background: var(--accent-light);
+  color: var(--accent);
+  border-color: var(--accent-border);
+}
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 1rem;
+}
+.skill-card {
+  background: var(--surface);
+  border: 0.5px solid var(--border);
+  border-radius: var(--r);
+  padding: 1rem 1.25rem;
+}
+.skill-card-title {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin-bottom: 0.75rem;
+}
+.pills { display: flex; flex-wrap: wrap; gap: 5px; }
+.pill {
+  font-size: 12px;
+  padding: 3px 9px;
+  border-radius: 20px;
+  background: var(--surface-2);
+  color: var(--ink-2);
+  border: 0.5px solid var(--border);
+}
+
+.projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; }
+.project-card {
+  background: var(--surface);
+  border: 0.5px solid var(--border);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+}
+.project-top {
+  min-height: 160px;
+  background: var(--surface-2);
+  border-bottom: 0.5px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 2rem;
+}
+.project-icon {
+  width: 40px; height: 40px;
+  border-radius: 10px;
+  background: var(--accent-light);
+  border: 0.5px solid var(--accent-border);
+  display: flex; align-items: center; justify-content: center;
+}
+.project-icon svg { width: 18px; height: 18px; stroke: var(--accent); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.project-placeholder-label { font-family: var(--mono); font-size: 11px; color: var(--ink-3); letter-spacing: 0.08em; text-transform: uppercase; }
+.project-placeholder-sub { font-size: 12px; color: var(--ink-3); font-style: italic; text-align: center; line-height: 1.5; }
+.project-bottom { padding: 1rem 1.25rem; }
+.project-name { font-size: 15px; font-weight: 500; color: var(--ink); margin-bottom: 4px; }
+.project-desc { font-size: 12px; color: var(--ink-2); line-height: 1.6; margin-bottom: 0.75rem; }
+.stack-grid { display: flex; flex-direction: column; gap: 0.85rem; }
+.stack-group-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin-bottom: 5px;
+}
+.pill.hi {
+  background: var(--accent-light);
+  color: var(--accent);
+  border-color: var(--accent-border);
+  font-weight: 500;
+}
+
+.edu-card {
+  background: var(--surface);
+  border: 0.5px solid var(--border);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+}
+.edu-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 0.85rem 1.25rem;
+  border-bottom: 0.5px solid var(--border);
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.edu-row:last-child { border-bottom: none; }
+.edu-degree { font-size: 14px; font-weight: 500; color: var(--ink); }
+.edu-school { font-size: 13px; color: var(--ink-3); }
+
+footer {
+  padding-top: 2rem;
+  border-top: 0.5px solid var(--border-strong);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+footer p { font-size: 12px; color: var(--ink-3); font-family: var(--mono); }
+footer a { color: var(--ink-3); text-decoration: none; }
+footer a:hover { color: var(--accent); }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.hero-name {
+  font-family: var(--serif);
+  font-size: clamp(36px, 6vw, 56px);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin-bottom: 0.4rem;
+}
+.hero-title {
+  font-size: 15px;
+  color: var(--ink-3);
+  margin-bottom: 1.25rem;
+  font-family: var(--mono);
+  letter-spacing: 0.02em;
+}
+.hero-title-sep { margin: 0 6px; opacity: 0.4; }
+
+nav { justify-content: space-between; }
+
+.view-switcher {
+  display: inline-flex;
+  background: var(--surface-2);
+  border: 0.5px solid var(--border-strong);
+  border-radius: 8px;
+  padding: 3px;
+  gap: 2px;
+  margin-top: 1.5rem;
+}
+.hero { text-align: left; }
+.view-switcher-wrap {
+  display: flex;
+  justify-content: center;
+  margin-top: 1.5rem;
+}
+.view-btn {
+  font-family: var(--sans);
+  font-size: 13px;
+  color: var(--ink-3);
+  background: transparent;
+  border: none;
+  border-radius: 6px;
+  padding: 5px 14px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.view-btn:hover { color: var(--ink); }
+.view-btn.active {
+  background: var(--surface);
+  color: var(--ink);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.view { display: none; }
+.view.active { display: block; }
+
+@keyframes viewIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.view.active { animation: viewIn 0.25s ease both; }
+
+.projects-view-header { margin-bottom: 3rem; }
+.projects-view-header h2 {
+  font-family: var(--serif);
+  font-size: clamp(28px, 4vw, 40px);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.75rem;
+}
+.projects-view-header h2 em { font-style: italic; color: var(--accent); }
+.projects-view-header p { font-size: 15px; color: var(--ink-2); line-height: 1.7; max-width: 560px; }
+
+.project-full-card {
+  background: var(--surface);
+  border: 0.5px solid var(--border);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+}
+.project-full-top {
+  min-height: 180px;
+  background: var(--surface-2);
+  border-bottom: 0.5px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 2.5rem;
+}
+.project-full-icon {
+  width: 48px; height: 48px;
+  border-radius: 12px;
+  background: var(--accent-light);
+  border: 0.5px solid var(--accent-border);
+  display: flex; align-items: center; justify-content: center;
+}
+.project-full-icon svg { width: 20px; height: 20px; stroke: var(--accent); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.project-coming { font-family: var(--mono); font-size: 11px; color: var(--ink-3); letter-spacing: 0.08em; text-transform: uppercase; }
+.project-coming-sub { font-size: 13px; color: var(--ink-3); font-style: italic; text-align: center; line-height: 1.5; }
+.project-full-body { padding: 1.5rem; }
+.project-full-name { font-size: 18px; font-weight: 500; color: var(--ink); margin-bottom: 6px; }
+.project-full-desc { font-size: 14px; color: var(--ink-2); line-height: 1.7; margin-bottom: 1.25rem; }
+.project-full-stack { display: flex; flex-wrap: wrap; gap: 5px; }
+
+@media (max-width: 580px) {
+  .page { padding: 0 1rem 4rem; }
+  nav { margin-bottom: 2.5rem; }
+  .hero h1 { font-size: 34px; }
+  .nav-right { gap: 1rem; }
+  .wshr { grid-template-columns: 40px 1fr; }
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <nav>
+    <span class="nav-name">Osama Badr</span>
+    <div class="nav-links">
+      <a href="about.html">About</a>
+      <a class="nav-contact" href="mailto:osabadr@gmail.com">Contact</a>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-eyebrow">Quality · AI · Product · San Jose, CA</div>
+    <h1 class="hero-name">Osama Badr</h1>
+    <p class="hero-title">Senior Product Quality Analyst <span class="hero-title-sep">·</span> AI Tooling Builder</p>
+    <p class="hero-summary">I spent 5+ years at Meta making sure products shipped clean — filing bugs, owning release readiness, and running QA for a VR companion app used by millions. Then AI changed what was possible, and I stopped just reporting problems and started building systems to fix them. Now I build products on the side that apply the same thinking: what breaks, why, and how do you design around it from the start.</p>
+    <div class="hero-contact">
+      <a href="mailto:osabadr@gmail.com">osabadr@gmail.com</a>
+      <a href="tel:4085949409">408-594-9409</a>
+      <a href="https://linkedin.com/in/obadr" target="_blank">linkedin.com/in/obadr</a>
+    </div>
+    <div class="view-switcher-wrap"><div class="view-switcher">
+      <button class="view-btn active" onclick="switchView('work')">Work</button>
+      <button class="view-btn" onclick="switchView('projects')">Projects</button>
+    </div></div>
+  </section>
+
+<div class="view active" id="view-work">
+
+  <div class="stat-strip">
+    <div class="stat"><div class="stat-num">5+</div><div class="stat-label">Years at Meta Reality Labs</div></div>
+    <div class="stat"><div class="stat-num">2,000+</div><div class="stat-label">Regression bugs verified</div></div>
+    <div class="stat"><div class="stat-num">500+</div><div class="stat-label">Bugs tested via AI fix workstream</div></div>
+    <div class="stat"><div class="stat-num">3,000+</div><div class="stat-label">Test cases managed</div></div>
+    <div class="stat"><div class="stat-num">47</div><div class="stat-label">Product areas covered</div></div>
+    <div class="stat"><div class="stat-num">10+</div><div class="stat-label">Technical docs authored</div></div>
+  </div>
+
+  <!-- Experience -->
+  <section class="section" id="experience">
+    <div class="section-label">Career timeline</div>
+    <div class="timeline">
+
+      <!-- Senior PQA -->
+      <div class="tl-block">
+        <div class="tl-dot"></div>
+        <div class="tl-period">Aug 2024 — Present</div>
+        <div class="tl-role">Senior Product Quality Analyst</div>
+        <div class="tl-company">Meta · Reality Labs · Burlingame, CA</div>
+        <div class="tl-card">
+
+          <div class="card-sublabel">AI-native initiatives</div>
+
+          <div class="ach-block">
+            <div class="ach-title">AI-led bug fix workstream</div>
+            <div class="wshr">
+              <span class="wl">What</span><span class="wv">Partnered with engineering on an LLM-assisted bug fix program — prompting, reviewing, and validating AI-generated code fixes for open production bugs across iOS and Android codebases</span>
+              <span class="wl">Scale</span><span class="wv"><strong>500+ bugs</strong> processed through the workstream; participated in a weekly buddy system with engineers to iterate on AI-generated fixes</span>
+              <span class="wl">Result</span><span class="wv">Generated scaled insights into AI-driven bug resolution; demonstrated that QA engineers can contribute directly to code-level remediation — expanding the traditional QA role</span>
+            </div>
+          </div>
+
+          <div class="ach-block">
+            <div class="ach-title">Reverse task search agent</div>
+            <div class="wshr">
+              <span class="wl">What</span><span class="wv">Built an AI agent for task and issue reporting — batch-converts task IDs into compact query URLs, enabling engineers to view dozens of related tasks simultaneously instead of looking them up one by one</span>
+              <span class="wl">Scale</span><span class="wv">Handles batches of <strong>75+ tasks</strong> with automatic URL splitting; promoted through staged rollout (Dev → RC) and shipped as a standalone CLI skill</span>
+              <span class="wl">Result</span><span class="wv">Eliminated manual one-by-one task lookups; increased operational efficiency across cross-functional teams</span>
+            </div>
+          </div>
+
+          <div class="ach-block">
+            <div class="ach-title">Self-healing test automation framework</div>
+            <div class="wshr">
+              <span class="wl">What</span><span class="wv">Designed a self-healing test automation framework that detects outdated test cases from code diffs and auto-generates updated golden path tests — removing the need for manual test maintenance after code changes</span>
+              <span class="wl">Scale</span><span class="wv">Self-healing framework achieves <strong>F1 scores of 0.97–1.0</strong> on test sets; manages E2E journey test cases with automated weekly summaries</span>
+              <span class="wl">Result</span><span class="wv">Reduced manual test maintenance burden; distinguished product bugs from documentation drift; enabled auto-generation of test cases from engineering code changes</span>
+            </div>
+          </div>
+
+          <div class="card-sublabel">Quality operations</div>
+
+          <div class="ach-block">
+            <div class="ach-title">Golden Path user journey program</div>
+            <div class="wshr">
+              <span class="wl">What</span><span class="wv">Led partnership with internal beta testing team, UXR, and Product Design to establish structured "Golden Path" user journey flows — enabling internal testers to provide structured feedback on existing and new features</span>
+              <span class="wl">Scale</span><span class="wv"><strong>2,600+ survey responses</strong> and nearly <strong>400 bugs filed</strong> by non-QA testers in a single quarter</span>
+              <span class="wl">Result</span><span class="wv">Scaled quality signal collection beyond QA; turned internal users into structured, high-signal feedback contributors</span>
+            </div>
+          </div>
+
+          <div class="ach-block">
+            <div class="ach-title">VR Engagement oncall and release readiness</div>
+            <div class="wshr">
+              <span class="wl">What</span><span class="wv">Served as primary QA oncall and release gatekeeper for the VR companion app across iOS and Android — player UI, content sharing, navigation, media galleries, CSS rendering</span>
+              <span class="wl">Scale</span><span class="wv"><strong>490+ oncall-tagged bugs</strong> filed across 47 product areas (344 oncall, 228 team-attributed); performed release QA signoffs for 5+ major release trains; 2 production oncall rotations spanning ~3 years</span>
+              <span class="wl">Result</span><span class="wv"><strong>20% reduction</strong> in mis-triaged issues; <strong>40% reduction</strong> in production bugs in Meta Horizon Mobile; release reports kept engineering and product aligned on blockers and feature readiness</span>
+            </div>
+          </div>
+
+          <div class="ach-block">
+            <div class="ach-title">Cross-platform integration testing</div>
+            <div class="wshr">
+              <span class="wl">What</span><span class="wv">Led QA for a social media platform's CSS-based share sheet integration with the VR companion app — covering FOA bar rendering, share sheet orientation, and media download flows across iOS and Android</span>
+              <span class="wl">How</span><span class="wv">Created and maintained structured exploratory testing guides with 7+ wiki revisions; verified fixes across multiple app versions and form factors</span>
+              <span class="wl">Result</span><span class="wv">Ensured cross-platform share sheet quality at launch</span>
+            </div>
+          </div>
+
+          <div class="ach-block" style="border-bottom:none;">
+            <div class="ach-title">QA documentation and technical output</div>
+            <div class="wshr">
+              <span class="wl">What</span><span class="wv">Authored 10+ technical documents including weekly auto-updated QA summaries, user journey test reports, golden path automation guides, and tool comparison analyses; maintained 3 wiki pages covering mobile testing, player UI, and oncall procedures</span>
+              <span class="wl">Result</span><span class="wv">Established reusable QA documentation standards adopted across the team; enabled other QA engineers to adopt AI-driven testing workflows; organized 59 meetings for team syncs, buddy system check-ins, and tooling coordination</span>
+            </div>
+          </div>
+
+          <div class="tag-row">
+            <span class="tag hi">AI agent development</span>
+            <span class="tag hi">LLM bug fixing</span>
+            <span class="tag hi">Agentic workflows</span>
+            <span class="tag hi">Prompt engineering</span>
+            <span class="tag">Release readiness</span>
+            <span class="tag">Triage systems</span>
+            <span class="tag">Cross-platform QA</span>
+            <span class="tag">iOS + Android</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- PQA -->
+      <div class="tl-block">
+        <div class="tl-dot"></div>
+        <div class="tl-period">Jul 2021 — Aug 2024</div>
+        <div class="tl-role">Product Quality Analyst</div>
+        <div class="tl-company">Meta · Reality Labs · Burlingame, CA</div>
+        <div class="tl-card">
+
+          <div class="card-sublabel">Coverage and scale</div>
+
+          <div class="ach-block">
+            <div class="ach-title">Multi-team QA across Meta Quest and VR companion apps</div>
+            <div class="wshr">
+              <span class="wl">What</span><span class="wv">Supported VR Engagement QA, VR Regression QA, and RayBan Stories QA — providing test coverage and quality insights across Meta Quest products and VR companion apps</span>
+              <span class="wl">Scale</span><span class="wv">Identified and verified fixes for <strong>2,000+ regression issues</strong> including <strong>300+ critical launch-blocking bugs</strong>; managed a repository of <strong>3,000+ test cases</strong> across onshore and offshore testers</span>
+              <span class="wl">Result</span><span class="wv">Optimized issue verification pipelines; enabled faster bug resolution prior to key product launches</span>
+            </div>
+          </div>
+
+          <div class="ach-block" style="border-bottom:none;">
+            <div class="ach-title">Major feature launch testing</div>
+            <div class="wshr">
+              <span class="wl">What</span><span class="wv">Led testing strategy and triage for high-profile launches: Reels in VR, Home Feed redesign, VR Search refresh</span>
+              <span class="wl">How</span><span class="wv">Coordinated test coverage across onshore and offshore testers; improved issue verification pipelines for pre-launch quality gates</span>
+              <span class="wl">Result</span><span class="wv">Smooth rollouts with timely issue resolution on all three launches</span>
+            </div>
+          </div>
+
+          <div class="tag-row">
+            <span class="tag">VR/MR testing</span>
+            <span class="tag">Regression QA</span>
+            <span class="tag">Launch readiness</span>
+            <span class="tag">Test case management</span>
+            <span class="tag">RayBan Stories</span>
+            <span class="tag">Offshore coordination</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Playtester -->
+      <div class="tl-block">
+        <div class="tl-dot"></div>
+        <div class="tl-period">Oct 2020 — Jul 2021</div>
+        <div class="tl-role">QA Playtester / Product Specialist</div>
+        <div class="tl-company">Meta · Reality Labs · Remote</div>
+        <div class="tl-card">
+
+          <div class="card-sublabel">Initiative</div>
+
+          <div class="ach-block" style="border-bottom:none;">
+            <div class="ach-title">Ray-Ban Stories beta and dogfooding program</div>
+            <div class="wshr">
+              <span class="wl">What</span><span class="wv">Designed and ran an internal beta testing and rotational dogfooding program for the Ray-Ban Stories hardware launch — device distribution, user onboarding, daily office hours, and structured feedback collection</span>
+              <span class="wl">Scale</span><span class="wv"><strong>134 users</strong> across 5 weeks; <strong>40+ pre-production devices</strong> in rotation; office hours 3× per week; supported <strong>100+ internal beta testers</strong>; surfaced <strong>300+ bugs</strong> pre-launch; unblocked 100+ participants encountering setup and firmware issues</span>
+              <span class="wl">Result</span><span class="wv">Improved pre-release product stability; generated structured dogfooding feedback that directly informed pre-launch product improvements; accelerated issue resolution across distributed teams</span>
+            </div>
+          </div>
+
+          <div class="tag-row">
+            <span class="tag">Hardware QA</span>
+            <span class="tag">Beta program design</span>
+            <span class="tag">Dogfooding</span>
+            <span class="tag">Bug triage</span>
+            <span class="tag">Device management</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Skills -->
+  <section class="section" id="skills">
+    <div class="section-label">Skills</div>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <div class="skill-card-title">AI + Automation</div>
+        <div class="pills">
+          <span class="pill">AI agent development</span>
+          <span class="pill">Prompt engineering</span>
+          <span class="pill">LLM-assisted bug fixing</span>
+          <span class="pill">Agentic workflow design</span>
+          <span class="pill">Test case generation</span>
+          <span class="pill">Self-healing test suites</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-title">Quality + Testing</div>
+        <div class="pills">
+          <span class="pill">Release readiness</span>
+          <span class="pill">VR/MR QA</span>
+          <span class="pill">Cross-platform mobile</span>
+          <span class="pill">Bug triage + lifecycle</span>
+          <span class="pill">Exploratory testing</span>
+          <span class="pill">Regression QA</span>
+          <span class="pill">Beta program design</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-title">Engineering + Tooling</div>
+        <div class="pills">
+          <span class="pill">Python</span>
+          <span class="pill">JavaScript</span>
+          <span class="pill">GraphQL</span>
+          <span class="pill">SQL</span>
+          <span class="pill">CI/CD</span>
+          <span class="pill">CLI development</span>
+          <span class="pill">JIRA</span>
+          <span class="pill">Tableau</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-title">Product + Operations</div>
+        <div class="pills">
+          <span class="pill">Cross-functional leadership</span>
+          <span class="pill">Release reporting</span>
+          <span class="pill">Data-driven triage</span>
+          <span class="pill">Stakeholder alignment</span>
+          <span class="pill">Dogfooding programs</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Education -->
+  <section class="section">
+    <div class="section-label">Education</div>
+    <div class="edu-card">
+      <div class="edu-row">
+        <div class="edu-degree">B.S. Business Administration</div>
+        <div class="edu-school">San Jose State University</div>
+      </div>
+      <div class="edu-row">
+        <div class="edu-degree">Data Analytics Certificate</div>
+        <div class="edu-school">General Assembly</div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>Osama Badr · San Jose, CA · 2026</p>
+    <p><a href="mailto:osabadr@gmail.com">osabadr@gmail.com</a> · <a href="https://linkedin.com/in/obadr" target="_blank">linkedin.com/in/obadr</a></p>
+  </footer>
+
+</div><!-- /view-work -->
+
+<div class="view" id="view-projects">
+  <div class="projects-view-header">
+    <h2>Personal<br><em>projects.</em></h2>
+    <p>Building outside of work — applying the same systems thinking that keeps products shippable to products I'm shipping myself.</p>
+  </div>
+
+  <div class="project-full-card">
+    <div class="project-full-top">
+      <div class="project-full-icon">
+        <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+      </div>
+      <div class="project-coming">Coming soon</div>
+      <div class="project-coming-sub">Prototype + product decisions in progress</div>
+    </div>
+    <div class="project-full-body">
+      <div class="project-full-name">pointd.fyi</div>
+      <div class="project-full-desc">Travel rewards optimizer that helps users maximize point and mile value across loyalty programs using real-time award availability data. Built out of a personal obsession with credit card rewards and the frustration of not having a simple tool that actually shows you where your points go furthest.</div>
+      <div class="stack-grid">
+        <div class="stack-group">
+          <div class="stack-group-label">Frontend</div>
+          <div class="pills">
+            <span class="pill">React + Vite</span>
+            <span class="pill">JavaScript</span>
+            <span class="pill">Zustand</span>
+            <span class="pill">Tailwind CSS</span>
+          </div>
+        </div>
+        <div class="stack-group">
+          <div class="stack-group-label">Backend &amp; Data</div>
+          <div class="pills">
+            <span class="pill">Supabase</span>
+            <span class="pill">Seats.aero API</span>
+            <span class="pill">Google Places API</span>
+            <span class="pill">Pexels API</span>
+            <span class="pill">Live scrapers (Hyatt)</span>
+          </div>
+        </div>
+        <div class="stack-group">
+          <div class="stack-group-label">Infra &amp; Deploy</div>
+          <div class="pills">
+            <span class="pill">Cloudflare Pages</span>
+            <span class="pill">GitHub Actions</span>
+            <span class="pill">Wrangler</span>
+            <span class="pill">Resend (email)</span>
+          </div>
+        </div>
+        <div class="stack-group">
+          <div class="stack-group-label">Testing</div>
+          <div class="pills">
+            <span class="pill">Vitest</span>
+            <span class="pill">React Testing Library</span>
+            <span class="pill">Playwright (e2e)</span>
+            <span class="pill hi">500+ tests</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="project-full-card">
+    <div class="project-full-top">
+      <div class="project-full-icon">
+        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+      </div>
+      <div class="project-coming">Coming soon</div>
+      <div class="project-coming-sub">Prototype + product decisions in progress</div>
+    </div>
+    <div class="project-full-body">
+      <div class="project-full-name">BIP — Build in Public</div>
+      <div class="project-full-desc">Platform for AI builders to share shipping logs, embed live prototypes, and collect micro-payments — turning the build process itself into content. Targeting resourceful AI builders who are somewhere between non-technical and semi-technical and want a home for their work that isn't just Twitter threads.</div>
+      <div class="stack-grid">
+        <div class="stack-group">
+          <div class="stack-group-label">Frontend</div>
+          <div class="pills">
+            <span class="pill">Next.js 16 (App Router)</span>
+            <span class="pill">React 19</span>
+            <span class="pill">TypeScript (strict)</span>
+            <span class="pill">Tailwind CSS 4</span>
+            <span class="pill">Lucide React</span>
+          </div>
+        </div>
+        <div class="stack-group">
+          <div class="stack-group-label">Backend &amp; Data</div>
+          <div class="pills">
+            <span class="pill">Supabase (auth + db)</span>
+            <span class="pill">TanStack Query</span>
+            <span class="pill">Anthropic SDK</span>
+          </div>
+        </div>
+        <div class="stack-group">
+          <div class="stack-group-label">Infra &amp; Deploy</div>
+          <div class="pills">
+            <span class="pill">Cloudflare Workers</span>
+            <span class="pill">OpenNext (CF adapter)</span>
+            <span class="pill">Wrangler</span>
+            <span class="pill">GitHub Actions</span>
+          </div>
+        </div>
+        <div class="stack-group">
+          <div class="stack-group-label">Testing</div>
+          <div class="pills">
+            <span class="pill">Vitest</span>
+            <span class="pill">React Testing Library</span>
+            <span class="pill">Playwright (e2e)</span>
+            <span class="pill hi">175+ tests</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="project-full-card">
+    <div class="project-full-top" style="background: #f0f4ff; border-bottom-color: rgba(60,80,180,0.12);">
+      <div class="project-full-icon" style="background: #eef1ff; border-color: rgba(60,80,180,0.2);">
+        <svg viewBox="0 0 24 24" style="stroke: #4355c4;"><path d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2v-4M9 21H5a2 2 0 01-2-2v-4m0 0h18"/></svg>
+      </div>
+      <div class="project-coming" style="color: #4355c4;">Active</div>
+      <div class="project-coming-sub">Deployed across pointd.fyi and BIP via GitHub Actions</div>
+    </div>
+    <div class="project-full-body">
+      <div class="project-full-name">qa-agent <a href="https://github.com/badro98/qa-agent" target="_blank" style="font-size:11px; font-family: var(--mono); color: var(--ink-3); text-decoration:none; border-bottom: 0.5px solid var(--border-strong); padding-bottom:1px; margin-left:6px;">github ↗</a></div>
+      <div class="project-full-desc">Config-driven QA agent that runs on every PR and on-demand regression. Analyzes diffs, scores risk by surface, identifies coverage gaps, proposes new tests, executes scoped test suites, and posts a structured report as a PR comment. Propose-only output — the agent drafts, you promote. Same agent, different config per repo.</div>
+      <div class="stack-grid">
+        <div class="stack-group">
+          <div class="stack-group-label">Pipeline (6 steps)</div>
+          <div class="pills">
+            <span class="pill">1. Diff analysis</span>
+            <span class="pill">2. Risk scoring</span>
+            <span class="pill">3. Coverage gap detection</span>
+            <span class="pill">4. Test proposals</span>
+            <span class="pill">5. Test execution</span>
+            <span class="pill">6. Synthesis + report</span>
+          </div>
+        </div>
+        <div class="stack-group">
+          <div class="stack-group-label">Stack</div>
+          <div class="pills">
+            <span class="pill">Node.js (ESM)</span>
+            <span class="pill">Anthropic API (claude-sonnet)</span>
+            <span class="pill">GitHub API</span>
+            <span class="pill">Vitest</span>
+            <span class="pill">Playwright</span>
+            <span class="pill">GitHub Actions</span>
+          </div>
+        </div>
+        <div class="stack-group">
+          <div class="stack-group-label">Modes</div>
+          <div class="pills">
+            <span class="pill">PR mode — scoped diff, @smoke e2e only, &lt;3 min CI</span>
+            <span class="pill">Regression mode — full Vitest + Playwright suite</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /view-projects -->
+
+<script>
+function switchView(name) {
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  document.querySelectorAll('.view-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('view-' + name).classList.add('active');
+  event.currentTarget.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+</body>
+</html>
