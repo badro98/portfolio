@@ -2,7 +2,7 @@
 
 Static personal portfolio site built with plain HTML and CSS. No framework, no build step.
 
-**Live:** [pages.dev URL once deployed]
+**Live:** https://osamabadr-portfolio.pages.dev
 
 ## Pages
 
