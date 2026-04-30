@@ -190,18 +190,40 @@ nav {
 .journey-phase {
   display: flex;
   gap: 1rem;
-  padding-bottom: 1.75rem;
+  padding-bottom: 2rem;
   position: relative;
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1);
 }
+.journey-phase.in-view { opacity: 1; transform: translateY(0); }
+
+/* Connecting line — base track */
 .journey-phase:not(:last-child)::before {
   content: '';
   position: absolute;
   left: 13px;
-  top: 28px;
+  top: 30px;
   bottom: 0;
   width: 1px;
   background: var(--border-strong);
 }
+
+/* Connecting line — drawn accent overlay */
+.journey-phase:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  left: 13px;
+  top: 30px;
+  bottom: 0;
+  width: 1px;
+  background: var(--accent);
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 0.9s cubic-bezier(0.22,1,0.36,1) 0.25s;
+}
+.journey-phase.in-view:not(:last-child)::after { transform: scaleY(1); }
+
 .journey-num {
   width: 28px; height: 28px;
   flex-shrink: 0;
@@ -214,7 +236,40 @@ nav {
   color: var(--ink-3);
   position: relative;
   z-index: 1;
+  transition: background 0.5s cubic-bezier(0.22,1,0.36,1) 0.15s,
+              color 0.5s cubic-bezier(0.22,1,0.36,1) 0.15s,
+              border-color 0.5s ease 0.15s,
+              box-shadow 0.6s cubic-bezier(0.22,1,0.36,1) 0.15s,
+              transform 0.5s cubic-bezier(0.22,1,0.36,1) 0.15s;
 }
+
+/* Orbiting dashed ring around the active node */
+.journey-num::after {
+  content: '';
+  position: absolute;
+  inset: -7px;
+  border-radius: 50%;
+  border: 1px dashed var(--accent);
+  opacity: 0;
+  transition: opacity 0.6s ease 0.45s;
+  pointer-events: none;
+}
+.journey-phase.in-view .journey-num {
+  background: var(--accent);
+  color: var(--surface);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px var(--accent-light);
+  transform: scale(1.06);
+}
+.journey-phase.in-view .journey-num::after {
+  opacity: 0.55;
+  animation: orbit 12s linear infinite;
+}
+
+@keyframes orbit { to { transform: rotate(360deg); } }
+
+.journey-content { flex: 1; min-width: 0; }
+
 .journey-period {
   font-family: var(--mono);
   font-size: 10px;
@@ -222,35 +277,206 @@ nav {
   color: var(--accent);
   margin-bottom: 3px;
   text-transform: uppercase;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.5s ease-out 0.2s, transform 0.5s cubic-bezier(0.22,1,0.36,1) 0.2s;
 }
 .journey-title {
-  font-size: 14px;
-  font-weight: 500;
+  font-family: var(--serif);
+  font-size: 19px;
+  letter-spacing: -0.01em;
   color: var(--ink);
-  margin-bottom: 8px;
+  margin-bottom: 10px;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.55s ease-out 0.28s, transform 0.55s cubic-bezier(0.22,1,0.36,1) 0.28s;
 }
 .journey-desc {
-  font-size: 13px;
-  line-height: 1.7;
+  font-size: 13.5px;
+  line-height: 1.75;
   color: var(--ink-2);
-  margin-bottom: 8px;
+  margin-bottom: 12px;
+  max-width: 56ch;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.55s ease-out 0.36s, transform 0.55s cubic-bezier(0.22,1,0.36,1) 0.36s;
 }
-.journey-chips { display: flex; flex-wrap: wrap; gap: 4px; }
+.journey-phase.in-view .journey-period,
+.journey-phase.in-view .journey-title,
+.journey-phase.in-view .journey-desc {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.journey-chips { display: flex; flex-wrap: wrap; gap: 5px; }
 .journey-chip {
   font-size: 11px;
   font-family: var(--mono);
-  padding: 2px 8px;
+  padding: 3px 9px;
   border-radius: 20px;
   background: var(--surface-2);
   color: var(--ink-3);
   border: 0.5px solid var(--border);
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.4s ease-out, transform 0.4s cubic-bezier(0.22,1,0.36,1),
+              background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 }
+.journey-phase.in-view .journey-chip { opacity: 1; transform: translateY(0); }
+.journey-phase.in-view .journey-chip:nth-child(1) { transition-delay: 0.45s, 0.45s, 0s, 0s, 0s; }
+.journey-phase.in-view .journey-chip:nth-child(2) { transition-delay: 0.50s, 0.50s, 0s, 0s, 0s; }
+.journey-phase.in-view .journey-chip:nth-child(3) { transition-delay: 0.55s, 0.55s, 0s, 0s, 0s; }
+.journey-phase.in-view .journey-chip:nth-child(4) { transition-delay: 0.60s, 0.60s, 0s, 0s, 0s; }
+.journey-phase.in-view .journey-chip:nth-child(5) { transition-delay: 0.65s, 0.65s, 0s, 0s, 0s; }
+.journey-chip:hover {
+  background: var(--accent-light);
+  color: var(--accent);
+  border-color: var(--accent-border);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .journey-phase,
+  .journey-phase .journey-num,
+  .journey-phase .journey-period,
+  .journey-phase .journey-title,
+  .journey-phase .journey-desc,
+  .journey-phase .journey-chip,
+  .journey-phase:not(:last-child)::after {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+    animation: none !important;
+  }
+  .journey-num::after { animation: none !important; }
+}
+
+/* ── Pop-art animations ── */
+.art { width: 80px; height: 80px; overflow: visible; }
+
+/* Coffee — steam wisps + crema swirl on hover */
+.art-coffee .steam {
+  transform-origin: 50% 100%;
+  animation: steam-rise 3.4s ease-in-out infinite;
+  opacity: 0.5;
+}
+.art-coffee .steam.s1 { animation-delay: 0s; }
+.art-coffee .steam.s2 { animation-delay: -1.1s; }
+.art-coffee .steam.s3 { animation-delay: -2.3s; }
+@keyframes steam-rise {
+  0%, 100% { transform: translateY(2px) scaleY(0.95); opacity: 0.25; }
+  50%      { transform: translateY(-3px) scaleY(1.05); opacity: 0.85; }
+}
+.art-coffee .crema {
+  transition: rx 0.5s cubic-bezier(0.22,1,0.36,1);
+}
+.hobby-card:hover .art-coffee .crema { rx: 14px; }
+
+/* Snow — falling flakes + rider drift on hover */
+.art-snow .flake {
+  animation: snowfall 5s linear infinite;
+}
+.art-snow .flake.f1 { animation-delay: -0.8s; animation-duration: 5.2s; }
+.art-snow .flake.f2 { animation-delay: -2.4s; animation-duration: 6.4s; }
+.art-snow .flake.f3 { animation-delay: -1.5s; animation-duration: 4.8s; }
+.art-snow .flake.f4 { animation-delay: -3.2s; animation-duration: 5.8s; }
+.art-snow .flake.f5 { animation-delay: -0.3s; animation-duration: 6.0s; }
+@keyframes snowfall {
+  0%   { transform: translateY(0);   opacity: 0; }
+  10%  { opacity: 0.95; }
+  90%  { opacity: 0.95; }
+  100% { transform: translateY(105px); opacity: 0; }
+}
+.art-snow .rider {
+  transform-origin: 67px 50px;
+  transition: transform 0.5s cubic-bezier(0.22,1,0.36,1);
+}
+.hobby-card:hover .art-snow .rider { transform: translate(3px, 4px); }
+
+/* Keyboard — staggered key presses */
+.art-kb .kb-key {
+  animation: keypress 5.5s ease-in-out infinite;
+}
+.art-kb .kb-key.k1 { animation-delay: 0s; }
+.art-kb .kb-key.k2 { animation-delay: 0.5s; }
+.art-kb .kb-key.k3 { animation-delay: 1.1s; }
+.art-kb .kb-key.k4 { animation-delay: 1.6s; }
+.art-kb .kb-key.k5 { animation-delay: 2.3s; }
+@keyframes keypress {
+  0%, 92%, 100% { fill: #3a3835; }
+  94%           { fill: #c95f2a; transform: translateY(0.5px); }
+  96%           { fill: #3a3835; transform: translateY(0); }
+}
+
+/* Vibe coding — blinking cursor + twinkling sparkles + code pulse on hover */
+.art-vibe .cursor {
+  animation: blink 1.05s steps(2) infinite;
+}
+@keyframes blink { 0%, 49% { opacity: 0.95; } 50%, 100% { opacity: 0; } }
+
+.art-vibe .sparkle {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: twinkle 2.6s ease-in-out infinite;
+}
+.art-vibe .sparkle.sp1 { animation-delay: 0s; }
+.art-vibe .sparkle.sp2 { animation-delay: 0.7s; }
+.art-vibe .sparkle.sp3 { animation-delay: 1.4s; }
+@keyframes twinkle {
+  0%, 100% { opacity: 0.4; transform: scale(0.85); }
+  50%      { opacity: 1;   transform: scale(1.25); }
+}
+.art-vibe .code {
+  transform-origin: left center;
+  transform-box: fill-box;
+  transition: transform 0.4s cubic-bezier(0.22,1,0.36,1);
+}
+.hobby-card:hover .art-vibe .code.c1 { transform: scaleX(1.1); }
+.hobby-card:hover .art-vibe .code.c3 { transform: scaleX(1.18); }
+.hobby-card:hover .art-vibe .code.c5 { transform: scaleX(1.06); }
+
+/* ── Hover interactions ── */
+.hobby-card {
+  transition: border-color 0.25s ease, transform 0.35s cubic-bezier(0.22,1,0.36,1);
+}
+.hobby-card:hover {
+  border-color: var(--accent-border);
+  transform: translateY(-2px);
+}
+.hero-contact a[href$=".html"] {
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+.hero-contact a[href$=".html"]:hover { letter-spacing: 0.04em; }
+
+/* ── Footer ── */
+footer.site-footer {
+  padding-top: 2rem;
+  margin-top: 4rem;
+  border-top: 0.5px solid var(--border-strong);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+footer.site-footer p { font-size: 12px; color: var(--ink-3); font-family: var(--mono); }
+footer.site-footer a { color: var(--ink-3); text-decoration: none; }
+footer.site-footer a:hover { color: var(--accent); }
 
 /* ── Responsive ── */
 @media (max-width: 720px) {
   .about-block { grid-template-columns: 1fr; gap: 0.5rem; }
   nav { padding: 1.25rem 1rem; }
   .page, .content { padding-left: 1rem; padding-right: 1rem; }
+}
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 </style>
 </head>
@@ -268,13 +494,13 @@ nav {
 
   <!-- Hero -->
   <section class="hero">
-    <div class="hero-eyebrow">Quality · AI · Product · San Jose, CA</div>
+    <div class="hero-eyebrow">Quality Operations · AI · Product · San Jose, CA</div>
     <h1 class="hero-name">Osama Badr</h1>
-    <p class="hero-title">Senior Product Quality Analyst <span class="hero-title-sep">·</span> AI Tooling Builder</p>
+    <p class="hero-title">Senior Product Quality Analyst <span class="hero-title-sep">·</span> AI Product Builder</p>
     <div class="hero-contact">
       <a href="mailto:osabadr@gmail.com">osabadr@gmail.com</a>
       <a href="tel:4085949409">408-594-9409</a>
-      <a href="https://linkedin.com/in/obadr" target="_blank">linkedin.com/in/obadr</a>
+      <a href="https://linkedin.com/in/obadr" target="_blank" rel="noopener noreferrer">linkedin.com/in/obadr</a>
       <a href="index.html">View work →</a>
     </div>
   </section>
@@ -282,22 +508,25 @@ nav {
 
 <!-- Outside work — hobbies up top -->
 <div class="content">
-  <div class="about-block" >
-    <div class="about-block-label">Outside of work — if I'm not working here's what you'll find me doing</div>
+  <div class="about-block">
+    <div class="about-block-label"></div>
     <div class="hobbies-grid">
 
       <div class="hobby-card">
         <div class="hobby-art" style="background:#fdf6e3;">
-          <svg viewBox="0 0 120 100" xmlns="http://www.w3.org/2000/svg">
+          <svg class="art art-coffee" viewBox="0 0 120 100" xmlns="http://www.w3.org/2000/svg">
             <rect x="30" y="45" width="55" height="40" rx="5" fill="#1a1a18"/>
             <rect x="33" y="48" width="49" height="34" rx="3" fill="#c95f2a"/>
             <path d="M85 55 Q105 55 105 65 Q105 75 85 75" fill="none" stroke="#1a1a18" stroke-width="4" stroke-linecap="round"/>
             <ellipse cx="57" cy="87" rx="33" ry="6" fill="#1a1a18"/>
             <ellipse cx="57" cy="86" rx="30" ry="4" fill="#e8d5a3"/>
-            <path d="M45 40 Q42 32 45 24 Q48 16 45 8" fill="none" stroke="#1a1a18" stroke-width="2.5" stroke-linecap="round"/>
-            <path d="M57 38 Q54 30 57 22 Q60 14 57 6" fill="none" stroke="#1a1a18" stroke-width="2.5" stroke-linecap="round"/>
-            <path d="M69 40 Q66 32 69 24 Q72 16 69 8" fill="none" stroke="#1a1a18" stroke-width="2.5" stroke-linecap="round"/>
+            <g class="steam-group" stroke="#1a1a18" stroke-width="2.5" stroke-linecap="round" fill="none">
+              <path class="steam s1" d="M45 40 Q42 32 45 24 Q48 16 45 8"/>
+              <path class="steam s2" d="M57 38 Q54 30 57 22 Q60 14 57 6"/>
+              <path class="steam s3" d="M69 40 Q66 32 69 24 Q72 16 69 8"/>
+            </g>
             <ellipse cx="57" cy="50" rx="22" ry="5" fill="#6b3a1f"/>
+            <ellipse class="crema" cx="57" cy="50" rx="0" ry="3" fill="#e8d5a3" opacity="0.55"/>
             <circle cx="42" cy="62" r="4" fill="rgba(255,255,255,0.15)"/>
           </svg>
         </div>
@@ -307,17 +536,26 @@ nav {
 
       <div class="hobby-card">
         <div class="hobby-art" style="background:#e8f4fd;">
-          <svg viewBox="0 0 120 100" xmlns="http://www.w3.org/2000/svg">
+          <svg class="art art-snow" viewBox="0 0 120 100" xmlns="http://www.w3.org/2000/svg">
             <polygon points="60,10 15,85 105,85" fill="#b8d4e8" stroke="#1a1a18" stroke-width="2" stroke-linejoin="round"/>
             <polygon points="60,10 38,55 82,55" fill="white" stroke="none"/>
             <rect x="10" y="83" width="100" height="10" rx="3" fill="white" stroke="#1a1a18" stroke-width="1.5"/>
-            <circle cx="72" cy="38" r="6" fill="#c95f2a" stroke="#1a1a18" stroke-width="1.5"/>
-            <line x1="72" y1="44" x2="68" y2="58" stroke="#1a1a18" stroke-width="2.5" stroke-linecap="round"/>
-            <line x1="70" y1="48" x2="60" y2="44" stroke="#1a1a18" stroke-width="2" stroke-linecap="round"/>
-            <line x1="70" y1="48" x2="79" y2="52" stroke="#1a1a18" stroke-width="2" stroke-linecap="round"/>
-            <rect x="54" y="58" width="26" height="5" rx="2.5" fill="#1a1a18" transform="rotate(-10 67 60)"/>
-            <line x1="30" y1="65" x2="50" y2="63" stroke="white" stroke-width="1.5" stroke-linecap="round" opacity="0.8"/>
-            <line x1="25" y1="72" x2="48" y2="69" stroke="white" stroke-width="1.5" stroke-linecap="round" opacity="0.8"/>
+            <g class="rider">
+              <circle cx="72" cy="38" r="6" fill="#c95f2a" stroke="#1a1a18" stroke-width="1.5"/>
+              <line x1="72" y1="44" x2="68" y2="58" stroke="#1a1a18" stroke-width="2.5" stroke-linecap="round"/>
+              <line x1="70" y1="48" x2="60" y2="44" stroke="#1a1a18" stroke-width="2" stroke-linecap="round"/>
+              <line x1="70" y1="48" x2="79" y2="52" stroke="#1a1a18" stroke-width="2" stroke-linecap="round"/>
+              <rect x="54" y="58" width="26" height="5" rx="2.5" fill="#1a1a18" transform="rotate(-10 67 60)"/>
+            </g>
+            <line class="speed s1" x1="30" y1="65" x2="50" y2="63" stroke="white" stroke-width="1.5" stroke-linecap="round" opacity="0.8"/>
+            <line class="speed s2" x1="25" y1="72" x2="48" y2="69" stroke="white" stroke-width="1.5" stroke-linecap="round" opacity="0.8"/>
+            <g class="flakes" fill="white">
+              <circle class="flake f1" cx="22" cy="-3" r="1.4"/>
+              <circle class="flake f2" cx="44" cy="-3" r="1.1"/>
+              <circle class="flake f3" cx="92" cy="-3" r="1.4"/>
+              <circle class="flake f4" cx="106" cy="-3" r="1"/>
+              <circle class="flake f5" cx="14" cy="-3" r="1.2"/>
+            </g>
           </svg>
         </div>
         <div class="hobby-label">Snowboarding</div>
@@ -326,7 +564,7 @@ nav {
 
       <div class="hobby-card">
         <div class="hobby-art" style="background:#f0ece0;">
-          <svg viewBox="0 0 120 100" xmlns="http://www.w3.org/2000/svg">
+          <svg class="art art-kb" viewBox="0 0 120 100" xmlns="http://www.w3.org/2000/svg">
             <!-- Case -->
             <rect x="7" y="18" width="106" height="68" rx="7" fill="#1c1b18"/>
             <!-- Plate -->
@@ -335,7 +573,7 @@ nav {
             <rect x="13" y="25" width="7" height="8" rx="1.5" fill="#c95f2a"/>
             <rect x="22" y="25" width="6" height="8" rx="1.5" fill="#3a3835"/>
             <rect x="29" y="25" width="6" height="8" rx="1.5" fill="#3a3835"/>
-            <rect x="36" y="25" width="6" height="8" rx="1.5" fill="#3a3835"/>
+            <rect class="kb-key k1" x="36" y="25" width="6" height="8" rx="1.5" fill="#3a3835"/>
             <rect x="43" y="25" width="6" height="8" rx="1.5" fill="#3a3835"/>
             <rect x="50" y="25" width="6" height="8" rx="1.5" fill="#3a3835"/>
             <rect x="57" y="25" width="6" height="8" rx="1.5" fill="#3a3835"/>
@@ -349,7 +587,7 @@ nav {
             <rect x="13" y="35" width="9" height="8" rx="1.5" fill="#3a3835"/>
             <rect x="24" y="35" width="6" height="8" rx="1.5" fill="#3a3835"/>
             <rect x="31" y="35" width="6" height="8" rx="1.5" fill="#3a3835"/>
-            <rect x="38" y="35" width="6" height="8" rx="1.5" fill="#3a3835"/>
+            <rect class="kb-key k2" x="38" y="35" width="6" height="8" rx="1.5" fill="#3a3835"/>
             <rect x="45" y="35" width="6" height="8" rx="1.5" fill="#3a3835"/>
             <rect x="52" y="35" width="6" height="8" rx="1.5" fill="#3a3835"/>
             <rect x="59" y="35" width="6" height="8" rx="1.5" fill="#3a3835"/>
@@ -363,9 +601,9 @@ nav {
             <rect x="26" y="45" width="6" height="8" rx="1.5" fill="#3a3835"/>
             <rect x="33" y="45" width="6" height="8" rx="1.5" fill="#3a3835"/>
             <rect x="40" y="45" width="6" height="8" rx="1.5" fill="#3a3835"/>
-            <rect x="47" y="45" width="6" height="8" rx="1.5" fill="#3a3835"/>
+            <rect class="kb-key k3" x="47" y="45" width="6" height="8" rx="1.5" fill="#3a3835"/>
             <rect x="54" y="45" width="6" height="8" rx="1.5" fill="#3a3835"/>
-            <rect x="61" y="45" width="6" height="8" rx="1.5" fill="#3a3835"/>
+            <rect class="kb-key k4" x="61" y="45" width="6" height="8" rx="1.5" fill="#3a3835"/>
             <rect x="68" y="45" width="6" height="8" rx="1.5" fill="#3a3835"/>
             <rect x="75" y="45" width="6" height="8" rx="1.5" fill="#3a3835"/>
             <rect x="82" y="45" width="6" height="8" rx="1.5" fill="#3a3835"/>
@@ -376,7 +614,7 @@ nav {
             <rect x="29" y="55" width="6" height="8" rx="1.5" fill="#3a3835"/>
             <rect x="36" y="55" width="6" height="8" rx="1.5" fill="#3a3835"/>
             <rect x="43" y="55" width="6" height="8" rx="1.5" fill="#3a3835"/>
-            <rect x="50" y="55" width="6" height="8" rx="1.5" fill="#3a3835"/>
+            <rect class="kb-key k5" x="50" y="55" width="6" height="8" rx="1.5" fill="#3a3835"/>
             <rect x="57" y="55" width="6" height="8" rx="1.5" fill="#3a3835"/>
             <rect x="64" y="55" width="6" height="8" rx="1.5" fill="#3a3835"/>
             <rect x="71" y="55" width="6" height="8" rx="1.5" fill="#3a3835"/>
@@ -398,20 +636,20 @@ nav {
 
       <div class="hobby-card">
         <div class="hobby-art" style="background:#f3f0ff;">
-          <svg viewBox="0 0 120 100" xmlns="http://www.w3.org/2000/svg">
+          <svg class="art art-vibe" viewBox="0 0 120 100" xmlns="http://www.w3.org/2000/svg">
             <rect x="15" y="58" width="90" height="6" rx="3" fill="#1a1a18"/>
             <rect x="22" y="20" width="76" height="40" rx="4" fill="#1a1a18" stroke="#1a1a18" stroke-width="2"/>
             <rect x="25" y="23" width="70" height="34" rx="2" fill="#0d1117"/>
             <rect x="52" y="58" width="16" height="3" rx="1.5" fill="#444"/>
-            <rect x="30" y="29" width="18" height="2.5" rx="1" fill="#c95f2a" opacity="0.9"/>
-            <rect x="35" y="34" width="28" height="2.5" rx="1" fill="#7c6af7" opacity="0.9"/>
-            <rect x="35" y="39" width="22" height="2.5" rx="1" fill="#4caf50" opacity="0.9"/>
-            <rect x="30" y="44" width="14" height="2.5" rx="1" fill="#c95f2a" opacity="0.9"/>
-            <rect x="35" y="49" width="32" height="2.5" rx="1" fill="#7c6af7" opacity="0.9"/>
-            <rect x="68" y="49" width="2" height="2.5" rx="0.5" fill="white" opacity="0.9"/>
-            <text x="78" y="32" font-size="10" fill="#f7c948">✦</text>
-            <text x="84" y="42" font-size="7" fill="#7c6af7">✦</text>
-            <text x="74" y="46" font-size="6" fill="#4caf50">✦</text>
+            <rect class="code c1" x="30" y="29" width="18" height="2.5" rx="1" fill="#c95f2a" opacity="0.9"/>
+            <rect class="code c2" x="35" y="34" width="28" height="2.5" rx="1" fill="#7c6af7" opacity="0.9"/>
+            <rect class="code c3" x="35" y="39" width="22" height="2.5" rx="1" fill="#4caf50" opacity="0.9"/>
+            <rect class="code c4" x="30" y="44" width="14" height="2.5" rx="1" fill="#c95f2a" opacity="0.9"/>
+            <rect class="code c5" x="35" y="49" width="32" height="2.5" rx="1" fill="#7c6af7" opacity="0.9"/>
+            <rect class="cursor" x="68" y="49" width="2" height="2.5" rx="0.5" fill="white" opacity="0.9"/>
+            <text class="sparkle sp1" x="78" y="32" font-size="10" fill="#f7c948">✦</text>
+            <text class="sparkle sp2" x="84" y="42" font-size="7" fill="#7c6af7">✦</text>
+            <text class="sparkle sp3" x="74" y="46" font-size="6" fill="#4caf50">✦</text>
           </svg>
         </div>
         <div class="hobby-label">Vibe coding</div>
@@ -431,46 +669,45 @@ nav {
     <div class="journey">
 
       <div class="journey-phase">
-        <div class="journey-num">1</div>
-        <div>
+        <div class="journey-num">01</div>
+        <div class="journey-content">
           <div class="journey-period">Pre-2020</div>
-          <div class="journey-title">Found the obsession</div>
-          <div class="journey-desc">Found the thing worth obsessing over: the delta between what a team thinks they shipped and what a customer actually gets.</div>
+          <div class="journey-title">Saw the gap</div>
+          <div class="journey-desc">Five years across biz ops, data analytics, and tech sales. Different teams, different products, same pattern every time: a quiet gap between what got shipped and what the customer actually got. Couldn't unsee it.</div>
           <div class="journey-chips">
-            <span class="journey-chip">Biz ops + data analytics</span>
+            <span class="journey-chip">Biz ops</span>
+            <span class="journey-chip">Data analytics</span>
             <span class="journey-chip">Tech sales</span>
-            <span class="journey-chip">Product vs. customer reality</span>
           </div>
         </div>
       </div>
 
       <div class="journey-phase">
-        <div class="journey-num">2</div>
-        <div>
+        <div class="journey-num">02</div>
+        <div class="journey-content">
           <div class="journey-period">2020 — 2024 · Meta Reality Labs</div>
-          <div class="journey-title">Owned the signal</div>
-          <div class="journey-desc">Built the tooling, ran the oncall, owned the release gates — and learned what quality actually looks like at scale.</div>
+          <div class="journey-title">Closed the gap</div>
+          <div class="journey-desc">Joined as QA on a VR companion app used by millions. Owned release gates across iOS and Android, ran oncall for 47 product areas, and built the Golden Path program — turning 100+ internal users into structured quality signal instead of one tester at a time.</div>
           <div class="journey-chips">
-            <span class="journey-chip">Systems thinking</span>
-            <span class="journey-chip">3,000+ test cases</span>
-            <span class="journey-chip">Golden Path program</span>
-            <span class="journey-chip">VoC at scale</span>
             <span class="journey-chip">Release gatekeeper</span>
+            <span class="journey-chip">Oncall · 3 yrs</span>
+            <span class="journey-chip">Golden Path program</span>
+            <span class="journey-chip">3,000+ test cases</span>
           </div>
         </div>
       </div>
 
       <div class="journey-phase">
-        <div class="journey-num">3</div>
-        <div>
+        <div class="journey-num">03</div>
+        <div class="journey-content">
           <div class="journey-period">2024 — Present</div>
-          <div class="journey-title">Built the fix</div>
-          <div class="journey-desc">The boundary between QA and engineering got interesting. Leaned in.</div>
+          <div class="journey-title">Started fixing</div>
+          <div class="journey-desc">LLMs changed what QA can do. I stopped just filing bugs and started building the agents that find them, fix them, and verify them — across 500+ production bugs and counting.</div>
           <div class="journey-chips">
-            <span class="journey-chip">AI agent development</span>
+            <span class="journey-chip">AI agents</span>
             <span class="journey-chip">LLM bug fixing</span>
             <span class="journey-chip">Self-healing tests</span>
-            <span class="journey-chip">QA meets engineering</span>
+            <span class="journey-chip">qa-agent</span>
           </div>
         </div>
       </div>
@@ -486,8 +723,31 @@ nav {
     </div>
   </div>
 
+  <footer class="site-footer">
+    <p>Osama Badr · San Jose, CA · 2026</p>
+    <p><a href="mailto:osabadr@gmail.com">osabadr@gmail.com</a> · <a href="https://linkedin.com/in/obadr" target="_blank" rel="noopener noreferrer">linkedin.com/in/obadr</a></p>
+  </footer>
+
 </div><!-- /content -->
 </div><!-- /page -->
 
+<script>
+(function () {
+  const phases = document.querySelectorAll('.journey-phase');
+  if (!('IntersectionObserver' in window)) {
+    phases.forEach(p => p.classList.add('in-view'));
+    return;
+  }
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in-view');
+        obs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.35, rootMargin: '0px 0px -8% 0px' });
+  phases.forEach(p => obs.observe(p));
+})();
+</script>
 </body>
 </html>
