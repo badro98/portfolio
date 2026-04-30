@@ -59,23 +59,39 @@ nav {
 .nav-contact { font-size: 13px; color: var(--ink-2); text-decoration: none; }
 .nav-contact:hover { color: var(--accent); }
 
-.hero { margin-bottom: 4rem; animation: fadeUp 0.5s ease both; }
-.hero-eyebrow {
-  font-family: var(--mono);
-  font-size: 11px;
-  letter-spacing: 0.12em;
-  color: var(--accent);
-  text-transform: uppercase;
-  margin-bottom: 1rem;
+.hero { margin-bottom: 4rem; animation: fadeUp 0.7s cubic-bezier(0.22,1,0.36,1) both; }
+.hero-statement { padding-top: 4rem; padding-bottom: 2rem; }
+.hero-dot {
+  width: 13px; height: 13px;
+  border-radius: 50%;
+  background: var(--accent);
+  margin-bottom: 3rem;
+  position: relative;
 }
-.hero h1 {
+.hero-dot::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: var(--accent);
+  opacity: 0.4;
+  animation: dot-pulse 2.6s ease-out infinite;
+}
+@keyframes dot-pulse {
+  0%   { transform: scale(1);   opacity: 0.5; }
+  100% { transform: scale(3.4); opacity: 0; }
+}
+.statement {
   font-family: var(--serif);
-  font-size: clamp(36px, 6vw, 56px);
-  line-height: 1.1;
-  letter-spacing: -0.02em;
-  margin-bottom: 1.5rem;
+  font-size: clamp(42px, 7vw, 76px);
+  line-height: 1.04;
+  letter-spacing: -0.025em;
+  color: var(--ink);
+  margin-bottom: 2.5rem;
+  font-weight: 400;
+  max-width: 14ch;
 }
-.hero h1 em { font-style: italic; color: var(--accent); }
+.statement em { font-style: italic; color: var(--accent); }
 .hero-summary {
   font-size: 16px;
   line-height: 1.8;
@@ -329,25 +345,6 @@ footer a:hover { color: var(--accent); }
   to   { opacity: 1; transform: translateY(0); }
 }
 
-.hero-name {
-  font-family: var(--serif);
-  font-size: clamp(36px, 6vw, 56px);
-  line-height: 1.1;
-  letter-spacing: -0.02em;
-  color: var(--ink);
-  margin-bottom: 0.4rem;
-}
-.hero-title {
-  font-size: 15px;
-  color: var(--ink-3);
-  margin-bottom: 1.25rem;
-  font-family: var(--mono);
-  letter-spacing: 0.02em;
-}
-.hero-title-sep { margin: 0 6px; opacity: 0.4; }
-
-nav { justify-content: space-between; }
-
 .view-switcher {
   display: inline-flex;
   background: var(--surface-2);
@@ -355,13 +352,7 @@ nav { justify-content: space-between; }
   border-radius: 8px;
   padding: 3px;
   gap: 2px;
-  margin-top: 1.5rem;
-}
-.hero { text-align: left; }
-.view-switcher-wrap {
-  display: flex;
-  justify-content: center;
-  margin-top: 1.5rem;
+  margin-top: 1rem;
 }
 .view-btn {
   font-family: var(--sans);
@@ -489,20 +480,19 @@ nav { justify-content: space-between; }
     </div>
   </nav>
 
-  <section class="hero">
-    <div class="hero-eyebrow">Quality Operations · AI · Product · San Jose, CA</div>
-    <h1 class="hero-name">Osama Badr</h1>
-    <p class="hero-title">Senior Product Quality Analyst <span class="hero-title-sep">·</span> AI Product Builder</p>
+  <section class="hero hero-statement">
+    <div class="hero-dot" aria-hidden="true"></div>
+    <h1 class="statement">I'm Osama, a QA who <em>builds</em>.</h1>
     <p class="hero-summary">I spent 5+ years at Meta making sure products shipped clean — filing bugs, owning release readiness, and running QA for a VR companion app used by millions. Then AI changed what was possible, and I stopped just reporting problems and started building systems to fix them. Now I build products on the side that apply the same thinking: what breaks, why, and how do you design around it from the start.</p>
     <div class="hero-contact">
       <a href="mailto:osabadr@gmail.com">osabadr@gmail.com</a>
       <a href="tel:4085949409">408-594-9409</a>
       <a href="https://linkedin.com/in/obadr" target="_blank" rel="noopener noreferrer">linkedin.com/in/obadr</a>
     </div>
-    <div class="view-switcher-wrap"><div class="view-switcher">
+    <div class="view-switcher">
       <button class="view-btn active" onclick="switchView('work', event)">Work</button>
       <button class="view-btn" onclick="switchView('projects', event)">Projects</button>
-    </div></div>
+    </div>
   </section>
 
 <div class="view active" id="view-work">
