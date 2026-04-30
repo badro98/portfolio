@@ -434,12 +434,47 @@ nav { justify-content: space-between; }
 .project-full-desc { font-size: 14px; color: var(--ink-2); line-height: 1.7; margin-bottom: 1.25rem; }
 .project-full-stack { display: flex; flex-wrap: wrap; gap: 5px; }
 
+/* ── Hover micro-interactions ── */
+.stat { transition: background 0.25s ease; }
+.stat:hover { background: var(--surface-2); }
+
+.skill-card,
+.project-card,
+.project-full-card {
+  transition: border-color 0.25s ease, transform 0.35s cubic-bezier(0.22,1,0.36,1);
+}
+.skill-card:hover,
+.project-card:hover,
+.project-full-card:hover {
+  border-color: var(--accent-border);
+  transform: translateY(-2px);
+}
+
+.tag, .pill {
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+.tag:not(.hi):hover, .pill:not(.hi):hover {
+  background: var(--accent-light);
+  color: var(--accent);
+  border-color: var(--accent-border);
+}
+
 @media (max-width: 580px) {
   .page { padding: 0 1rem 4rem; }
   nav { margin-bottom: 2.5rem; }
   .hero h1 { font-size: 34px; }
   .nav-right { gap: 1rem; }
   .wshr { grid-template-columns: 40px 1fr; }
+}
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 </style>
 </head>
@@ -455,18 +490,18 @@ nav { justify-content: space-between; }
   </nav>
 
   <section class="hero">
-    <div class="hero-eyebrow">Quality · AI · Product · San Jose, CA</div>
+    <div class="hero-eyebrow">Quality Operations · AI · Product · San Jose, CA</div>
     <h1 class="hero-name">Osama Badr</h1>
-    <p class="hero-title">Senior Product Quality Analyst <span class="hero-title-sep">·</span> AI Tooling Builder</p>
+    <p class="hero-title">Senior Product Quality Analyst <span class="hero-title-sep">·</span> AI Product Builder</p>
     <p class="hero-summary">I spent 5+ years at Meta making sure products shipped clean — filing bugs, owning release readiness, and running QA for a VR companion app used by millions. Then AI changed what was possible, and I stopped just reporting problems and started building systems to fix them. Now I build products on the side that apply the same thinking: what breaks, why, and how do you design around it from the start.</p>
     <div class="hero-contact">
       <a href="mailto:osabadr@gmail.com">osabadr@gmail.com</a>
       <a href="tel:4085949409">408-594-9409</a>
-      <a href="https://linkedin.com/in/obadr" target="_blank">linkedin.com/in/obadr</a>
+      <a href="https://linkedin.com/in/obadr" target="_blank" rel="noopener noreferrer">linkedin.com/in/obadr</a>
     </div>
     <div class="view-switcher-wrap"><div class="view-switcher">
-      <button class="view-btn active" onclick="switchView('work')">Work</button>
-      <button class="view-btn" onclick="switchView('projects')">Projects</button>
+      <button class="view-btn active" onclick="switchView('work', event)">Work</button>
+      <button class="view-btn" onclick="switchView('projects', event)">Projects</button>
     </div></div>
   </section>
 
@@ -714,7 +749,7 @@ nav { justify-content: space-between; }
 
   <footer>
     <p>Osama Badr · San Jose, CA · 2026</p>
-    <p><a href="mailto:osabadr@gmail.com">osabadr@gmail.com</a> · <a href="https://linkedin.com/in/obadr" target="_blank">linkedin.com/in/obadr</a></p>
+    <p><a href="mailto:osabadr@gmail.com">osabadr@gmail.com</a> · <a href="https://linkedin.com/in/obadr" target="_blank" rel="noopener noreferrer">linkedin.com/in/obadr</a></p>
   </footer>
 
 </div><!-- /view-work -->
@@ -839,7 +874,7 @@ nav { justify-content: space-between; }
       <div class="project-coming-sub">Deployed across pointd.fyi and BIP via GitHub Actions</div>
     </div>
     <div class="project-full-body">
-      <div class="project-full-name">qa-agent <a href="https://github.com/badro98/qa-agent" target="_blank" style="font-size:11px; font-family: var(--mono); color: var(--ink-3); text-decoration:none; border-bottom: 0.5px solid var(--border-strong); padding-bottom:1px; margin-left:6px;">github ↗</a></div>
+      <div class="project-full-name">qa-agent <a href="https://github.com/badro98/qa-agent" target="_blank" rel="noopener noreferrer" style="font-size:11px; font-family: var(--mono); color: var(--ink-3); text-decoration:none; border-bottom: 0.5px solid var(--border-strong); padding-bottom:1px; margin-left:6px;">github ↗</a></div>
       <div class="project-full-desc">Config-driven QA agent that runs on every PR and on-demand regression. Analyzes diffs, scores risk by surface, identifies coverage gaps, proposes new tests, executes scoped test suites, and posts a structured report as a PR comment. Propose-only output — the agent drafts, you promote. Same agent, different config per repo.</div>
       <div class="stack-grid">
         <div class="stack-group">
@@ -878,11 +913,11 @@ nav { justify-content: space-between; }
 </div><!-- /view-projects -->
 
 <script>
-function switchView(name) {
+function switchView(name, evt) {
   document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
   document.querySelectorAll('.view-btn').forEach(b => b.classList.remove('active'));
   document.getElementById('view-' + name).classList.add('active');
-  event.currentTarget.classList.add('active');
+  if (evt && evt.currentTarget) evt.currentTarget.classList.add('active');
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 </script>
