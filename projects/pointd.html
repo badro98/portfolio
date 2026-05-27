@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>pointd — Osama Badr</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css">
+<style>
+/* ── Case study layout ── */
+.case-hero { margin-bottom: 3.5rem; animation: fadeUp 0.7s cubic-bezier(0.22,1,0.36,1) both; }
+.case-eyebrow {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--ink-3);
+  margin-bottom: 1rem;
+}
+.case-hero h1 {
+  font-family: var(--serif);
+  font-size: clamp(32px, 5vw, 52px);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  font-weight: 400;
+  color: var(--ink);
+  margin-bottom: 1rem;
+  max-width: 18ch;
+}
+.case-hero p {
+  font-size: 16px;
+  line-height: 1.75;
+  color: var(--ink-2);
+  max-width: 560px;
+}
+.case-meta {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  padding: 1.5rem 0;
+  border-top: 0.5px solid var(--border-strong);
+  border-bottom: 0.5px solid var(--border-strong);
+  margin: 2rem 0 3.5rem;
+}
+.meta-item { display: flex; flex-direction: column; gap: 3px; }
+.meta-label { font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-3); }
+.meta-value { font-size: 13px; color: var(--ink); font-weight: 500; }
+
+.case-section { margin-bottom: 3.5rem; }
+.case-section h2 {
+  font-family: var(--serif);
+  font-size: 26px;
+  font-weight: 400;
+  color: var(--ink);
+  margin-bottom: 1rem;
+}
+.case-section p {
+  font-size: 15px;
+  line-height: 1.8;
+  color: var(--ink-2);
+  margin-bottom: 1rem;
+  max-width: 640px;
+}
+.case-section p:last-child { margin-bottom: 0; }
+
+/* Pull quote */
+.pull-quote {
+  border-left: 3px solid var(--accent);
+  padding: 1rem 1.5rem;
+  margin: 2rem 0;
+  background: var(--accent-light);
+  border-radius: 0 var(--r) var(--r) 0;
+}
+.pull-quote p {
+  font-family: var(--serif);
+  font-size: 18px;
+  font-style: italic;
+  color: var(--ink);
+  line-height: 1.5;
+  margin: 0;
+}
+.pull-quote cite {
+  display: block;
+  margin-top: 0.5rem;
+  font-size: 12px;
+  font-family: var(--mono);
+  color: var(--ink-3);
+  font-style: normal;
+}
+
+/* Decision blocks */
+.decisions { display: flex; flex-direction: column; gap: 1.5rem; margin-top: 1.5rem; }
+.decision {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 24px;
+}
+.decision-num {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 6px;
+}
+.decision strong {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 8px;
+}
+.decision p {
+  font-size: 13px;
+  color: var(--ink-2);
+  line-height: 1.65;
+  margin: 0;
+  max-width: 100%;
+}
+
+/* Screenshot */
+.screenshot-wrap { margin: 2.5rem 0; }
+.screenshot-caption {
+  margin-top: 10px;
+  font-size: 12px;
+  font-family: var(--mono);
+  color: var(--ink-3);
+}
+
+/* Stack tags */
+.stack { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 1rem; }
+.stack-tag {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--ink-2);
+  background: var(--surface-2);
+  padding: 4px 10px;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+}
+
+@media (max-width: 580px) {
+  .case-meta { gap: 1.25rem; }
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <nav>
+    <a href="../index.html" class="nav-name">Osama Badr</a>
+    <div class="nav-links">
+      <a href="../about.html">About</a>
+      <a href="mailto:osabadr@gmail.com">Contact</a>
+    </div>
+  </nav>
+
+  <a href="../index.html" class="back-link">All projects</a>
+
+  <div class="case-hero">
+    <p class="case-eyebrow">Project · Travel Rewards</p>
+    <h1>pointd</h1>
+    <p>A travel rewards optimizer that shows you where your points can take you — across all your programs, in one place. No math, no research, no account needed.</p>
+    <div style="margin-top:1.25rem;display:flex;align-items:center;gap:12px;">
+      <span class="status-badge early-access">Early Access</span>
+      <a href="https://pointd.fyi" target="_blank" rel="noopener noreferrer" style="font-family:var(--mono);font-size:12px;color:var(--ink-3);text-decoration:none;border-bottom:0.5px solid var(--border-strong);padding-bottom:1px;">pointd.fyi ↗</a>
+    </div>
+  </div>
+
+  <div class="case-meta">
+    <div class="meta-item"><span class="meta-label">Role</span><span class="meta-value">Solo builder</span></div>
+    <div class="meta-item"><span class="meta-label">Started</span><span class="meta-value">Late 2024</span></div>
+    <div class="meta-item"><span class="meta-label">Status</span><span class="meta-value">MVP in progress</span></div>
+    <div class="meta-item"><span class="meta-label">Stack</span><span class="meta-value">React, Vite, Supabase, Seats.aero</span></div>
+  </div>
+
+  <!-- Problem -->
+  <div class="case-section fade-up">
+    <h2>The problem</h2>
+    <p>I kept getting burned on points redemptions. Not because I wasn't trying — I was researching, comparing programs, reading transfer partner guides. The problem was that none of the existing tools were built for discovery. They were built for booking. They assumed you already knew where you wanted to go and how many points it would cost. They put all the complexity of airline and hotel loyalty programs on the user and called it a feature.</p>
+    <p>After talking to other points holders, I found the same pattern every time:</p>
+    <div class="pull-quote">
+      <p>curiosity → complexity → abandonment → cash fallback</p>
+      <cite>— Pattern from user interviews</cite>
+    </div>
+    <p>People sit on points for years. They know they're valuable. They just never use them because the first time they try to figure out redemption, the system overwhelms them and they give up. pointd is built around a different question: not "how do I book with points?" but "where can I actually go with what I have?"</p>
+  </div>
+
+  <!-- Screenshot: gate page -->
+  <div class="screenshot-wrap fade-up">
+    <div class="browser-frame">
+      <img src="../assets/screenshots/pointd-gate.png" alt="pointd gate page — Your points are worth more than you think" loading="lazy">
+    </div>
+    <p class="screenshot-caption">Gate page — the value prop before users even sign up</p>
+  </div>
+
+  <!-- Screenshot: program entry -->
+  <div class="screenshot-wrap fade-up">
+    <div class="browser-frame">
+      <img src="../assets/screenshots/pointd-programs.png" alt="pointd program entry — add your loyalty programs" loading="lazy">
+    </div>
+    <p class="screenshot-caption">Program entry — add your balances once, pointd calculates your combined purchasing power across all programs</p>
+  </div>
+
+  <!-- Key decisions -->
+  <div class="case-section fade-up">
+    <h2>Key decisions</h2>
+    <div class="decisions">
+      <div class="decision">
+        <p class="decision-num">Decision 01</p>
+        <strong>Discovery-first, not booking-first</strong>
+        <p>Every competitor starts with "where do you want to go?" pointd starts with "what do you have?" Enter your program balances, see destinations you can actually reach. The mental model shift — from searching to discovering — is the core product bet.</p>
+      </div>
+      <div class="decision">
+        <p class="decision-num">Decision 02</p>
+        <strong>Cross-program balance aggregation</strong>
+        <p>Most tools are siloed to one loyalty program. Users with points spread across Chase UR, Amex MR, and Marriott Bonvoy have to check each separately. pointd aggregates everything so the view reflects your real total purchasing power, not just one account.</p>
+      </div>
+      <div class="decision">
+        <p class="decision-num">Decision 03</p>
+        <strong>Surface transfer partner paths</strong>
+        <p>Transfer partners are where the best redemption value lives — and where 90% of users don't know to look. pointd explicitly shows "via transfer" options with the full transfer chain (e.g., Amex MR → Marriott Bonvoy) so users discover value they didn't know they had.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Screenshot: explore -->
+  <div class="screenshot-wrap fade-up">
+    <div class="browser-frame">
+      <img src="../assets/screenshots/pointd-explore.png" alt="pointd planner — filters and destination cards" loading="lazy">
+    </div>
+    <p class="screenshot-caption">Planner view — filter by hotel tier, availability, and points/night. Only shows destinations you can actually afford with your current balances.</p>
+  </div>
+
+  <!-- Screenshot: detail -->
+  <div class="screenshot-wrap fade-up">
+    <div class="browser-frame">
+      <img src="../assets/screenshots/pointd-detail.png" alt="pointd hotel detail — Taipei list with map" loading="lazy">
+    </div>
+    <p class="screenshot-caption">Hotel detail — map view with per-night pricing in points across properties</p>
+  </div>
+
+  <!-- Where it stands -->
+  <div class="case-section fade-up">
+    <h2>Where it stands</h2>
+    <p>Currently in early access while the MVP is being finalized. The core explore flow works — add your programs, see where you can go, drill into hotel options with real award availability via Seats.aero. Booking integration is next.</p>
+    <p>500+ tests, 13 loyalty programs supported, deployed on Cloudflare Pages with GitHub Actions CI.</p>
+    <div class="stack">
+      <span class="stack-tag">React + Vite</span>
+      <span class="stack-tag">Zustand</span>
+      <span class="stack-tag">Supabase</span>
+      <span class="stack-tag">Seats.aero API</span>
+      <span class="stack-tag">Cloudflare Pages</span>
+      <span class="stack-tag">GitHub Actions</span>
+      <span class="stack-tag">Playwright</span>
+    </div>
+  </div>
+
+  <footer>
+    <span class="footer-name">Osama Badr</span>
+    <div class="footer-links">
+      <a href="mailto:osabadr@gmail.com">osabadr@gmail.com</a>
+      <a href="https://linkedin.com/in/obadr" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      <a href="https://github.com/badro98" target="_blank" rel="noopener noreferrer">GitHub</a>
+    </div>
+  </footer>
+
+</div>
+<script>
+  const fadeUps = [...document.querySelectorAll('.fade-up')];
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        const idx = fadeUps.indexOf(entry.target);
+        entry.target.style.animationDelay = `${idx * 0.08}s`;
+        entry.target.classList.add('in-view');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '-4% 0px' });
+  fadeUps.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
