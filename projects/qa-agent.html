@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>qa-agent — Osama Badr</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css">
+<style>
+.case-hero { margin-bottom: 3.5rem; }
+.case-eyebrow { font-family: var(--mono); font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-3); margin-bottom: 1rem; }
+.case-hero h1 { font-family: var(--serif); font-size: clamp(32px, 5vw, 52px); line-height: 1.1; letter-spacing: -0.02em; font-weight: 400; color: var(--ink); margin-bottom: 1rem; max-width: 18ch; }
+.case-hero p { font-size: 16px; line-height: 1.75; color: var(--ink-2); max-width: 560px; }
+.case-meta { display: flex; gap: 2rem; flex-wrap: wrap; padding: 1.5rem 0; border-top: 0.5px solid var(--border-strong); border-bottom: 0.5px solid var(--border-strong); margin: 2rem 0 3.5rem; }
+.meta-item { display: flex; flex-direction: column; gap: 3px; }
+.meta-label { font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-3); }
+.meta-value { font-size: 13px; color: var(--ink); font-weight: 500; }
+.case-section { margin-bottom: 3.5rem; }
+.case-section h2 { font-family: var(--serif); font-size: 26px; font-weight: 400; color: var(--ink); margin-bottom: 1rem; }
+.case-section p { font-size: 15px; line-height: 1.8; color: var(--ink-2); margin-bottom: 1rem; max-width: 640px; }
+.case-section p:last-child { margin-bottom: 0; }
+.decisions { display: flex; flex-direction: column; gap: 1.5rem; margin-top: 1.5rem; }
+.decision { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r); padding: 24px; }
+.decision-num { font-family: var(--mono); font-size: 10px; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 6px; }
+.decision strong { display: block; font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 8px; }
+.decision p { font-size: 13px; color: var(--ink-2); line-height: 1.65; margin: 0; max-width: 100%; }
+.screenshot-wrap { margin: 2.5rem 0; }
+.screenshot-caption { margin-top: 10px; font-size: 12px; font-family: var(--mono); color: var(--ink-3); }
+.pipeline {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin: 1.5rem 0;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  overflow: hidden;
+}
+.pipeline-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border);
+}
+.pipeline-step:last-child { border-bottom: none; }
+.pipeline-num {
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--accent);
+  min-width: 20px;
+  padding-top: 2px;
+}
+.pipeline-step strong { font-size: 13px; font-weight: 600; color: var(--ink); display: block; margin-bottom: 2px; }
+.pipeline-step span { font-size: 12px; color: var(--ink-3); line-height: 1.5; }
+.stack { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 1rem; }
+.stack-tag { font-family: var(--mono); font-size: 11px; color: var(--ink-2); background: var(--surface-2); padding: 4px 10px; border-radius: 4px; border: 1px solid var(--border); }
+.meta-callout {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 20px 24px;
+  margin: 1.5rem 0;
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+.meta-callout-item { display: flex; flex-direction: column; gap: 4px; }
+.meta-callout-num { font-family: var(--serif); font-size: 28px; color: var(--ink); }
+.meta-callout-label { font-size: 12px; color: var(--ink-3); font-family: var(--mono); }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <nav>
+    <a href="../index.html" class="nav-name">Osama Badr</a>
+    <div class="nav-links">
+      <a href="../about.html">About</a>
+      <a href="mailto:osabadr@gmail.com">Contact</a>
+    </div>
+  </nav>
+
+  <a href="../index.html" class="back-link">All projects</a>
+
+  <div class="case-hero fade-up">
+    <p class="case-eyebrow">Project · QA Tooling</p>
+    <h1>qa-agent</h1>
+    <p>A QA agent that runs on every PR and flags coverage gaps before they merge. Built so nothing slips through when you're shipping fast with AI.</p>
+    <div style="margin-top:1.25rem;">
+      <span class="status-badge active">Active — deployed in pointd &amp; BIP</span>
+    </div>
+  </div>
+
+  <div class="case-meta">
+    <div class="meta-item"><span class="meta-label">Role</span><span class="meta-value">Solo builder</span></div>
+    <div class="meta-item"><span class="meta-label">Started</span><span class="meta-value">Early 2025</span></div>
+    <div class="meta-item"><span class="meta-label">Runs</span><span class="meta-value">158+ workflow runs</span></div>
+    <div class="meta-item"><span class="meta-label">Stack</span><span class="meta-value">Node.js, Anthropic API, GitHub Actions</span></div>
+  </div>
+
+  <!-- Problem -->
+  <div class="case-section fade-up">
+    <h2>The problem</h2>
+    <p>When you're building quickly with AI, you ship a lot of code fast. Tests pass — but that doesn't mean the right things are being tested. Coverage logic doesn't keep up with what actually changed. The gap isn't obvious until something breaks in production.</p>
+    <p>I built qa-agent out of necessity while working on pointd and BIP. I needed a second set of eyes on every PR — something that could look at what changed, check what was being tested, and flag the gaps before I merged. Not a linter, not a static analyzer — something that actually reads the diff and reasons about coverage.</p>
+  </div>
+
+  <!-- Screenshot: sidebar -->
+  <div class="screenshot-wrap fade-up">
+    <div class="browser-frame">
+      <img src="../assets/screenshots/qa-agent-sidebar.png" alt="GitHub Actions sidebar showing three QA Agent workflows" loading="lazy">
+    </div>
+    <p class="screenshot-caption">Three workflows — PR analysis, failed test re-runs, and full regression — all running in GitHub Actions</p>
+  </div>
+
+  <!-- Pipeline -->
+  <div class="case-section fade-up">
+    <h2>How it works</h2>
+    <p>qa-agent runs as a GitHub Actions workflow, triggered automatically on every PR. It runs a 6-step pipeline:</p>
+    <div class="pipeline">
+      <div class="pipeline-step">
+        <span class="pipeline-num">01</span>
+        <div><strong>Diff analysis</strong><span>Reads the PR diff and identifies what changed — new functions, modified logic, deleted paths</span></div>
+      </div>
+      <div class="pipeline-step">
+        <span class="pipeline-num">02</span>
+        <div><strong>Risk scoring</strong><span>Classifies the change by risk level — UI-only, business logic, auth, data layer, etc.</span></div>
+      </div>
+      <div class="pipeline-step">
+        <span class="pipeline-num">03</span>
+        <div><strong>Coverage gap detection</strong><span>Compares what changed against existing tests to identify what isn't covered</span></div>
+      </div>
+      <div class="pipeline-step">
+        <span class="pipeline-num">04</span>
+        <div><strong>Test proposals</strong><span>Generates specific missing test cases — unit, e2e, or smoke — with descriptions</span></div>
+      </div>
+      <div class="pipeline-step">
+        <span class="pipeline-num">05</span>
+        <div><strong>Execution</strong><span>Runs the existing test suite (Vitest + Playwright) and captures results</span></div>
+      </div>
+      <div class="pipeline-step">
+        <span class="pipeline-num">06</span>
+        <div><strong>Synthesis</strong><span>Produces a PASS/WARN report with test results, gap list, and proposed tests filed as GitHub issues</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Screenshot: runs -->
+  <div class="screenshot-wrap fade-up">
+    <div class="browser-frame">
+      <img src="../assets/screenshots/qa-agent-runs.png" alt="158 workflow runs in GitHub Actions" loading="lazy">
+    </div>
+    <p class="screenshot-caption">158 runs across pointd PRs — every merge is checked before it lands</p>
+  </div>
+
+  <!-- Screenshot: report -->
+  <div class="screenshot-wrap fade-up">
+    <div class="browser-frame">
+      <img src="../assets/screenshots/qa-agent-report.png" alt="QA Agent Report showing WARN status, test results, coverage gaps, and proposed tests" loading="lazy">
+    </div>
+    <p class="screenshot-caption">A WARN report — 1,012 tests passed, but a new scroll utility has no coverage. Gaps listed, tests proposed, issue filed.</p>
+  </div>
+
+  <!-- Key decisions -->
+  <div class="case-section fade-up">
+    <h2>Key decisions</h2>
+    <div class="decisions">
+      <div class="decision">
+        <p class="decision-num">Decision 01</p>
+        <strong>GitHub Actions, not a separate service</strong>
+        <p>Keeping it in GitHub Actions means zero additional infrastructure, zero additional cost, and it runs where the PRs already live. The config lives in the repo. Adding it to a new project is a single workflow file.</p>
+      </div>
+      <div class="decision">
+        <p class="decision-num">Decision 02</p>
+        <strong>WARN, not BLOCK</strong>
+        <p>The agent flags gaps and proposes tests — it doesn't block merges. This keeps the feedback loop fast and treats the agent as a QA collaborator, not a gatekeeper. The developer decides what's worth addressing before merging.</p>
+      </div>
+      <div class="decision">
+        <p class="decision-num">Decision 03</p>
+        <strong>File issues, don't just comment</strong>
+        <p>Proposed tests are filed as GitHub issues, not just posted as PR comments. Comments get buried. Issues create accountability and make it easy to prioritize coverage work separately from shipping.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Meta connection -->
+  <div class="case-section fade-up">
+    <h2>The Meta connection</h2>
+    <p>The next planned enhancement is simulator-based manual testing — running automated flows against a device emulator the same way VR/MR hardware QA was done at Meta Reality Labs. The agent already handles static analysis and test execution. Connecting it to a simulator closes the loop on full end-to-end coverage, not just unit and e2e.</p>
+    <p>That experience — building repeatable, scalable QA systems for hardware that can't be continuously deployed — is what qa-agent is growing toward for web products.</p>
+  </div>
+
+  <div class="case-section fade-up">
+    <h2>Where it stands</h2>
+    <div class="meta-callout">
+      <div class="meta-callout-item"><span class="meta-callout-num">158+</span><span class="meta-callout-label">Workflow runs</span></div>
+      <div class="meta-callout-item"><span class="meta-callout-num">3</span><span class="meta-callout-label">Workflows (PR, regression, re-run)</span></div>
+      <div class="meta-callout-item"><span class="meta-callout-num">2</span><span class="meta-callout-label">Active repos (pointd, BIP)</span></div>
+    </div>
+    <div class="stack">
+      <span class="stack-tag">Node.js (ESM)</span>
+      <span class="stack-tag">Anthropic API</span>
+      <span class="stack-tag">GitHub Actions</span>
+      <span class="stack-tag">GitHub API</span>
+      <span class="stack-tag">Vitest</span>
+      <span class="stack-tag">Playwright</span>
+    </div>
+  </div>
+
+  <footer>
+    <span class="footer-name">Osama Badr</span>
+    <div class="footer-links">
+      <a href="mailto:osabadr@gmail.com">osabadr@gmail.com</a>
+      <a href="https://linkedin.com/in/obadr" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      <a href="https://github.com/badro98" target="_blank" rel="noopener noreferrer">GitHub</a>
+    </div>
+  </footer>
+
+</div>
+<script>
+  const fadeUps = [...document.querySelectorAll('.fade-up')];
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        const idx = fadeUps.indexOf(entry.target);
+        entry.target.style.animationDelay = `${idx * 0.08}s`;
+        entry.target.classList.add('in-view');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '-4% 0px' });
+  fadeUps.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
