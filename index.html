@@ -105,8 +105,8 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
   gap: 1px;
-  background: var(--border);
-  border: 1px solid var(--border);
+  background: var(--border-strong);
+  border: 1px solid var(--border-strong);
   border-radius: var(--r-lg);
   overflow: hidden;
 }
@@ -278,17 +278,19 @@
 
 <script>
   // Fade-up on scroll
+  const fadeUps = [...document.querySelectorAll('.fade-up')];
   const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry, i) => {
+    entries.forEach((entry) => {
       if (entry.isIntersecting) {
-        entry.target.style.animationDelay = `${i * 0.08}s`;
+        const idx = fadeUps.indexOf(entry.target);
+        entry.target.style.animationDelay = `${idx * 0.08}s`;
         entry.target.classList.add('in-view');
         observer.unobserve(entry.target);
       }
     });
   }, { threshold: 0.15, rootMargin: '-4% 0px' });
 
-  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+  fadeUps.forEach(el => observer.observe(el));
 </script>
 </body>
 </html>
