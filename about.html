@@ -58,10 +58,6 @@ nav {
   color: var(--ink);
   text-decoration: none;
 }
-.nav-links { display: flex; gap: 1.75rem; align-items: center; }
-.nav-links a { font-size: 13px; color: var(--ink-2); text-decoration: none; }
-.nav-links a:hover { color: var(--accent); }
-.nav-links a.active { color: var(--ink); font-weight: 500; }
 
 /* ── Hero ── */
 .page { max-width: 860px; margin: 0 auto; padding: 0 2rem 6rem; }
@@ -448,20 +444,6 @@ nav {
 }
 .hero-contact a[href$=".html"]:hover { letter-spacing: 0.04em; }
 
-/* ── Footer ── */
-footer.site-footer {
-  padding-top: 2rem;
-  margin-top: 4rem;
-  border-top: 0.5px solid var(--border-strong);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 1rem;
-}
-footer.site-footer p { font-size: 12px; color: var(--ink-3); font-family: var(--mono); }
-footer.site-footer a { color: var(--ink-3); text-decoration: none; }
-footer.site-footer a:hover { color: var(--accent); }
 
 /* ── Responsive ── */
 @media (max-width: 720px) {
@@ -724,9 +706,13 @@ footer.site-footer a:hover { color: var(--accent); }
     </div>
   </div>
 
-  <footer class="site-footer">
-    <p>Osama Badr · San Jose, CA · 2026</p>
-    <p><a href="mailto:osabadr@gmail.com">osabadr@gmail.com</a> · <a href="https://linkedin.com/in/obadr" target="_blank" rel="noopener noreferrer">linkedin.com/in/obadr</a></p>
+  <footer>
+    <span class="footer-name">Osama Badr</span>
+    <div class="footer-links">
+      <a href="mailto:osabadr@gmail.com">osabadr@gmail.com</a>
+      <a href="https://linkedin.com/in/obadr" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      <a href="https://github.com/badro98" target="_blank" rel="noopener noreferrer">GitHub</a>
+    </div>
   </footer>
 
 </div><!-- /content -->
