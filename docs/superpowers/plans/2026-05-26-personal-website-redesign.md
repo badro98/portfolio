@@ -41,8 +41,9 @@ Save the following images from the conversation into `assets/screenshots/`:
 
 | Filename | What it shows |
 |----------|---------------|
-| `pointd-gate.png` | pointd gate page — "Your points are worth more than you think" |
-| `pointd-explore.png` | pointd explore grid — destination cards (Taipei, Cairo, Prague) |
+| `pointd-gate.png` | pointd gate page — "Your points are worth more than you think" (email waitlist) |
+| `pointd-programs.png` | pointd program entry — "See what your points are worth" with Chase UR, Amex MR, Capital One inputs |
+| `pointd-explore.png` | pointd planner — filters sidebar + destination cards (Taipei, Cairo, Prague) with points/night |
 | `pointd-detail.png` | pointd hotel detail — Taipei list + map with price bubbles |
 | `qa-agent-sidebar.png` | GitHub Actions sidebar — 3 QA Agent workflows |
 | `qa-agent-runs.png` | GitHub Actions run history — 158 runs list |
@@ -550,8 +551,8 @@ Replace everything between `<body>` and `</body>` with:
           <p class="proj-problem">Points redemption is too complex. Most people sit on points for years — they know they're valuable, but the math and research push them back to cash. pointd skips the complexity and shows you where your points can take you, across every program you have.</p>
         </div>
         <div class="proj-screenshots">
-          <div class="browser-frame"><img src="assets/screenshots/pointd-gate.png" alt="pointd gate page" loading="lazy"></div>
-          <div class="browser-frame"><img src="assets/screenshots/pointd-explore.png" alt="pointd explore view" loading="lazy"></div>
+          <div class="browser-frame"><img src="assets/screenshots/pointd-programs.png" alt="pointd program entry" loading="lazy"></div>
+          <div class="browser-frame"><img src="assets/screenshots/pointd-explore.png" alt="pointd planner view" loading="lazy"></div>
         </div>
         <div class="proj-card-footer">
           <a href="projects/pointd.html">Read the story →</a>
@@ -896,7 +897,15 @@ Create the file with this content:
     <div class="browser-frame">
       <img src="../assets/screenshots/pointd-gate.png" alt="pointd gate page — Your points are worth more than you think" loading="lazy">
     </div>
-    <p class="screenshot-caption">Gate page — positioning the discovery approach before users even sign up</p>
+    <p class="screenshot-caption">Gate page — the value prop before users even sign up</p>
+  </div>
+
+  <!-- Screenshot: program entry -->
+  <div class="screenshot-wrap fade-up">
+    <div class="browser-frame">
+      <img src="../assets/screenshots/pointd-programs.png" alt="pointd program entry — add your loyalty programs" loading="lazy">
+    </div>
+    <p class="screenshot-caption">Program entry — add your balances once, pointd calculates your combined purchasing power across all programs</p>
   </div>
 
   <!-- Key decisions -->
@@ -924,9 +933,9 @@ Create the file with this content:
   <!-- Screenshot: explore + detail -->
   <div class="screenshot-wrap fade-up">
     <div class="browser-frame">
-      <img src="../assets/screenshots/pointd-explore.png" alt="pointd explore grid — destinations with points per night" loading="lazy">
+      <img src="../assets/screenshots/pointd-explore.png" alt="pointd planner — filters and destination cards" loading="lazy">
     </div>
-    <p class="screenshot-caption">Explore view — destinations ranked by your real balance, not generic award charts</p>
+    <p class="screenshot-caption">Planner view — filter by hotel tier, availability, and points/night. Only shows destinations you can actually afford with your current balances.</p>
   </div>
 
   <div class="screenshot-wrap fade-up">
