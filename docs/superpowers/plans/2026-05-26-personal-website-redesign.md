@@ -1341,7 +1341,7 @@ git commit -m "feat: add qa-agent case study page"
     <p>A platform that connects to your GitHub and Claude Code sessions, reads what you built that day, and writes the post for you. Building in public shouldn't require a separate writing session after a long build day.</p>
     <div style="margin-top:1.25rem;display:flex;align-items:center;gap:12px;">
       <span class="status-badge in-progress">In Progress</span>
-      <a href="https://bip.so" target="_blank" rel="noopener noreferrer" style="font-family:var(--mono);font-size:12px;color:var(--ink-3);text-decoration:none;border-bottom:0.5px solid var(--border-strong);padding-bottom:1px;">bip.so ↗</a>
+      <a href="https://usebip.dev" target="_blank" rel="noopener noreferrer" style="font-family:var(--mono);font-size:12px;color:var(--ink-3);text-decoration:none;border-bottom:0.5px solid var(--border-strong);padding-bottom:1px;">usebip.dev ↗</a>
     </div>
   </div>
 
@@ -1566,4 +1566,4 @@ git commit -m "feat: update about page hero copy and nav link"
 
 **Type consistency:** `.browser-frame`, `.status-badge`, `.fade-up`, `.back-link` used consistently across all pages via `styles.css`. Case study styles (`.case-hero`, `.case-section`, `.decision`, `.screenshot-wrap`, `.stack-tag`) are duplicated per project page intentionally — each page is self-contained.
 
-**One item to confirm before deploying:** BIP's live URL — used `bip.so` in the case study. Verify this is correct or update to the actual URL.
+**BIP URL confirmed:** `usebip.dev` — updated throughout.
