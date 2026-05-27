@@ -156,7 +156,10 @@ Shared structure across all three pages. Same nav as home page. Same color syste
 
 **Vision:** The longer arc is a feed where builders share fragments of what they've built — not just text posts, but interactive prototypes and features that other people can try directly in the feed. That's the eventual product. Current state is the summarization and generation layer.
 
-**Screenshots:** TBD — user to provide once current bug fix is complete.
+**Screenshots to use:**
+- Build Log page — daily activity captured automatically, "summarized" badge, project tags (BIP/qa-agent/pointd.fyi), AI-written note, "Publish to profile" CTA
+- Settings page — 3-step setup flow (Connect GitHub → Connect BIP MCP → Generate + publish), "What BIP can see" transparency section, active integrations (GitHub + BIP MCP)
+- Profile/Activity page — public profile (@badro), activity feed grouped by week, project-tagged build log entries
 
 **Where it stands:** Live but in active development. Summarization and post generation working. Social publishing and the feed are next.
 
@@ -182,7 +185,7 @@ Minor updates only:
 
 ## Content Still Needed
 
-- BIP screenshots (user to provide after current bug fix)
+- BIP screenshots (provided — build log, settings, activity feed)
 - Final hero headline copy (to be written during implementation)
 - Resume PDF link or decision on linking to LinkedIn instead
 
