@@ -47,10 +47,13 @@
   gap: 2rem;
 }
 .proj-card {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--r-lg);
-  overflow: hidden;
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 .proj-card:hover {
@@ -83,15 +86,14 @@
   display: flex;
   justify-content: flex-end;
 }
-.proj-card-footer a {
+.proj-card-link {
   font-size: 13px;
   font-family: var(--mono);
   color: var(--accent);
-  text-decoration: none;
   font-weight: 500;
   transition: letter-spacing 0.2s ease;
 }
-.proj-card-footer a:hover { letter-spacing: 0.02em; }
+.proj-card:hover .proj-card-link { letter-spacing: 0.02em; }
 /* ── Card fan deck ── */
 .deck-wrap {
   padding: 0 28px 24px;
@@ -109,43 +111,17 @@
 .deck-card.dc1 {
   position: relative;
   z-index: 3;
+  box-shadow: 0 4px 16px rgba(28,27,24,0.14);
 }
 .deck-card.dc2 {
   position: absolute;
   top: 0; left: 0; right: 0; bottom: 0;
   z-index: 2;
-  transform: translateX(10px) translateY(3px) rotate(1.2deg);
+  transform: translateX(7px) translateY(5px) rotate(1.8deg);
+  box-shadow: 0 2px 10px rgba(28,27,24,0.09);
 }
-.deck.fanned .dc2 {
-  transform: translateX(18px) translateY(5px) rotate(2deg);
-}
-
-/* Hint label below deck */
-.deck-hint {
-  margin-top: 8px;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-.deck-hint-dot {
-  width: 5px; height: 5px;
-  border-radius: 50%;
-  background: var(--accent);
-  flex-shrink: 0;
-  animation: deckPulse 2s ease-in-out infinite;
-}
-@keyframes deckPulse {
-  0%, 100% { opacity: 0.4; transform: scale(1); }
-  50%       { opacity: 1;   transform: scale(1.5); }
-}
-.deck-hint-label {
-  font-family: var(--mono);
-  font-size: 11px;
-  color: var(--ink-3);
-}
-
-@media (max-width: 580px) {
-  .deck-hint-label { font-size: 10px; }
+.deck-wrap:hover .deck .dc2 {
+  transform: translateX(22px) translateY(10px) rotate(4.5deg);
 }
 
 /* ── Professional section ── */
@@ -369,11 +345,11 @@
     <div class="projects-grid">
 
       <!-- pointd -->
-      <div class="proj-card fade-up">
+      <a class="proj-card fade-up" href="projects/pointd.html">
         <div class="proj-card-body">
           <div class="proj-card-top">
             <span class="proj-name">pointd</span>
-            <span class="status-badge early-access">Early Access</span>
+            <span class="status-badge in-progress">MVP in progress</span>
           </div>
           <p class="proj-problem">Points redemption is too complex. Most people sit on points for years — they know they're valuable, but the math and research push them back to cash. pointd skips the complexity and shows you where your points can take you, across every program you have.</p>
         </div>
@@ -386,18 +362,14 @@
               <div class="browser-frame"><img src="assets/screenshots/pointd-programs.png" alt="pointd program entry" loading="lazy"></div>
             </div>
           </div>
-          <div class="deck-hint" aria-hidden="true">
-            <span class="deck-hint-dot"></span>
-            <span class="deck-hint-label">1 more screenshot</span>
-          </div>
         </div>
         <div class="proj-card-footer">
-          <a href="projects/pointd.html">Read the story →</a>
+          <span class="proj-card-link">Read the story →</span>
         </div>
-      </div>
+      </a>
 
       <!-- qa-agent -->
-      <div class="proj-card fade-up">
+      <a class="proj-card fade-up" href="projects/qa-agent.html">
         <div class="proj-card-body">
           <div class="proj-card-top">
             <span class="proj-name">qa-agent</span>
@@ -414,18 +386,14 @@
               <div class="browser-frame"><img src="assets/screenshots/qa-agent-runs.png" alt="qa-agent GitHub Actions runs" loading="lazy"></div>
             </div>
           </div>
-          <div class="deck-hint" aria-hidden="true">
-            <span class="deck-hint-dot"></span>
-            <span class="deck-hint-label">1 more screenshot</span>
-          </div>
         </div>
         <div class="proj-card-footer">
-          <a href="projects/qa-agent.html">Read the story →</a>
+          <span class="proj-card-link">Read the story →</span>
         </div>
-      </div>
+      </a>
 
       <!-- BIP -->
-      <div class="proj-card fade-up">
+      <a class="proj-card fade-up" href="projects/bip.html">
         <div class="proj-card-body">
           <div class="proj-card-top">
             <span class="proj-name">BIP</span>
@@ -442,18 +410,14 @@
               <div class="browser-frame"><img src="assets/screenshots/bip-buildlog.png" alt="BIP build log" loading="lazy"></div>
             </div>
           </div>
-          <div class="deck-hint" aria-hidden="true">
-            <span class="deck-hint-dot"></span>
-            <span class="deck-hint-label">1 more screenshot</span>
-          </div>
         </div>
         <div class="proj-card-footer">
-          <a href="projects/bip.html">Read the story →</a>
+          <span class="proj-card-link">Read the story →</span>
         </div>
-      </div>
+      </a>
 
       <!-- UX Gap Detection -->
-      <div class="proj-card fade-up">
+      <a class="proj-card fade-up" href="projects/ux-gap.html">
         <div class="proj-card-body">
           <div class="proj-card-top">
             <span class="proj-name">UX Gap Detection</span>
@@ -510,9 +474,9 @@
           <div class="diag-status">Active · 2 apps</div>
         </div>
         <div class="proj-card-footer">
-          <a href="projects/ux-gap.html">Read the story →</a>
+          <span class="proj-card-link">Read the story →</span>
         </div>
-      </div>
+      </a>
 
     </div>
   </section>
@@ -556,7 +520,6 @@
     <div class="footer-links">
       <a href="mailto:osabadr@gmail.com">osabadr@gmail.com</a>
       <a href="https://linkedin.com/in/obadr" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-      <a href="https://github.com/badro98" target="_blank" rel="noopener noreferrer">GitHub</a>
     </div>
   </footer>
 
@@ -578,21 +541,6 @@
 
   fadeUps.forEach(el => observer.observe(el));
 
-  // Card fan — scroll-triggered
-  const decks = [...document.querySelectorAll('.deck')];
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    decks.forEach(d => d.classList.add('fanned'));
-  } else {
-    const deckObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('fanned');
-          deckObserver.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.3 });
-    decks.forEach(d => deckObserver.observe(d));
-  }
 </script>
 </body>
 </html>
