@@ -101,7 +101,7 @@
   overflow: visible;
 }
 .deck-card {
-  border-radius: 8px;
+  border-radius: var(--r);
   overflow: hidden;
   transition: transform 0.55s cubic-bezier(0.22,1,0.36,1),
               box-shadow 0.45s ease;
@@ -204,7 +204,6 @@
 .background-footer a:hover { border-color: var(--accent); }
 
 @media (max-width: 580px) {
-  .proj-screenshots { grid-template-columns: 1fr; }
   .highlight-grid { grid-template-columns: 1fr; }
   .hero-actions { flex-direction: column; }
 }
@@ -247,9 +246,19 @@
           </div>
           <p class="proj-problem">Points redemption is too complex. Most people sit on points for years — they know they're valuable, but the math and research push them back to cash. pointd skips the complexity and shows you where your points can take you, across every program you have.</p>
         </div>
-        <div class="proj-screenshots">
-          <div class="browser-frame"><img src="assets/screenshots/pointd-programs.png" alt="pointd program entry" loading="lazy"></div>
-          <div class="browser-frame"><img src="assets/screenshots/pointd-explore.png" alt="pointd planner view" loading="lazy"></div>
+        <div class="deck-wrap">
+          <div class="deck">
+            <div class="deck-card dc2">
+              <div class="browser-frame"><img src="assets/screenshots/pointd-explore.png" alt="pointd planner view" loading="lazy"></div>
+            </div>
+            <div class="deck-card dc1">
+              <div class="browser-frame"><img src="assets/screenshots/pointd-programs.png" alt="pointd program entry" loading="lazy"></div>
+            </div>
+          </div>
+          <div class="deck-hint">
+            <span class="deck-hint-dot"></span>
+            <span class="deck-hint-label">1 more screenshot</span>
+          </div>
         </div>
         <div class="proj-card-footer">
           <a href="projects/pointd.html">Read the story →</a>
@@ -265,9 +274,19 @@
           </div>
           <p class="proj-problem">Building fast with AI creates coverage blind spots — tests pass but the right things aren't being tested. qa-agent runs on every PR and flags gaps before they merge, so nothing slips through.</p>
         </div>
-        <div class="proj-screenshots">
-          <div class="browser-frame"><img src="assets/screenshots/qa-agent-runs.png" alt="qa-agent GitHub Actions runs" loading="lazy"></div>
-          <div class="browser-frame"><img src="assets/screenshots/qa-agent-report.png" alt="qa-agent report output" loading="lazy"></div>
+        <div class="deck-wrap">
+          <div class="deck">
+            <div class="deck-card dc2">
+              <div class="browser-frame"><img src="assets/screenshots/qa-agent-report.png" alt="qa-agent report output" loading="lazy"></div>
+            </div>
+            <div class="deck-card dc1">
+              <div class="browser-frame"><img src="assets/screenshots/qa-agent-runs.png" alt="qa-agent GitHub Actions runs" loading="lazy"></div>
+            </div>
+          </div>
+          <div class="deck-hint">
+            <span class="deck-hint-dot"></span>
+            <span class="deck-hint-label">1 more screenshot</span>
+          </div>
         </div>
         <div class="proj-card-footer">
           <a href="projects/qa-agent.html">Read the story →</a>
@@ -283,9 +302,19 @@
           </div>
           <p class="proj-problem">Building in public is consistently good advice but manually painful. BIP connects to your GitHub and Claude Code sessions and writes the post for you — what you shipped, summarized, ready to publish.</p>
         </div>
-        <div class="proj-screenshots">
-          <div class="browser-frame"><img src="assets/screenshots/bip-buildlog.png" alt="BIP build log" loading="lazy"></div>
-          <div class="browser-frame"><img src="assets/screenshots/bip-profile.png" alt="BIP public profile" loading="lazy"></div>
+        <div class="deck-wrap">
+          <div class="deck">
+            <div class="deck-card dc2">
+              <div class="browser-frame"><img src="assets/screenshots/bip-profile.png" alt="BIP public profile" loading="lazy"></div>
+            </div>
+            <div class="deck-card dc1">
+              <div class="browser-frame"><img src="assets/screenshots/bip-buildlog.png" alt="BIP build log" loading="lazy"></div>
+            </div>
+          </div>
+          <div class="deck-hint">
+            <span class="deck-hint-dot"></span>
+            <span class="deck-hint-label">1 more screenshot</span>
+          </div>
         </div>
         <div class="proj-card-footer">
           <a href="projects/bip.html">Read the story →</a>
@@ -348,6 +377,22 @@
   }, { threshold: 0.15, rootMargin: '-4% 0px' });
 
   fadeUps.forEach(el => observer.observe(el));
+
+  // Card fan — scroll-triggered
+  const decks = [...document.querySelectorAll('.deck')];
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    decks.forEach(d => d.classList.add('fanned'));
+  } else {
+    const deckObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('fanned');
+          deckObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.3 });
+    decks.forEach(d => deckObserver.observe(d));
+  }
 </script>
 </body>
 </html>
