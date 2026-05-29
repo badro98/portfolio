@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UX Gap Detection — Osama Badr</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css">
+<style>
+/* ── Case study layout ── */
+.case-hero { margin-bottom: 3.5rem; }
+.case-eyebrow { font-family: var(--mono); font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-3); margin-bottom: 1rem; }
+.case-hero h1 { font-family: var(--serif); font-size: clamp(32px, 5vw, 52px); line-height: 1.1; letter-spacing: -0.02em; font-weight: 400; color: var(--ink); margin-bottom: 1rem; max-width: 18ch; }
+.case-hero p { font-size: 16px; line-height: 1.75; color: var(--ink-2); max-width: 560px; }
+.case-meta { display: flex; gap: 2rem; flex-wrap: wrap; padding: 1.5rem 0; border-top: 0.5px solid var(--border-strong); border-bottom: 0.5px solid var(--border-strong); margin: 2rem 0 3.5rem; }
+.meta-item { display: flex; flex-direction: column; gap: 3px; }
+.meta-label { font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-3); }
+.meta-value { font-size: 13px; color: var(--ink); font-weight: 500; }
+.case-section { margin-bottom: 3.5rem; }
+.case-section h2 { font-family: var(--serif); font-size: 26px; font-weight: 400; color: var(--ink); margin-bottom: 1rem; }
+.case-section p { font-size: 15px; line-height: 1.8; color: var(--ink-2); margin-bottom: 1rem; max-width: 640px; }
+.case-section p:last-child { margin-bottom: 0; }
+
+/* Decision blocks */
+.decisions { display: flex; flex-direction: column; gap: 1.5rem; margin-top: 1.5rem; }
+.decision { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r); padding: 24px; }
+.decision-num { font-family: var(--mono); font-size: 10px; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 6px; }
+.decision strong { display: block; font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 8px; }
+.decision p { font-size: 13px; color: var(--ink-2); line-height: 1.65; margin: 0; max-width: 100%; }
+
+/* Stack tags */
+.stack { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 1rem; }
+.stack-tag { font-family: var(--mono); font-size: 11px; color: var(--ink-2); background: var(--surface-2); padding: 4px 10px; border-radius: 4px; border: 1px solid var(--border); }
+
+/* Stats callout */
+.meta-callout { background: var(--surface-2); border: 1px solid var(--border); border-radius: var(--r); padding: 20px 24px; margin: 1.5rem 0; display: flex; gap: 2rem; flex-wrap: wrap; }
+.meta-callout-item { display: flex; flex-direction: column; gap: 4px; }
+.meta-callout-num { font-family: var(--serif); font-size: 28px; color: var(--ink); }
+.meta-callout-label { font-size: 12px; color: var(--ink-3); font-family: var(--mono); }
+
+/* ── Pipeline diagram ── */
+.pipeline-diagram {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: 28px;
+  margin: 2.5rem 0;
+  position: relative;
+}
+.pipeline-diagram::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: var(--r-lg);
+  background-image: radial-gradient(circle, rgba(28,27,24,0.04) 1px, transparent 1px);
+  background-size: 20px 20px;
+  pointer-events: none;
+}
+.pd-title { font-family: var(--serif); font-size: 18px; color: var(--ink); margin-bottom: 24px; position: relative; z-index: 1; }
+.pd-flow { display: flex; flex-direction: column; gap: 0; position: relative; z-index: 1; }
+.pd-row { display: flex; align-items: flex-start; gap: 14px; position: relative; }
+.pd-row:not(:last-child) { padding-bottom: 16px; }
+.pd-row:not(:last-child)::before {
+  content: '';
+  position: absolute;
+  left: 17px; top: 36px;
+  bottom: 0;
+  width: 1px;
+  background: var(--border-strong);
+}
+.pd-icon-wrap { flex-shrink: 0; }
+.pd-icon {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: var(--surface);
+  border: 1px solid var(--border-strong);
+  display: flex; align-items: center; justify-content: center;
+  position: relative; z-index: 1;
+}
+.pd-icon svg { width: 14px; height: 14px; stroke: var(--ink-3); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.pd-icon.accent { background: var(--accent-light); border-color: var(--accent-border); }
+.pd-icon.accent svg { stroke: var(--accent); }
+.pd-body { flex: 1; padding-top: 2px; }
+.pd-num { font-family: var(--mono); font-size: 9px; color: var(--accent); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 2px; }
+.pd-name { font-size: 13px; font-weight: 600; color: var(--ink); margin-bottom: 3px; }
+.pd-desc { font-size: 12.5px; color: var(--ink-2); line-height: 1.6; }
+
+/* Branch decision */
+.pd-branch {
+  margin: 0 0 16px 50px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+.pd-branch-node { background: var(--surface-2); border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; }
+.pd-branch-node.accent { background: var(--accent-light); border-color: var(--accent-border); }
+.pd-branch-label { font-family: var(--mono); font-size: 9px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-3); margin-bottom: 3px; }
+.pd-branch-label.yes { color: #2e7d32; }
+.pd-branch-label.no { color: var(--accent); }
+.pd-branch-text { font-size: 11.5px; color: var(--ink-2); line-height: 1.5; }
+
+@media (max-width: 580px) {
+  .case-meta { gap: 1.25rem; }
+  .meta-callout { gap: 1.25rem; }
+  .pd-branch { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <nav>
+    <a href="../index.html" class="nav-name">Osama Badr</a>
+    <div class="nav-links">
+      <a href="../about.html">About</a>
+      <a href="mailto:osabadr@gmail.com">Contact</a>
+    </div>
+  </nav>
+
+  <a href="../index.html" class="back-link">All projects</a>
+
+  <div class="case-hero fade-up">
+    <p class="case-eyebrow">Project · AI Tooling</p>
+    <h1>UX Gap Detection</h1>
+    <p>A multi-bot pipeline that finds the UX issues automated testing misses — running continuously on every test pass, deduplicating against known bugs, and filing verified issues automatically.</p>
+    <div style="margin-top:1.25rem;">
+      <span class="status-badge active">Active — Meta Reality Labs</span>
+    </div>
+  </div>
+
+  <div class="case-meta">
+    <div class="meta-item"><span class="meta-label">Role</span><span class="meta-value">Solo builder</span></div>
+    <div class="meta-item"><span class="meta-label">Started</span><span class="meta-value">Mar 2026</span></div>
+    <div class="meta-item"><span class="meta-label">Status</span><span class="meta-value">Active · 2 apps</span></div>
+    <div class="meta-item"><span class="meta-label">Stack</span><span class="meta-value">Python, Anthropic API, GitHub Actions</span></div>
+  </div>
+
+  <!-- Problem -->
+  <div class="case-section fade-up">
+    <h2>The problem</h2>
+    <p>When the offshore manual testing team was replaced by automated test passes, the coverage gap wasn't obvious at first. Automated tests are written to verify behavior — they pass as long as the app does what it's programmed to do. They don't notice when something looks off: a misaligned UI element, a flow that's technically correct but confusing, a rendering issue that only appears in certain states.</p>
+    <p>Real users notice these things. There was no systematic way to catch them without reintroducing manual review, which was exactly what automation was supposed to eliminate. The question became: how do you get the coverage of a manual tester without the manual tester?</p>
+  </div>
+
+  <!-- Pipeline diagram -->
+  <div class="pipeline-diagram fade-up">
+    <div class="pd-title">How it works</div>
+    <div class="pd-flow">
+
+      <div class="pd-row">
+        <div class="pd-icon-wrap"><div class="pd-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div></div>
+        <div class="pd-body"><div class="pd-num">Step 01</div><div class="pd-name">Ingest automated runs</div><div class="pd-desc">Bots pull the latest automated test results — job outputs and post-run reports across both apps</div></div>
+      </div>
+
+      <div class="pd-row">
+        <div class="pd-icon-wrap"><div class="pd-icon accent"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35M11 8v3l2 2"/></svg></div></div>
+        <div class="pd-body"><div class="pd-num">Step 02</div><div class="pd-name">Identify UX gaps</div><div class="pd-desc">AI reviews run output and flags potential UX issues — rendering problems, broken flows, functional anomalies that automation passes but users would notice</div></div>
+      </div>
+
+      <div class="pd-row">
+        <div class="pd-icon-wrap"><div class="pd-icon"><svg viewBox="0 0 24 24"><path d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2v-4M9 21H5a2 2 0 01-2-2v-4m0 0h18"/></svg></div></div>
+        <div class="pd-body"><div class="pd-num">Step 03</div><div class="pd-name">Dedup against existing bugs</div><div class="pd-desc">Candidate issues are checked against the open bug database. Already-known issues are filtered out — only net-new gaps proceed</div></div>
+      </div>
+
+      <div class="pd-branch">
+        <div class="pd-branch-node">
+          <div class="pd-branch-label yes">Known issue</div>
+          <div class="pd-branch-text">Already filed — skipped. No duplicate noise.</div>
+        </div>
+        <div class="pd-branch-node accent">
+          <div class="pd-branch-label no">Net new</div>
+          <div class="pd-branch-text">Proceeds to simulator testing</div>
+        </div>
+      </div>
+
+      <div class="pd-row">
+        <div class="pd-icon-wrap"><div class="pd-icon"><svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg></div></div>
+        <div class="pd-body"><div class="pd-num">Step 04</div><div class="pd-name">Simulator testing</div><div class="pd-desc">Net-new issues are reproduced in device simulators and emulators. Manual verification for flows with account limitations or hardware dependencies</div></div>
+      </div>
+
+      <div class="pd-row">
+        <div class="pd-icon-wrap"><div class="pd-icon accent"><svg viewBox="0 0 24 24"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></div></div>
+        <div class="pd-body"><div class="pd-num">Step 05</div><div class="pd-name">Auto-file &amp; triage</div><div class="pd-desc">Confirmed issues are filed automatically — title, reproduction steps, and severity pre-populated. Filed to the correct product area on my behalf</div></div>
+      </div>
+
+      <div class="pd-row">
+        <div class="pd-icon-wrap"><div class="pd-icon"><svg viewBox="0 0 24 24"><path d="M20 7H4a2 2 0 00-2 2v6a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg></div></div>
+        <div class="pd-body"><div class="pd-num">Step 06</div><div class="pd-name">Review &amp; assign</div><div class="pd-desc">Filed issues are reviewed and assigned for prioritisation. Working toward full autonomous triage — manual review currently required for edge cases and account-gated flows</div></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Key decisions -->
+  <div class="case-section fade-up">
+    <h2>Key decisions</h2>
+    <div class="decisions">
+      <div class="decision">
+        <p class="decision-num">Decision 01</p>
+        <strong>Bot-per-concern, not one monolith</strong>
+        <p>Each stage of the pipeline runs as a separate bot — ingestion, analysis, dedup, filing. This means any stage can be updated, retrained, or replaced independently without rebuilding the whole pipeline. When the analysis bot needed refinement, the filing and dedup logic stayed untouched.</p>
+      </div>
+      <div class="decision">
+        <p class="decision-num">Decision 02</p>
+        <strong>Dedup before testing, not after</strong>
+        <p>The dedup check runs before simulator testing, not after. Running a simulator test only to find out the issue is already filed wastes compute and time. Checking the bug database first means only net-new issues ever reach the testing stage.</p>
+      </div>
+      <div class="decision">
+        <p class="decision-num">Decision 03</p>
+        <strong>Auto-file with a human review gate</strong>
+        <p>Issues are filed automatically but reviewed before being assigned. This keeps the output trustworthy — a fully autonomous pipeline that silently files noise is worse than no pipeline. The review gate stays until confidence is high enough to remove it for specific issue types.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Where it stands -->
+  <div class="case-section fade-up">
+    <h2>Where it stands</h2>
+    <p>Started with one app and a few features. Now covers two apps with a full feature suite. The pipeline has been running for around two months — long enough to validate the approach and start tuning accuracy.</p>
+    <div class="meta-callout">
+      <div class="meta-callout-item"><span class="meta-callout-num">2</span><span class="meta-callout-label">Apps covered</span></div>
+      <div class="meta-callout-item"><span class="meta-callout-num">6</span><span class="meta-callout-label">Pipeline steps</span></div>
+      <div class="meta-callout-item"><span class="meta-callout-num">~2mo</span><span class="meta-callout-label">In production</span></div>
+    </div>
+    <div class="stack">
+      <span class="stack-tag">Python</span>
+      <span class="stack-tag">Anthropic API</span>
+      <span class="stack-tag">GitHub Actions</span>
+      <span class="stack-tag">iOS Simulator</span>
+      <span class="stack-tag">Android Emulator</span>
+    </div>
+  </div>
+
+  <footer>
+    <span class="footer-name">Osama Badr</span>
+    <div class="footer-links">
+      <a href="mailto:osabadr@gmail.com">osabadr@gmail.com</a>
+      <a href="https://linkedin.com/in/obadr" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      <a href="https://github.com/badro98" target="_blank" rel="noopener noreferrer">GitHub</a>
+    </div>
+  </footer>
+
+</div>
+<script>
+  const fadeUps = [...document.querySelectorAll('.fade-up')];
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        const idx = fadeUps.indexOf(entry.target);
+        entry.target.style.animationDelay = `${idx * 0.08}s`;
+        entry.target.classList.add('in-view');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '-4% 0px' });
+  fadeUps.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
