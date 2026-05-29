@@ -194,6 +194,35 @@
 }
 .background-footer a:hover { border-color: var(--accent); }
 
+/* ── Stat strip ── */
+.stat-strip {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 1px;
+  background: var(--border-strong);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+}
+.stat {
+  background: var(--surface);
+  padding: 1.25rem 1rem;
+  text-align: center;
+}
+.stat-num {
+  font-family: var(--serif);
+  font-size: 26px;
+  color: var(--ink);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.stat-label {
+  font-size: 11px;
+  color: var(--ink-3);
+  line-height: 1.4;
+}
+
 @media (max-width: 580px) {
   .highlight-grid { grid-template-columns: 1fr; }
   .hero-actions { flex-direction: column; }
@@ -318,6 +347,13 @@
   <!-- Professional background -->
   <section class="section" id="background">
     <div class="section-label">Where I've operated</div>
+    <div class="stat-strip">
+      <div class="stat"><div class="stat-num">5+</div><div class="stat-label">Years at Meta Reality Labs</div></div>
+      <div class="stat"><div class="stat-num">2,000+</div><div class="stat-label">Regression bugs verified</div></div>
+      <div class="stat"><div class="stat-num">500+</div><div class="stat-label">AI fix workstream bugs</div></div>
+      <div class="stat"><div class="stat-num">3,000+</div><div class="stat-label">Test cases managed</div></div>
+      <div class="stat"><div class="stat-num">47</div><div class="stat-label">Product areas covered</div></div>
+    </div>
     <div class="highlight-grid">
       <div class="highlight-block fade-up">
         <strong>AI-driven bug fix pipeline</strong>
