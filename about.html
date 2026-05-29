@@ -182,169 +182,133 @@ nav {
   line-height: 1.4;
 }
 
-/* ── Journey infographic ── */
-.journey { display: flex; flex-direction: column; }
-.journey-phase {
-  display: flex;
-  gap: 1rem;
-  padding-bottom: 2rem;
-  position: relative;
-  opacity: 0;
-  transform: translateY(18px);
-  transition: opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1);
-}
-.journey-phase.in-view { opacity: 1; transform: translateY(0); }
-
-/* Connecting line — base track */
-.journey-phase:not(:last-child)::before {
+/* ── Career timeline ── */
+.timeline { position: relative; padding-left: 1.5rem; }
+.timeline::before {
   content: '';
   position: absolute;
-  left: 13px;
-  top: 30px;
-  bottom: 0;
+  left: 0; top: 8px; bottom: 0;
   width: 1px;
   background: var(--border-strong);
 }
-
-/* Connecting line — drawn accent overlay */
-.journey-phase:not(:last-child)::after {
-  content: '';
+.tl-block { position: relative; margin-bottom: 2.5rem; }
+.tl-dot {
   position: absolute;
-  left: 13px;
-  top: 30px;
-  bottom: 0;
-  width: 1px;
-  background: var(--accent);
-  transform: scaleY(0);
-  transform-origin: top;
-  transition: transform 0.9s cubic-bezier(0.22,1,0.36,1) 0.25s;
-}
-.journey-phase.in-view:not(:last-child)::after { transform: scaleY(1); }
-
-.journey-num {
-  width: 28px; height: 28px;
-  flex-shrink: 0;
+  left: -1.5rem; top: 8px;
+  width: 7px; height: 7px;
   border-radius: 50%;
-  background: var(--surface);
-  border: 0.5px solid var(--border-strong);
-  display: flex; align-items: center; justify-content: center;
+  background: var(--accent);
+  transform: translateX(-3px);
+  box-shadow: 0 0 0 3px var(--bg);
+}
+.tl-period {
   font-family: var(--mono);
   font-size: 11px;
+  letter-spacing: 0.07em;
+  color: var(--accent);
+  margin-bottom: 2px;
+}
+.tl-role { font-size: 15px; font-weight: 500; color: var(--ink); margin-bottom: 1px; }
+.tl-company { font-size: 12px; color: var(--ink-3); margin-bottom: 1rem; }
+
+.tl-card {
+  background: var(--surface);
+  border: 0.5px solid var(--border);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+}
+.card-sublabel {
+  padding: 0.5rem 1.25rem;
+  border-bottom: 0.5px solid var(--border);
+  font-size: 11px;
+  font-family: var(--mono);
+  letter-spacing: 0.07em;
   color: var(--ink-3);
-  position: relative;
-  z-index: 1;
-  transition: background 0.5s cubic-bezier(0.22,1,0.36,1) 0.15s,
-              color 0.5s cubic-bezier(0.22,1,0.36,1) 0.15s,
-              border-color 0.5s ease 0.15s,
-              box-shadow 0.6s cubic-bezier(0.22,1,0.36,1) 0.15s,
-              transform 0.5s cubic-bezier(0.22,1,0.36,1) 0.15s;
+  background: var(--surface-2);
 }
-
-/* Orbiting dashed ring around the active node */
-.journey-num::after {
-  content: '';
-  position: absolute;
-  inset: -7px;
-  border-radius: 50%;
-  border: 1px dashed var(--accent);
-  opacity: 0;
-  transition: opacity 0.6s ease 0.45s;
-  pointer-events: none;
+.card-sublabel.ai {
+  background: var(--accent-light);
+  color: var(--accent);
 }
-.journey-phase.in-view .journey-num {
-  background: var(--accent);
-  color: var(--surface);
-  border-color: var(--accent);
-  box-shadow: 0 0 0 4px var(--accent-light);
-  transform: scale(1.06);
+.ach-block {
+  padding: 0.9rem 1.25rem;
+  border-bottom: 0.5px solid var(--border);
 }
-.journey-phase.in-view .journey-num::after {
-  opacity: 0.55;
-  animation: orbit 12s linear infinite;
+.ach-block:last-of-type { border-bottom: none; }
+.ach-title { font-size: 13px; font-weight: 500; color: var(--ink); margin-bottom: 0.5rem; }
+.wshr {
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  gap: 2px 8px;
+  font-size: 12px;
+  line-height: 1.65;
 }
-
-@keyframes orbit { to { transform: rotate(360deg); } }
-
-.journey-content { flex: 1; min-width: 0; }
-
-.journey-period {
+.wl {
   font-family: var(--mono);
   font-size: 10px;
-  letter-spacing: 0.08em;
-  color: var(--accent);
-  margin-bottom: 3px;
-  text-transform: uppercase;
-  opacity: 0;
-  transform: translateY(6px);
-  transition: opacity 0.5s ease-out 0.2s, transform 0.5s cubic-bezier(0.22,1,0.36,1) 0.2s;
+  letter-spacing: 0.05em;
+  color: var(--ink-3);
+  padding-top: 2px;
 }
-.journey-title {
-  font-family: var(--serif);
-  font-size: 19px;
-  letter-spacing: -0.01em;
-  color: var(--ink);
-  margin-bottom: 10px;
-  opacity: 0;
-  transform: translateY(8px);
-  transition: opacity 0.55s ease-out 0.28s, transform 0.55s cubic-bezier(0.22,1,0.36,1) 0.28s;
-}
-.journey-desc {
-  font-size: 13.5px;
-  line-height: 1.75;
-  color: var(--ink-2);
-  margin-bottom: 12px;
-  max-width: 56ch;
-  opacity: 0;
-  transform: translateY(8px);
-  transition: opacity 0.55s ease-out 0.36s, transform 0.55s cubic-bezier(0.22,1,0.36,1) 0.36s;
-}
-.journey-phase.in-view .journey-period,
-.journey-phase.in-view .journey-title,
-.journey-phase.in-view .journey-desc {
-  opacity: 1;
-  transform: translateY(0);
-}
+.wv { color: var(--ink-2); }
+.wv strong { color: var(--ink); font-weight: 500; }
 
-.journey-chips { display: flex; flex-wrap: wrap; gap: 5px; }
-.journey-chip {
+/* AI phases sub-table */
+.ai-phases {
+  margin-top: 10px;
+  border: 0.5px solid var(--accent-border);
+  border-radius: var(--r);
+  overflow: hidden;
+}
+.ai-phase-row {
+  display: grid;
+  grid-template-columns: 28px 1fr;
+  gap: 0 10px;
+  padding: 9px 12px;
+  border-bottom: 0.5px solid var(--accent-border);
+  align-items: flex-start;
+}
+.ai-phase-row:last-child { border-bottom: none; }
+.ai-n {
+  font-family: var(--mono);
+  font-size: 9px;
+  color: var(--accent);
+  padding-top: 3px;
+  text-align: right;
+}
+.ai-phase-row strong {
+  display: block;
+  font-size: 12px;
+  color: var(--ink);
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+.ai-phase-row span { font-size: 11px; color: var(--ink-2); line-height: 1.55; }
+
+.tag-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  padding: 0.65rem 1.25rem;
+  border-top: 0.5px solid var(--border);
+}
+.tag {
   font-size: 11px;
   font-family: var(--mono);
-  padding: 3px 9px;
+  padding: 2px 8px;
   border-radius: 20px;
   background: var(--surface-2);
   color: var(--ink-3);
   border: 0.5px solid var(--border);
-  opacity: 0;
-  transform: translateY(6px);
-  transition: opacity 0.4s ease-out, transform 0.4s cubic-bezier(0.22,1,0.36,1),
-              background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 }
-.journey-phase.in-view .journey-chip { opacity: 1; transform: translateY(0); }
-.journey-phase.in-view .journey-chip:nth-child(1) { transition-delay: 0.45s, 0.45s, 0s, 0s, 0s; }
-.journey-phase.in-view .journey-chip:nth-child(2) { transition-delay: 0.50s, 0.50s, 0s, 0s, 0s; }
-.journey-phase.in-view .journey-chip:nth-child(3) { transition-delay: 0.55s, 0.55s, 0s, 0s, 0s; }
-.journey-phase.in-view .journey-chip:nth-child(4) { transition-delay: 0.60s, 0.60s, 0s, 0s, 0s; }
-.journey-phase.in-view .journey-chip:nth-child(5) { transition-delay: 0.65s, 0.65s, 0s, 0s, 0s; }
-.journey-chip:hover {
+.tag.hi {
   background: var(--accent-light);
   color: var(--accent);
   border-color: var(--accent-border);
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .journey-phase,
-  .journey-phase .journey-num,
-  .journey-phase .journey-period,
-  .journey-phase .journey-title,
-  .journey-phase .journey-desc,
-  .journey-phase .journey-chip,
-  .journey-phase:not(:last-child)::after {
-    opacity: 1 !important;
-    transform: none !important;
-    transition: none !important;
-    animation: none !important;
-  }
-  .journey-num::after { animation: none !important; }
+@media (max-width: 580px) {
+  .wshr { grid-template-columns: 40px 1fr; }
 }
 
 /* ── Pop-art animations ── */
@@ -729,50 +693,130 @@ nav {
 <!-- Background & more -->
 <div class="content">
 
-  <div class="about-block">
+  <div class="about-block" style="align-items:flex-start;">
     <div class="about-block-label">Background</div>
-    <div class="journey">
+    <div class="timeline">
 
-      <div class="journey-phase">
-        <div class="journey-num">01</div>
-        <div class="journey-content">
-          <div class="journey-period">Pre-2020</div>
-          <div class="journey-title">Early career</div>
-          <div class="journey-desc">Five years across biz ops, data analytics, and tech sales. Different teams, different products, same pattern every time: a quiet gap between what got shipped and what the customer actually got. Couldn't unsee it.</div>
-          <div class="journey-chips">
-            <span class="journey-chip">Biz ops</span>
-            <span class="journey-chip">Data analytics</span>
-            <span class="journey-chip">Tech sales</span>
+      <!-- Senior PQA -->
+      <div class="tl-block">
+        <div class="tl-dot"></div>
+        <div class="tl-period">Aug 2024 — Present</div>
+        <div class="tl-role">Senior Product Quality Analyst</div>
+        <div class="tl-company">Meta · Reality Labs · Burlingame, CA</div>
+        <div class="tl-card">
+
+          <div class="card-sublabel ai">AI-Native QA transition</div>
+          <div class="ach-block">
+            <div class="ach-title">Manual → AI-native testing: full transition</div>
+            <div class="wshr">
+              <span class="wl">What</span><span class="wv">Drove the org-wide shift from fully manual offshore testing to an AI-native, automated-first QA workflow — piloting early tooling, bridging to automation, and building the UX coverage layer that closed the remaining gaps</span>
+              <span class="wl">Scale</span><span class="wv"><strong>6–7 months</strong> pilot to near-full adoption; <strong>2 apps</strong> with full feature suite; daily automated runs replacing weekly manual cycles</span>
+              <span class="wl">Result</span><span class="wv">Offshore team replaced by automation; weekly → daily test cadence; VP-level recognition for change-based testing methodology</span>
+            </div>
+            <div class="ai-phases">
+              <div class="ai-phase-row">
+                <span class="ai-n">01</span>
+                <div><strong>Change-based testing agent</strong><span>Piloted AI agent that extracted recent diffs and surfaced relevant exploratory tests. Onboarded and coached offshore team, owned weekly VP-facing reports. Praised as a step-change for QA.</span></div>
+              </div>
+              <div class="ai-phase-row">
+                <span class="ai-n">02</span>
+                <div><strong>Manual → automated bridge</strong><span>Ran parallel manual and automated testing. Identified gaps between outputs, synced weekly with tooling team to inform automation changes. ~1.5 months to convergence.</span></div>
+              </div>
+              <div class="ai-phase-row">
+                <span class="ai-n">03</span>
+                <div><strong>Full automation live</strong><span>Automated test passes replaced offshore manual testing entirely. Daily runs replaced weekly cycles.</span></div>
+              </div>
+              <div class="ai-phase-row">
+                <span class="ai-n">04</span>
+                <div><strong>UX gap coverage (ongoing)</strong><span>Built multi-bot pipeline: review automated runs → identify UX issues → dedup against existing bugs → simulator-test net-new issues → auto-file. 2 apps, full feature suite.</span></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-sublabel">Quality operations</div>
+          <div class="ach-block">
+            <div class="ach-title">Golden Path user journey program</div>
+            <div class="wshr">
+              <span class="wl">What</span><span class="wv">Led partnership with internal beta team, UXR, and Product Design to run structured user journey testing across VR features</span>
+              <span class="wl">Scale</span><span class="wv"><strong>2,600+ survey responses</strong> and nearly <strong>400 bugs filed</strong> by non-QA testers in a single quarter</span>
+              <span class="wl">Result</span><span class="wv">Turned internal users into structured quality signal contributors; scaled feedback beyond the QA team</span>
+            </div>
+          </div>
+          <div class="ach-block">
+            <div class="ach-title">VR Engagement oncall and release readiness</div>
+            <div class="wshr">
+              <span class="wl">What</span><span class="wv">Primary QA oncall and release gatekeeper for the VR companion app on iOS and Android</span>
+              <span class="wl">Scale</span><span class="wv"><strong>490+ oncall-tagged bugs</strong> across 47 product areas; 5+ major release signoffs; ~3 years oncall</span>
+              <span class="wl">Result</span><span class="wv"><strong>20% reduction</strong> in mis-triaged issues; <strong>40% reduction</strong> in production bugs in Meta Horizon Mobile</span>
+            </div>
+          </div>
+
+          <div class="tag-row">
+            <span class="tag hi">AI agent development</span>
+            <span class="tag hi">Agentic workflows</span>
+            <span class="tag hi">Test automation</span>
+            <span class="tag">Release readiness</span>
+            <span class="tag">Cross-platform QA</span>
+            <span class="tag">iOS + Android</span>
           </div>
         </div>
       </div>
 
-      <div class="journey-phase">
-        <div class="journey-num">02</div>
-        <div class="journey-content">
-          <div class="journey-period">2020 — 2024 · Meta Reality Labs</div>
-          <div class="journey-title">Meta · Quality at scale</div>
-          <div class="journey-desc">Joined as QA on a VR companion app used by millions. Owned release gates across iOS and Android, ran oncall for 47 product areas, and built the Golden Path program — turning 100+ internal users into structured quality signal instead of one tester at a time.</div>
-          <div class="journey-chips">
-            <span class="journey-chip">Release gatekeeper</span>
-            <span class="journey-chip">Oncall · 3 yrs</span>
-            <span class="journey-chip">Golden Path program</span>
-            <span class="journey-chip">3,000+ test cases</span>
+      <!-- PQA -->
+      <div class="tl-block">
+        <div class="tl-dot"></div>
+        <div class="tl-period">Jul 2021 — Aug 2024</div>
+        <div class="tl-role">Product Quality Analyst</div>
+        <div class="tl-company">Meta · Reality Labs · Burlingame, CA</div>
+        <div class="tl-card">
+          <div class="card-sublabel">Coverage and scale</div>
+          <div class="ach-block">
+            <div class="ach-title">Multi-team QA across Meta Quest and VR companion apps</div>
+            <div class="wshr">
+              <span class="wl">What</span><span class="wv">Test coverage across VR Engagement, VR Regression, and RayBan Stories QA</span>
+              <span class="wl">Scale</span><span class="wv"><strong>2,000+ regression issues</strong> verified; <strong>300+ launch-blocking bugs</strong>; <strong>3,000+ test cases</strong> managed</span>
+              <span class="wl">Result</span><span class="wv">Faster bug resolution ahead of key product launches; optimized verification pipelines</span>
+            </div>
+          </div>
+          <div class="ach-block">
+            <div class="ach-title">Major feature launch testing</div>
+            <div class="wshr">
+              <span class="wl">What</span><span class="wv">Led testing for Reels in VR, Home Feed redesign, VR Search refresh</span>
+              <span class="wl">How</span><span class="wv">Coordinated onshore and offshore test coverage; improved issue verification pipelines for pre-launch quality gates</span>
+              <span class="wl">Result</span><span class="wv">Smooth rollouts with timely issue resolution on all three launches</span>
+            </div>
+          </div>
+          <div class="tag-row">
+            <span class="tag">VR/MR testing</span>
+            <span class="tag">Regression QA</span>
+            <span class="tag">Launch readiness</span>
+            <span class="tag">RayBan Stories</span>
+            <span class="tag">Offshore coordination</span>
           </div>
         </div>
       </div>
 
-      <div class="journey-phase">
-        <div class="journey-num">03</div>
-        <div class="journey-content">
-          <div class="journey-period">2024 — Present</div>
-          <div class="journey-title">Meta · QA + AI</div>
-          <div class="journey-desc">LLMs changed what QA can do. I stopped just filing bugs and started building the agents that find them, fix them, and verify them — across 500+ production bugs and counting.</div>
-          <div class="journey-chips">
-            <span class="journey-chip">AI agents</span>
-            <span class="journey-chip">LLM bug fixing</span>
-            <span class="journey-chip">Self-healing tests</span>
-            <span class="journey-chip">qa-agent</span>
+      <!-- Playtester -->
+      <div class="tl-block">
+        <div class="tl-dot"></div>
+        <div class="tl-period">Oct 2020 — Jul 2021</div>
+        <div class="tl-role">QA Playtester / Product Specialist</div>
+        <div class="tl-company">Meta · Reality Labs · Remote</div>
+        <div class="tl-card">
+          <div class="card-sublabel">Initiative</div>
+          <div class="ach-block">
+            <div class="ach-title">Ray-Ban Stories beta and dogfooding program</div>
+            <div class="wshr">
+              <span class="wl">What</span><span class="wv">Designed and ran internal beta testing and rotational dogfooding program for the Ray-Ban Stories hardware launch</span>
+              <span class="wl">Scale</span><span class="wv"><strong>134 users</strong> across 5 weeks; <strong>40+ pre-production devices</strong>; <strong>300+ pre-launch bugs</strong> surfaced</span>
+              <span class="wl">Result</span><span class="wv">Improved pre-release stability; structured feedback directly informed pre-launch product improvements</span>
+            </div>
+          </div>
+          <div class="tag-row">
+            <span class="tag">Hardware QA</span>
+            <span class="tag">Beta program design</span>
+            <span class="tag">Dogfooding</span>
+            <span class="tag">Device management</span>
           </div>
         </div>
       </div>
@@ -800,23 +844,5 @@ nav {
 </div><!-- /content -->
 </div><!-- /page -->
 
-<script>
-(function () {
-  const phases = document.querySelectorAll('.journey-phase');
-  if (!('IntersectionObserver' in window)) {
-    phases.forEach(p => p.classList.add('in-view'));
-    return;
-  }
-  const obs = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('in-view');
-        obs.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.35, rootMargin: '0px 0px -8% 0px' });
-  phases.forEach(p => obs.observe(p));
-})();
-</script>
 </body>
 </html>
