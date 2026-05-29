@@ -223,6 +223,117 @@
   line-height: 1.4;
 }
 
+/* ── UX Gap Detection cover diagram ── */
+.proj-diagram-cover {
+  margin: 0 28px 24px;
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  padding: 20px 16px 16px;
+  position: relative;
+}
+.proj-diagram-cover::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(28,27,24,0.06) 1px, transparent 1px);
+  background-size: 20px 20px;
+  pointer-events: none;
+}
+.diag-eyebrow {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin-bottom: 14px;
+  position: relative;
+  z-index: 1;
+}
+.diag-flow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  position: relative;
+  z-index: 1;
+}
+.diag-node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 7px;
+  flex: 1;
+}
+.diag-circle {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: var(--surface);
+  border: 1px solid var(--border-strong);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 1px 3px rgba(28,27,24,0.06);
+}
+.diag-circle svg {
+  width: 14px; height: 14px;
+  stroke: var(--ink-3);
+  fill: none;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.diag-circle.accent {
+  background: var(--accent-light);
+  border-color: var(--accent-border);
+}
+.diag-circle.accent svg { stroke: var(--accent); }
+.diag-label {
+  font-family: var(--mono);
+  font-size: 8px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  text-align: center;
+  line-height: 1.4;
+}
+.diag-label.accent { color: var(--ink-2); }
+.diag-arrow {
+  flex-shrink: 0;
+  width: 24px;
+  margin-bottom: 20px;
+}
+.diag-arrow svg {
+  width: 20px; height: 8px;
+  stroke: var(--border-strong);
+  fill: none;
+  stroke-width: 1;
+}
+.diag-arrow.accent svg { stroke: var(--accent-border); }
+.diag-status {
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--mono);
+  font-size: 9px;
+  color: var(--ink-3);
+  justify-content: flex-end;
+  position: relative;
+  z-index: 1;
+}
+.diag-status::before {
+  content: '';
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: #4caf50;
+  animation: diagPulse 2.5s ease-in-out infinite;
+}
+@keyframes diagPulse {
+  0%, 100% { opacity: 0.4; } 50% { opacity: 1; }
+}
+
 @media (max-width: 580px) {
   .highlight-grid { grid-template-columns: 1fr; }
   .hero-actions { flex-direction: column; }
@@ -338,6 +449,68 @@
         </div>
         <div class="proj-card-footer">
           <a href="projects/bip.html">Read the story →</a>
+        </div>
+      </div>
+
+      <!-- UX Gap Detection -->
+      <div class="proj-card fade-up">
+        <div class="proj-card-body">
+          <div class="proj-card-top">
+            <span class="proj-name">UX Gap Detection</span>
+            <span class="status-badge active">Active</span>
+          </div>
+          <p class="proj-problem">Automated testing catches regressions. It doesn't catch the UX issues users actually notice. A multi-bot pipeline runs on every automated pass, deduplicates against open bugs, and files verified issues automatically.</p>
+        </div>
+        <div class="proj-diagram-cover">
+          <div class="diag-eyebrow">Meta · AI Tooling · Pipeline</div>
+          <div class="diag-flow">
+            <div class="diag-node">
+              <div class="diag-circle">
+                <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+              </div>
+              <span class="diag-label">Auto<br>runs</span>
+            </div>
+            <div class="diag-arrow">
+              <svg viewBox="0 0 20 8"><line x1="0" y1="4" x2="15" y2="4"/><polyline points="11,1 16,4 11,7"/></svg>
+            </div>
+            <div class="diag-node">
+              <div class="diag-circle accent">
+                <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35M11 8v3l2 2"/></svg>
+              </div>
+              <span class="diag-label accent">AI<br>analysis</span>
+            </div>
+            <div class="diag-arrow accent">
+              <svg viewBox="0 0 20 8"><line x1="0" y1="4" x2="15" y2="4"/><polyline points="11,1 16,4 11,7"/></svg>
+            </div>
+            <div class="diag-node">
+              <div class="diag-circle">
+                <svg viewBox="0 0 24 24"><path d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2v-4M9 21H5a2 2 0 01-2-2v-4m0 0h18"/></svg>
+              </div>
+              <span class="diag-label">Dedup<br>filter</span>
+            </div>
+            <div class="diag-arrow accent">
+              <svg viewBox="0 0 20 8"><line x1="0" y1="4" x2="15" y2="4"/><polyline points="11,1 16,4 11,7"/></svg>
+            </div>
+            <div class="diag-node">
+              <div class="diag-circle">
+                <svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg>
+              </div>
+              <span class="diag-label">Simulator<br>verify</span>
+            </div>
+            <div class="diag-arrow accent">
+              <svg viewBox="0 0 20 8"><line x1="0" y1="4" x2="15" y2="4"/><polyline points="11,1 16,4 11,7"/></svg>
+            </div>
+            <div class="diag-node">
+              <div class="diag-circle accent">
+                <svg viewBox="0 0 24 24"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+              </div>
+              <span class="diag-label accent">Auto<br>filed</span>
+            </div>
+          </div>
+          <div class="diag-status">Active · 2 apps</div>
+        </div>
+        <div class="proj-card-footer">
+          <a href="projects/ux-gap.html">Read the story →</a>
         </div>
       </div>
 
