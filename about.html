@@ -452,6 +452,41 @@ nav {
   .page, .content { padding-left: 1rem; padding-right: 1rem; }
 }
 
+/* ── Skills ── */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 0.75rem;
+}
+.skill-card {
+  background: var(--surface);
+  border: 0.5px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: 1rem 1.25rem;
+}
+.skill-card-title {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin-bottom: 0.75rem;
+}
+.pills { display: flex; flex-wrap: wrap; gap: 5px; }
+.pill {
+  font-size: 12px;
+  padding: 3px 9px;
+  border-radius: 20px;
+  background: var(--surface-2);
+  color: var(--ink-2);
+  border: 0.5px solid var(--border);
+}
+.pill.hi {
+  background: var(--accent-light);
+  color: var(--accent);
+  border-color: var(--accent-border);
+}
+
 /* ── Reduced motion ── */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
@@ -488,6 +523,53 @@ nav {
     </div>
   </section>
 
+<!-- Skills -->
+<div class="content">
+  <div class="about-block">
+    <div class="about-block-label">Skills</div>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <div class="skill-card-title">AI + Automation</div>
+        <div class="pills">
+          <span class="pill hi">AI agent development</span>
+          <span class="pill hi">Agentic workflow design</span>
+          <span class="pill">Prompt engineering</span>
+          <span class="pill">Self-healing test suites</span>
+          <span class="pill">LLM-assisted bug fixing</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-title">Quality + Testing</div>
+        <div class="pills">
+          <span class="pill">Release readiness</span>
+          <span class="pill">VR/MR QA</span>
+          <span class="pill">Cross-platform mobile</span>
+          <span class="pill">Exploratory testing</span>
+          <span class="pill">Regression QA</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-title">Engineering</div>
+        <div class="pills">
+          <span class="pill">Python</span>
+          <span class="pill">JavaScript</span>
+          <span class="pill">SQL</span>
+          <span class="pill">GitHub Actions</span>
+          <span class="pill">CI/CD</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-title">Product + Ops</div>
+        <div class="pills">
+          <span class="pill">Cross-functional leadership</span>
+          <span class="pill">Release reporting</span>
+          <span class="pill">Stakeholder alignment</span>
+          <span class="pill">Dogfooding programs</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- Outside work — hobbies up top -->
 <div class="content">
