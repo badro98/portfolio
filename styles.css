@@ -16,7 +16,7 @@
   --accent-border: rgba(201,95,42,0.22);
   --serif: 'DM Serif Display', Georgia, serif;
   --sans: 'DM Sans', system-ui, sans-serif;
-  --mono: 'DM Mono', monospace;
+  --mono: 'DM Sans', system-ui, sans-serif;
   --r: 10px;
   --r-lg: 16px;
 }
