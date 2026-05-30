@@ -8,11 +8,11 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../styles.css">
 <style>
-.case-hero { margin-bottom: 3.5rem; }
+.case-hero { margin-bottom: 1.5rem; }
 .case-eyebrow { font-family: var(--mono); font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-3); margin-bottom: 1rem; }
-.case-hero h1 { font-family: var(--serif); font-size: clamp(32px, 5vw, 52px); line-height: 1.1; letter-spacing: -0.02em; font-weight: 400; color: var(--ink); margin-bottom: 1rem; max-width: 18ch; }
+.case-hero h1 { font-family: var(--serif); font-size: clamp(32px, 5vw, 52px); line-height: 1.1; letter-spacing: -0.02em; font-weight: 400; color: var(--ink); margin-bottom: 0; }
 .case-hero p { font-size: 16px; line-height: 1.75; color: var(--ink-2); max-width: 560px; }
-.case-meta { display: flex; gap: 2rem; flex-wrap: wrap; padding: 1.5rem 0; border-top: 0.5px solid var(--border-strong); border-bottom: 0.5px solid var(--border-strong); margin: 2rem 0 3.5rem; }
+.case-meta { display: flex; gap: 2rem; flex-wrap: wrap; padding: 0.75rem 0; border-bottom: 0.5px solid var(--border); margin: 0.75rem 0 0; }
 .meta-item { display: flex; flex-direction: column; gap: 3px; }
 .meta-label { font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-3); }
 .meta-value { font-size: 13px; color: var(--ink); font-weight: 500; }
@@ -63,30 +63,30 @@
 
   <div class="case-hero fade-up">
     <p class="case-eyebrow">Project · Developer Tools</p>
-    <h1>BIP — Build in Public</h1>
-    <p>A platform that connects to your GitHub and Claude Code sessions, reads what you built that day, and writes the post for you. Building in public shouldn't require a separate writing session after a long build day.</p>
-    <div style="margin-top:1.25rem;display:flex;align-items:center;gap:12px;">
-      <span class="status-badge in-progress">In Progress</span>
-      <a href="https://usebip.dev" target="_blank" rel="noopener noreferrer" style="font-family:var(--mono);font-size:12px;color:var(--ink-3);text-decoration:none;border-bottom:0.5px solid var(--border-strong);padding-bottom:1px;">usebip.dev ↗</a>
+    <div class="case-hero-title-row">
+      <h1>BIP — Build in Public</h1>
+      <div class="case-hero-badges">
+        <span class="status-badge in-progress">In Progress</span>
+        <a href="https://usebip.dev" target="_blank" rel="noopener noreferrer" style="font-family:var(--mono);font-size:12px;color:var(--ink-3);text-decoration:none;border-bottom:0.5px solid var(--border-strong);padding-bottom:1px;">usebip.dev ↗</a>
+      </div>
     </div>
-  </div>
-
-  <div class="case-pills">
-    <span class="case-pill">Developer Tools</span>
-    <span class="case-pill">AI</span>
-    <span class="case-pill">Build in Public</span>
-  </div>
-
-  <div class="case-meta">
-    <div class="meta-item"><span class="meta-label">Role</span><span class="meta-value">Founder</span></div>
-    <div class="meta-item"><span class="meta-label">Started</span><span class="meta-value">Mar 2026</span></div>
-    <div class="meta-item"><span class="meta-label">Status</span><span class="meta-value">In progress</span></div>
-    <div class="meta-item"><span class="meta-label">Stack</span><span class="meta-value">Next.js, Supabase, Anthropic SDK</span></div>
+    <p>A platform that connects to your GitHub and Claude Code sessions, reads what you built that day, and writes the post for you. Building in public shouldn't require a separate writing session after a long build day.</p>
+    <div class="case-pills" style="margin-top:1rem;margin-bottom:0.75rem;">
+      <span class="case-pill">Developer Tools</span>
+      <span class="case-pill">AI</span>
+      <span class="case-pill">Build in Public</span>
+    </div>
+    <div class="case-meta">
+      <div class="meta-item"><span class="meta-label">Role</span><span class="meta-value">Founder</span></div>
+      <div class="meta-item"><span class="meta-label">Started</span><span class="meta-value">Mar 2026</span></div>
+      <div class="meta-item"><span class="meta-label">Status</span><span class="meta-value">In progress</span></div>
+      <div class="meta-item"><span class="meta-label">Stack</span><span class="meta-value">Next.js, Supabase, Anthropic SDK</span></div>
+    </div>
   </div>
 
   <div class="case-hero-img fade-up">
     <div class="browser-frame">
-      <img src="../assets/screenshots/bip-profile.png" alt="BIP public profile showing build activity feed" loading="eager">
+      <img src="../assets/screenshots/bip-buildlog.png" alt="BIP build log — daily activity automatically captured" loading="eager">
     </div>
   </div>
 

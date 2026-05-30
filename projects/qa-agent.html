@@ -8,11 +8,11 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../styles.css">
 <style>
-.case-hero { margin-bottom: 3.5rem; }
+.case-hero { margin-bottom: 1.5rem; }
 .case-eyebrow { font-family: var(--mono); font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-3); margin-bottom: 1rem; }
-.case-hero h1 { font-family: var(--serif); font-size: clamp(32px, 5vw, 52px); line-height: 1.1; letter-spacing: -0.02em; font-weight: 400; color: var(--ink); margin-bottom: 1rem; max-width: 18ch; }
+.case-hero h1 { font-family: var(--serif); font-size: clamp(32px, 5vw, 52px); line-height: 1.1; letter-spacing: -0.02em; font-weight: 400; color: var(--ink); margin-bottom: 0; }
 .case-hero p { font-size: 16px; line-height: 1.75; color: var(--ink-2); max-width: 560px; }
-.case-meta { display: flex; gap: 2rem; flex-wrap: wrap; padding: 1.5rem 0; border-top: 0.5px solid var(--border-strong); border-bottom: 0.5px solid var(--border-strong); margin: 2rem 0 3.5rem; }
+.case-meta { display: flex; gap: 2rem; flex-wrap: wrap; padding: 0.75rem 0; border-bottom: 0.5px solid var(--border); margin: 0.75rem 0 0; }
 .meta-item { display: flex; flex-direction: column; gap: 3px; }
 .meta-label { font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-3); }
 .meta-value { font-size: 13px; color: var(--ink); font-weight: 500; }
@@ -92,29 +92,29 @@
 
   <div class="case-hero fade-up">
     <p class="case-eyebrow">Project · QA Tooling</p>
-    <h1>qa-agent</h1>
-    <p>A QA agent that runs on every PR and flags coverage gaps before they merge. Built so nothing slips through when you're shipping fast with AI.</p>
-    <div style="margin-top:1.25rem;">
-      <span class="status-badge active">Active — deployed in pointd &amp; BIP</span>
+    <div class="case-hero-title-row">
+      <h1>qa-agent</h1>
+      <div class="case-hero-badges">
+        <span class="status-badge active">Active — deployed in pointd &amp; BIP</span>
+      </div>
     </div>
-  </div>
-
-  <div class="case-pills">
-    <span class="case-pill">QA</span>
-    <span class="case-pill">AI Tooling</span>
-    <span class="case-pill">Automation</span>
-  </div>
-
-  <div class="case-meta">
-    <div class="meta-item"><span class="meta-label">Role</span><span class="meta-value">Founder</span></div>
-    <div class="meta-item"><span class="meta-label">Started</span><span class="meta-value">Early 2026</span></div>
-    <div class="meta-item"><span class="meta-label">Runs</span><span class="meta-value">260+ workflow runs</span></div>
-    <div class="meta-item"><span class="meta-label">Stack</span><span class="meta-value">Node.js, Anthropic API, GitHub Actions</span></div>
+    <p>A QA agent that runs on every PR and flags coverage gaps before they merge. Built so nothing slips through when you're shipping fast with AI.</p>
+    <div class="case-pills" style="margin-top:1rem;margin-bottom:0.75rem;">
+      <span class="case-pill">QA</span>
+      <span class="case-pill">AI Tooling</span>
+      <span class="case-pill">Automation</span>
+    </div>
+    <div class="case-meta">
+      <div class="meta-item"><span class="meta-label">Role</span><span class="meta-value">Founder</span></div>
+      <div class="meta-item"><span class="meta-label">Started</span><span class="meta-value">Early 2026</span></div>
+      <div class="meta-item"><span class="meta-label">Runs</span><span class="meta-value">260+ workflow runs</span></div>
+      <div class="meta-item"><span class="meta-label">Stack</span><span class="meta-value">Node.js, Anthropic API, GitHub Actions</span></div>
+    </div>
   </div>
 
   <div class="case-hero-img fade-up">
     <div class="browser-frame">
-      <img src="../assets/screenshots/qa-agent-report.png" alt="QA Agent WARN report showing coverage gaps and proposed tests" loading="eager">
+      <img src="../assets/screenshots/qa-agent-runs.png" alt="260+ workflow runs in GitHub Actions" loading="eager">
     </div>
   </div>
 

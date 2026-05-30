@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="../styles.css">
 <style>
 /* ── Case study layout ── */
-.case-hero { margin-bottom: 3.5rem; }
+.case-hero { margin-bottom: 1.5rem; }
 .case-eyebrow {
   font-family: var(--mono);
   font-size: 11px;
@@ -26,8 +26,7 @@
   letter-spacing: -0.02em;
   font-weight: 400;
   color: var(--ink);
-  margin-bottom: 1rem;
-  max-width: 18ch;
+  margin-bottom: 0;
 }
 .case-hero p {
   font-size: 16px;
@@ -39,10 +38,9 @@
   display: flex;
   gap: 2rem;
   flex-wrap: wrap;
-  padding: 1.5rem 0;
-  border-top: 0.5px solid var(--border-strong);
-  border-bottom: 0.5px solid var(--border-strong);
-  margin: 2rem 0 3.5rem;
+  padding: 0.75rem 0;
+  border-bottom: 0.5px solid var(--border);
+  margin: 0.75rem 0 0;
 }
 .meta-item { display: flex; flex-direction: column; gap: 3px; }
 .meta-label { font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-3); }
@@ -162,29 +160,29 @@
 
   <div class="case-hero fade-up">
     <p class="case-eyebrow">Project · Travel Rewards</p>
-    <h1>pointd</h1>
-    <p>A travel rewards optimizer that shows you where your points can take you — across all your programs, in one place. No math, no research, no account needed.</p>
-    <div style="margin-top:1.25rem;display:flex;align-items:center;gap:12px;">
-      <span class="status-badge in-progress">MVP in progress</span>
-      <a href="https://pointd.fyi" target="_blank" rel="noopener noreferrer" style="font-family:var(--mono);font-size:12px;color:var(--ink-3);text-decoration:none;border-bottom:0.5px solid var(--border-strong);padding-bottom:1px;">pointd.fyi ↗</a>
+    <div class="case-hero-title-row">
+      <h1>pointd</h1>
+      <div class="case-hero-badges">
+        <span class="status-badge in-progress">MVP in progress</span>
+        <a href="https://pointd.fyi" target="_blank" rel="noopener noreferrer" style="font-family:var(--mono);font-size:12px;color:var(--ink-3);text-decoration:none;border-bottom:0.5px solid var(--border-strong);padding-bottom:1px;">pointd.fyi ↗</a>
+      </div>
     </div>
-  </div>
-
-  <div class="case-pills">
-    <span class="case-pill">Travel</span>
-    <span class="case-pill">Consumer</span>
-    <span class="case-pill">Rewards</span>
-  </div>
-
-  <div class="case-meta">
-    <div class="meta-item"><span class="meta-label">Role</span><span class="meta-value">Founder</span></div>
-    <div class="meta-item"><span class="meta-label">Started</span><span class="meta-value">Early 2026</span></div>
-    <div class="meta-item"><span class="meta-label">Status</span><span class="meta-value">MVP in progress</span></div>
+    <p>A travel rewards optimizer that shows you where your points can take you — across all your programs, in one place. No math, no research, no account needed.</p>
+    <div class="case-pills" style="margin-top:1rem;margin-bottom:0.75rem;">
+      <span class="case-pill">Travel</span>
+      <span class="case-pill">Consumer</span>
+      <span class="case-pill">Rewards</span>
+    </div>
+    <div class="case-meta">
+      <div class="meta-item"><span class="meta-label">Role</span><span class="meta-value">Founder</span></div>
+      <div class="meta-item"><span class="meta-label">Started</span><span class="meta-value">Early 2026</span></div>
+      <div class="meta-item"><span class="meta-label">Status</span><span class="meta-value">MVP in progress</span></div>
+    </div>
   </div>
 
   <div class="case-hero-img fade-up">
     <div class="browser-frame">
-      <img src="../assets/screenshots/pointd-explore.png" alt="pointd planner view showing destinations reachable with your points" loading="eager">
+      <img src="../assets/screenshots/pointd-programs.png" alt="pointd program entry — add your loyalty programs" loading="eager">
     </div>
   </div>
 

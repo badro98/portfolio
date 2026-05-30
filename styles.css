@@ -192,6 +192,27 @@ footer {
 .back-link:hover { color: var(--accent); }
 .back-link::before { content: '←'; }
 
+/* ── Case study hero title row ── */
+.case-hero-title-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+.case-hero-title-row h1 { margin-bottom: 0; }
+.case-hero-badges {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-top: 8px;
+  flex-shrink: 0;
+}
+@media (max-width: 600px) {
+  .case-hero-title-row { flex-wrap: wrap; }
+  .case-hero-badges { padding-top: 0; }
+}
+
 /* ── Categorical pills ── */
 .case-pills {
   display: flex;
@@ -214,7 +235,7 @@ footer {
 
 /* ── Case study hero image ── */
 .case-hero-img {
-  margin-bottom: 3rem;
+  margin: 0 0 2.5rem;
 }
 .case-hero-img .browser-frame {
   box-shadow: 0 24px 64px rgba(28,27,24,0.12);
