@@ -129,6 +129,12 @@
     </div>
   </div>
 
+  <div class="case-pills">
+    <span class="case-pill">QA</span>
+    <span class="case-pill">AI Tooling</span>
+    <span class="case-pill">Enterprise</span>
+  </div>
+
   <div class="case-meta">
     <div class="meta-item"><span class="meta-label">Role</span><span class="meta-value">Founder</span></div>
     <div class="meta-item"><span class="meta-label">Started</span><span class="meta-value">Mar 2026</span></div>
@@ -141,6 +147,34 @@
     <h2>The problem</h2>
     <p>When the offshore manual testing team was replaced by automated test passes, the coverage gap wasn't obvious at first. Automated tests are written to verify behavior — they pass as long as the app does what it's programmed to do. They don't notice when something looks off: a misaligned UI element, a flow that's technically correct but confusing, a rendering issue that only appears in certain states.</p>
     <p>Real users notice these things. There was no systematic way to catch them without reintroducing manual review, which was exactly what automation was supposed to eliminate. The question became: how do you get the coverage of a manual tester without the manual tester?</p>
+  </div>
+
+  <!-- Challenge -->
+  <div class="case-section fade-up">
+    <h2>The challenge</h2>
+    <p>The biggest risk was noise. A pipeline that files inaccurate or duplicate bugs erodes engineering trust fast, and a system engineers learn to ignore is worse than no system at all. Getting it right required iteration: bugs had to be reproduced in a simulator before filing, not just theorized; correct details (description, build info, reproduction steps) had to be consistently attached; and the pipeline had to coexist with existing automated workflows without disruption. That calibration happened through review cycles with engineering and cross-functional partners, adjusting the detection logic until accuracy was high enough to trust.</p>
+  </div>
+
+  <!-- Key decisions -->
+  <div class="case-section fade-up">
+    <h2>Key decisions</h2>
+    <div class="decisions">
+      <div class="decision">
+        <p class="decision-num">Decision 01</p>
+        <strong>Bot-per-concern, not one monolith</strong>
+        <p>Each stage of the pipeline runs as a separate bot — ingestion, analysis, dedup, filing. This means any stage can be updated, retrained, or replaced independently without rebuilding the whole pipeline. When the analysis bot needed refinement, the filing and dedup logic stayed untouched.</p>
+      </div>
+      <div class="decision">
+        <p class="decision-num">Decision 02</p>
+        <strong>Dedup before testing, not after</strong>
+        <p>The dedup check runs before simulator testing, not after. Running a simulator test only to find out the issue is already filed wastes compute and time. Checking the bug database first means only net-new issues ever reach the testing stage.</p>
+      </div>
+      <div class="decision">
+        <p class="decision-num">Decision 03</p>
+        <strong>Auto-file with a human review gate</strong>
+        <p>Issues are filed automatically but reviewed before being assigned. This keeps the output trustworthy — a fully autonomous pipeline that silently files noise is worse than no pipeline. The review gate stays until confidence is high enough to remove it for specific issue types.</p>
+      </div>
+    </div>
   </div>
 
   <!-- Pipeline diagram -->
@@ -189,28 +223,6 @@
         <div class="pd-body"><div class="pd-num">Step 06</div><div class="pd-name">Review &amp; assign</div><div class="pd-desc">Filed issues are reviewed and assigned for prioritization. Working toward full autonomous triage — manual review currently required for edge cases and account-gated flows</div></div>
       </div>
 
-    </div>
-  </div>
-
-  <!-- Key decisions -->
-  <div class="case-section fade-up">
-    <h2>Key decisions</h2>
-    <div class="decisions">
-      <div class="decision">
-        <p class="decision-num">Decision 01</p>
-        <strong>Bot-per-concern, not one monolith</strong>
-        <p>Each stage of the pipeline runs as a separate bot — ingestion, analysis, dedup, filing. This means any stage can be updated, retrained, or replaced independently without rebuilding the whole pipeline. When the analysis bot needed refinement, the filing and dedup logic stayed untouched.</p>
-      </div>
-      <div class="decision">
-        <p class="decision-num">Decision 02</p>
-        <strong>Dedup before testing, not after</strong>
-        <p>The dedup check runs before simulator testing, not after. Running a simulator test only to find out the issue is already filed wastes compute and time. Checking the bug database first means only net-new issues ever reach the testing stage.</p>
-      </div>
-      <div class="decision">
-        <p class="decision-num">Decision 03</p>
-        <strong>Auto-file with a human review gate</strong>
-        <p>Issues are filed automatically but reviewed before being assigned. This keeps the output trustworthy — a fully autonomous pipeline that silently files noise is worse than no pipeline. The review gate stays until confidence is high enough to remove it for specific issue types.</p>
-      </div>
     </div>
   </div>
 

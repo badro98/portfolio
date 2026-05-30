@@ -99,6 +99,18 @@
     </div>
   </div>
 
+  <div class="case-pills">
+    <span class="case-pill">QA</span>
+    <span class="case-pill">AI Tooling</span>
+    <span class="case-pill">Automation</span>
+  </div>
+
+  <div class="case-hero-img fade-up">
+    <div class="browser-frame">
+      <img src="../assets/screenshots/qa-agent-report.png" alt="QA Agent WARN report showing coverage gaps and proposed tests" loading="eager">
+    </div>
+  </div>
+
   <div class="case-meta">
     <div class="meta-item"><span class="meta-label">Role</span><span class="meta-value">Founder</span></div>
     <div class="meta-item"><span class="meta-label">Started</span><span class="meta-value">Early 2026</span></div>
@@ -111,6 +123,12 @@
     <h2>The problem</h2>
     <p>When you're building quickly with AI, you ship a lot of code fast. Tests pass — but that doesn't mean the right things are being tested. Coverage logic doesn't keep up with what actually changed. The gap isn't obvious until something breaks in production.</p>
     <p>I built qa-agent out of necessity while working on pointd and BIP. I needed a second set of eyes on every PR — something that could look at what changed, check what was being tested, and flag the gaps before I merged. Not a linter, not a static analyzer — something that actually reads the diff and reasons about coverage.</p>
+  </div>
+
+  <!-- Challenge -->
+  <div class="case-section fade-up">
+    <h2>The challenge</h2>
+    <p>The hard problem wasn't making the agent smart. It was making it unobtrusive. Early versions flagged too many low-confidence gaps, creating friction that slowed development instead of supporting it. The fix was a deliberate design choice: WARN instead of block, and open GitHub issues instead of failing the build. That kept the feedback loop fast while building an accountability trail. Coverage gaps get addressed on their own schedule, not as a hard gate on every merge.</p>
   </div>
 
   <!-- Screenshot: sidebar -->
@@ -161,12 +179,8 @@
     <p class="screenshot-caption">263 runs across pointd and BIP — every merge is checked before it lands</p>
   </div>
 
-  <!-- Screenshot: report -->
-  <div class="screenshot-wrap fade-up">
-    <div class="browser-frame">
-      <img src="../assets/screenshots/qa-agent-report.png" alt="QA Agent Report showing WARN status, test results, coverage gaps, and proposed tests" loading="lazy">
-    </div>
-    <p class="screenshot-caption">A WARN report — coverage gap flagged, tests proposed, issue filed automatically. 158 GitHub issues filed across pointd and BIP to date.</p>
+  <div class="case-section fade-up">
+    <p>Every run produces a structured report. Coverage gaps are listed with context, proposed tests are described specifically, and any net-new gaps are filed as GitHub issues automatically — no manual triage required.</p>
   </div>
 
   <!-- Key decisions -->

@@ -71,6 +71,18 @@
     </div>
   </div>
 
+  <div class="case-pills">
+    <span class="case-pill">Developer Tools</span>
+    <span class="case-pill">AI</span>
+    <span class="case-pill">Build in Public</span>
+  </div>
+
+  <div class="case-hero-img fade-up">
+    <div class="browser-frame">
+      <img src="../assets/screenshots/bip-profile.png" alt="BIP public profile showing build activity feed" loading="eager">
+    </div>
+  </div>
+
   <div class="case-meta">
     <div class="meta-item"><span class="meta-label">Role</span><span class="meta-value">Founder</span></div>
     <div class="meta-item"><span class="meta-label">Started</span><span class="meta-value">Mar 2026</span></div>
@@ -83,6 +95,12 @@
     <h2>The problem</h2>
     <p>When I started building, the consistent advice was to build in public — tweet what you shipped, share your progress, document the journey. Good advice. But after a six-hour build session, writing a coherent post about what you just did is the last thing you want to do. The friction kills it.</p>
     <p>I was focused on shipping code. So I thought: why not build the tool that does the writing for me? Connect it to what I actually built that day, let it summarize, and give me something I can publish with minimal editing.</p>
+  </div>
+
+  <!-- Challenge -->
+  <div class="case-section fade-up">
+    <h2>The challenge</h2>
+    <p>Two problems. First, maintaining a reliable MCP connection across Claude Code sessions. The integration has to be invisible enough that you forget it's running. Second, state consolidation: commits from GitHub, task summaries from the MCP, and multiple sessions in a day all need to collapse into a summary that reads like a build log, not a data dump. State reliability is the current focus and the next problem on the roadmap.</p>
   </div>
 
   <!-- Screenshots: build log + settings -->
@@ -109,14 +127,6 @@
     <p>Critically, BIP only sees commit messages, file names, branch names, and Claude Code task summaries. It never reads your code or conversation history.</p>
   </div>
 
-  <!-- Screenshot: profile -->
-  <div class="screenshot-wrap fade-up">
-    <div class="browser-frame">
-      <img src="../assets/screenshots/bip-profile.png" alt="BIP public profile — @badro activity feed" loading="lazy">
-    </div>
-    <p class="screenshot-caption">Public profile — build logs grouped by week, tagged by project</p>
-  </div>
-
   <!-- Key decisions -->
   <div class="case-section fade-up">
     <h2>Key decisions</h2>
@@ -133,8 +143,8 @@
       </div>
       <div class="decision">
         <p class="decision-num">Decision 03</p>
-        <strong>Live but unannounced</strong>
-        <p>BIP is publicly accessible but hasn't been posted about anywhere. The core loop works and is being used daily to generate logs for BIP and pointd development. It'll be announced once the experience is solid enough to explain itself without context.</p>
+        <strong>Build the loop, then the audience</strong>
+        <p>BIP is publicly accessible but hasn't been announced anywhere. The core loop works and is being used daily to generate build logs for BIP and pointd. Announcing before the experience is solid enough to explain itself without context would just front-load expectations the product isn't ready to meet.</p>
       </div>
     </div>
   </div>
