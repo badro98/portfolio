@@ -181,12 +181,13 @@ footer {
 .back-link {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  font-size: 13px;
+  gap: 5px;
+  font-size: 12px;
   font-family: var(--mono);
   color: var(--ink-3);
   text-decoration: none;
-  margin-bottom: 1.5rem;
+  margin-top: -0.75rem;
+  margin-bottom: 1rem;
   transition: color 0.2s ease;
 }
 .back-link:hover { color: var(--accent); }
