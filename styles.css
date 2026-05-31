@@ -30,6 +30,7 @@ body {
   font-size: 15px;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
 }
 .page { max-width: 860px; margin: 0 auto; padding: 0 2rem 6rem; }
 
@@ -40,11 +41,23 @@ nav {
   align-items: center;
   padding: 1.5rem 0;
   margin-bottom: 2.25rem;
-  border-bottom: 0.5px solid var(--border-strong);
   position: sticky;
   top: 0;
-  background: var(--bg);
+  background: transparent;
   z-index: 10;
+}
+/* Full-bleed background so the bar spans the viewport, not just the column */
+nav::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100vw;
+  background: var(--bg);
+  border-bottom: 0.5px solid var(--border-strong);
+  z-index: -1;
 }
 .nav-name { font-family: var(--serif); font-size: 18px; text-decoration: none; color: var(--ink); }
 .nav-links { display: flex; gap: 1.75rem; }
@@ -240,6 +253,21 @@ footer {
 }
 .case-hero-img .browser-frame {
   box-shadow: 0 24px 64px rgba(28,27,24,0.12);
+}
+
+/* ── Two-column hero (text left, image right) ── */
+.case-hero-layout {
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+  gap: 2.5rem;
+  align-items: start;
+  margin-bottom: 2.5rem;
+}
+.case-hero-layout .case-hero { margin-bottom: 0; }
+.case-hero-layout .case-hero p { font-size: 15px; }
+.case-hero-layout .case-hero-img { margin: 0; }
+@media (max-width: 720px) {
+  .case-hero-layout { grid-template-columns: 1fr; gap: 1.5rem; }
 }
 
 /* ── Responsive ── */
