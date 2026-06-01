@@ -151,7 +151,8 @@ footer {
     radial-gradient(circle at 26px 16px, #fdbc2c 4px, transparent 4px),
     radial-gradient(circle at 40px 16px, #29c940 4px, transparent 4px);
 }
-.browser-frame img {
+.browser-frame img,
+.browser-frame video {
   display: block;
   width: 100%;
   height: auto;
