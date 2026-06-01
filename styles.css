@@ -35,7 +35,7 @@ body {
 .page { max-width: 860px; margin: 0 auto; padding: 0 2rem 6rem; }
 
 /* ── Nav ── */
-nav {
+nav:not(.toc) {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -47,7 +47,7 @@ nav {
   z-index: 10;
 }
 /* Full-bleed background so the bar spans the viewport, not just the column */
-nav::before {
+nav:not(.toc)::before {
   content: '';
   position: absolute;
   top: 0;
@@ -255,6 +255,37 @@ footer {
   box-shadow: 0 24px 64px rgba(28,27,24,0.12);
 }
 
+/* ── Jump-link sidebar (case study section nav) ── */
+.toc {
+  position: fixed;
+  top: 50%;
+  left: calc(50% - 430px - 18px);
+  transform: translate(-100%, -50%);
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+  width: 128px;
+  z-index: 5;
+}
+.toc a {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.03em;
+  color: var(--ink-3);
+  text-decoration: none;
+  text-align: right;
+  padding-right: 12px;
+  border-right: 1.5px solid var(--border);
+  line-height: 1.35;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+.toc a:hover { color: var(--ink-2); }
+.toc a.active { color: var(--accent); border-color: var(--accent); }
+@media (max-width: 1140px) { .toc { display: none; } }
+
+/* anchored sections clear the sticky nav on jump */
+.case-section, .pipeline-diagram { scroll-margin-top: 96px; }
+
 /* ── Two-column hero (text left, image right) ── */
 .case-hero-layout {
   display: grid;
@@ -263,6 +294,8 @@ footer {
   align-items: start;
   margin-bottom: 2.5rem;
 }
+.case-hero-layout .case-hero,
+.case-hero-layout .case-hero-img { min-width: 0; }
 .case-hero-layout .case-hero { margin-bottom: 0; }
 .case-hero-layout .case-hero p { font-size: 15px; }
 .case-hero-layout .case-hero-img { margin: 0; }

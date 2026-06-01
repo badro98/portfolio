@@ -90,6 +90,15 @@
 
   <a href="../index.html" class="back-link">All projects</a>
 
+  <nav class="toc" aria-label="Sections">
+    <a href="#problem">Problem</a>
+    <a href="#challenge">Challenge</a>
+    <a href="#how">How it works</a>
+    <a href="#decisions">Decisions</a>
+    <a href="#meta">Meta connection</a>
+    <a href="#where">Where it stands</a>
+  </nav>
+
   <div class="case-hero-layout fade-up">
   <div class="case-hero">
     <p class="case-eyebrow">Project · QA Tooling</p>
@@ -119,14 +128,14 @@
   </div>
 
   <!-- Problem -->
-  <div class="case-section fade-up">
+  <div class="case-section fade-up" id="problem">
     <h2>The problem</h2>
     <p>When you're building quickly with AI, you ship a lot of code fast. Tests pass — but that doesn't mean the right things are being tested. Coverage logic doesn't keep up with what actually changed. The gap isn't obvious until something breaks in production.</p>
     <p>I built qa-agent out of necessity while working on pointd and BIP. I needed a second set of eyes on every PR — something that could look at what changed, check what was being tested, and flag the gaps before I merged. Not a linter, not a static analyzer — something that actually reads the diff and reasons about coverage.</p>
   </div>
 
   <!-- Challenge -->
-  <div class="case-section fade-up">
+  <div class="case-section fade-up" id="challenge">
     <h2>The challenge</h2>
     <p>The hard problem wasn't making the agent smart. It was making it unobtrusive. Early versions flagged too many low-confidence gaps, creating friction that slowed development instead of supporting it. The fix was a deliberate design choice: WARN instead of block, and open GitHub issues instead of failing the build. That kept the feedback loop fast while building an accountability trail. Coverage gaps get addressed on their own schedule, not as a hard gate on every merge.</p>
   </div>
@@ -140,7 +149,7 @@
   </div>
 
   <!-- Pipeline -->
-  <div class="case-section fade-up">
+  <div class="case-section fade-up" id="how">
     <h2>How it works</h2>
     <p>qa-agent runs as a GitHub Actions workflow, triggered automatically on every PR. It runs a 6-step pipeline:</p>
     <div class="pipeline">
@@ -184,7 +193,7 @@
   </div>
 
   <!-- Key decisions -->
-  <div class="case-section fade-up">
+  <div class="case-section fade-up" id="decisions">
     <h2>Key decisions</h2>
     <div class="decisions">
       <div class="decision">
@@ -206,13 +215,13 @@
   </div>
 
   <!-- Meta connection -->
-  <div class="case-section fade-up">
+  <div class="case-section fade-up" id="meta">
     <h2>The Meta connection</h2>
     <p>The next planned enhancement is simulator-based manual testing — running automated flows against a device emulator the same way VR/MR hardware QA was done at Meta Reality Labs. The agent already handles static analysis and test execution. Connecting it to a simulator closes the loop on full end-to-end coverage, not just unit and e2e.</p>
     <p>That experience — building repeatable, scalable QA systems for hardware that can't be continuously deployed — is what qa-agent is growing toward for web products.</p>
   </div>
 
-  <div class="case-section fade-up">
+  <div class="case-section fade-up" id="where">
     <h2>Where it stands</h2>
     <div class="meta-callout">
       <div class="meta-callout-item"><span class="meta-callout-num">260+</span><span class="meta-callout-label">Workflow runs</span></div>
@@ -242,6 +251,24 @@
     });
   }, { threshold: 0.12, rootMargin: '-4% 0px' });
   fadeUps.forEach(el => observer.observe(el));
+
+  const tocLinks = [...document.querySelectorAll('.toc a')];
+  if (tocLinks.length) {
+    const linkFor = new Map();
+    tocLinks.forEach(a => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) linkFor.set(target, a);
+    });
+    const spy = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          tocLinks.forEach(a => a.classList.remove('active'));
+          linkFor.get(entry.target)?.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-45% 0px -50% 0px' });
+    linkFor.forEach((a, target) => spy.observe(target));
+  }
 </script>
 </body>
 </html>

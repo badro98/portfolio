@@ -158,6 +158,13 @@
 
   <a href="../index.html" class="back-link">All projects</a>
 
+  <nav class="toc" aria-label="Sections">
+    <a href="#problem">Problem</a>
+    <a href="#challenge">Challenge</a>
+    <a href="#decisions">Decisions</a>
+    <a href="#where">Where it stands</a>
+  </nav>
+
   <div class="case-hero-layout fade-up">
   <div class="case-hero">
     <p class="case-eyebrow">Project · Travel Rewards</p>
@@ -188,7 +195,7 @@
   </div>
 
   <!-- Problem -->
-  <div class="case-section fade-up">
+  <div class="case-section fade-up" id="problem">
     <h2>The problem</h2>
     <p>I kept getting burned on points redemptions. Not because I wasn't trying — I was researching, comparing programs, reading transfer partner guides. The problem was that none of the existing tools were built for discovery. They were built for booking. They assumed you already knew where you wanted to go and how many points it would cost. They put all the complexity of airline and hotel loyalty programs on the user and called it a feature.</p>
     <p>After talking to other points holders, I found the same pattern every time:</p>
@@ -208,7 +215,7 @@
   </div>
 
   <!-- Challenge -->
-  <div class="case-section fade-up">
+  <div class="case-section fade-up" id="challenge">
     <h2>The challenge</h2>
     <p>The core challenge was data. Loyalty program pricing and award availability aren't cleanly accessible: award space varies by date, program, and transfer chain, and most of it isn't exposed through reliable APIs. The current implementation combines scraping and multiple API integrations to surface live cash pricing, with award availability still an open problem. That constraint also shaped the product direction. A discovery-first model (show what's theoretically reachable with your points) made it possible to ship something useful while the harder availability data problem gets solved.</p>
   </div>
@@ -222,7 +229,7 @@
   </div>
 
   <!-- Key decisions -->
-  <div class="case-section fade-up">
+  <div class="case-section fade-up" id="decisions">
     <h2>Key decisions</h2>
     <div class="decisions">
       <div class="decision">
@@ -252,7 +259,7 @@
   </div>
 
   <!-- Where it stands -->
-  <div class="case-section fade-up">
+  <div class="case-section fade-up" id="where">
     <h2>Where it stands</h2>
     <p>The core explore flow works — add your programs, see where your points can take you, and link directly to hotel booking pages to redeem. Live cash pricing is available, with integrated booking coming soon. Availability data is the next problem to solve.</p>
   </div>
@@ -278,6 +285,24 @@
     });
   }, { threshold: 0.12, rootMargin: '-4% 0px' });
   fadeUps.forEach(el => observer.observe(el));
+
+  const tocLinks = [...document.querySelectorAll('.toc a')];
+  if (tocLinks.length) {
+    const linkFor = new Map();
+    tocLinks.forEach(a => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) linkFor.set(target, a);
+    });
+    const spy = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          tocLinks.forEach(a => a.classList.remove('active'));
+          linkFor.get(entry.target)?.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-45% 0px -50% 0px' });
+    linkFor.forEach((a, target) => spy.observe(target));
+  }
 </script>
 </body>
 </html>

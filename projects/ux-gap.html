@@ -140,6 +140,14 @@
 
   <a href="../index.html" class="back-link">All projects</a>
 
+  <nav class="toc" aria-label="Sections">
+    <a href="#problem">Problem</a>
+    <a href="#challenge">Challenge</a>
+    <a href="#decisions">Decisions</a>
+    <a href="#how">How it works</a>
+    <a href="#where">Where it stands</a>
+  </nav>
+
   <div class="case-hero-layout fade-up">
   <div class="case-hero">
     <p class="case-eyebrow">Project · AI Tooling</p>
@@ -193,20 +201,20 @@
   </div>
 
   <!-- Problem -->
-  <div class="case-section fade-up">
+  <div class="case-section fade-up" id="problem">
     <h2>The problem</h2>
     <p>When the offshore manual testing team was replaced by automated test passes, the coverage gap wasn't obvious at first. Automated tests are written to verify behavior — they pass as long as the app does what it's programmed to do. They don't notice when something looks off: a misaligned UI element, a flow that's technically correct but confusing, a rendering issue that only appears in certain states.</p>
     <p>Real users notice these things. There was no systematic way to catch them without reintroducing manual review, which was exactly what automation was supposed to eliminate. The question became: how do you get the coverage of a manual tester without the manual tester?</p>
   </div>
 
   <!-- Challenge -->
-  <div class="case-section fade-up">
+  <div class="case-section fade-up" id="challenge">
     <h2>The challenge</h2>
     <p>The biggest risk was noise. A pipeline that files inaccurate or duplicate bugs erodes engineering trust fast, and a system engineers learn to ignore is worse than no system at all. Getting it right required iteration: bugs had to be reproduced in a simulator before filing, not just theorized; correct details (description, build info, reproduction steps) had to be consistently attached; and the pipeline had to coexist with existing automated workflows without disruption. That calibration happened through review cycles with engineering and cross-functional partners, adjusting the detection logic until accuracy was high enough to trust.</p>
   </div>
 
   <!-- Key decisions -->
-  <div class="case-section fade-up">
+  <div class="case-section fade-up" id="decisions">
     <h2>Key decisions</h2>
     <div class="decisions">
       <div class="decision">
@@ -228,7 +236,7 @@
   </div>
 
   <!-- Pipeline diagram -->
-  <div class="pipeline-diagram fade-up">
+  <div class="pipeline-diagram fade-up" id="how">
     <div class="pd-title">How it works</div>
     <div class="pd-flow">
 
@@ -277,7 +285,7 @@
   </div>
 
   <!-- Where it stands -->
-  <div class="case-section fade-up">
+  <div class="case-section fade-up" id="where">
     <h2>Where it stands</h2>
     <p>Started with one app and a few features. Now covers two apps with a full feature suite. The pipeline has been running for around two months — long enough to validate the approach and start tuning accuracy.</p>
     <div class="meta-callout">
@@ -308,6 +316,24 @@
     });
   }, { threshold: 0.12, rootMargin: '-4% 0px' });
   fadeUps.forEach(el => observer.observe(el));
+
+  const tocLinks = [...document.querySelectorAll('.toc a')];
+  if (tocLinks.length) {
+    const linkFor = new Map();
+    tocLinks.forEach(a => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) linkFor.set(target, a);
+    });
+    const spy = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          tocLinks.forEach(a => a.classList.remove('active'));
+          linkFor.get(entry.target)?.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-45% 0px -50% 0px' });
+    linkFor.forEach((a, target) => spy.observe(target));
+  }
 </script>
 </body>
 </html>

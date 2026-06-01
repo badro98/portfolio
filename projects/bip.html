@@ -61,6 +61,14 @@
 
   <a href="../index.html" class="back-link">All projects</a>
 
+  <nav class="toc" aria-label="Sections">
+    <a href="#problem">Problem</a>
+    <a href="#challenge">Challenge</a>
+    <a href="#how">How it works</a>
+    <a href="#decisions">Decisions</a>
+    <a href="#vision">Where it's going</a>
+  </nav>
+
   <div class="case-hero-layout fade-up">
   <div class="case-hero">
     <p class="case-eyebrow">Project · Developer Tools</p>
@@ -92,14 +100,14 @@
   </div>
 
   <!-- Problem -->
-  <div class="case-section fade-up">
+  <div class="case-section fade-up" id="problem">
     <h2>The problem</h2>
     <p>When I started building, the consistent advice was to build in public — tweet what you shipped, share your progress, document the journey. Good advice. But after a six-hour build session, writing a coherent post about what you just did is the last thing you want to do. The friction kills it.</p>
     <p>I was focused on shipping code. So I thought: why not build the tool that does the writing for me? Connect it to what I actually built that day, let it summarize, and give me something I can publish with minimal editing.</p>
   </div>
 
   <!-- Challenge -->
-  <div class="case-section fade-up">
+  <div class="case-section fade-up" id="challenge">
     <h2>The challenge</h2>
     <p>Two problems. First, maintaining a reliable MCP connection across Claude Code sessions. The integration has to be invisible enough that you forget it's running. Second, state consolidation: commits from GitHub, task summaries from the MCP, and multiple sessions in a day all need to collapse into a summary that reads like a build log, not a data dump. State reliability is the current focus and the next problem on the roadmap.</p>
   </div>
@@ -121,7 +129,7 @@
   </div>
 
   <!-- How it works -->
-  <div class="case-section fade-up">
+  <div class="case-section fade-up" id="how">
     <h2>How it works</h2>
     <p>Connect your GitHub account and BIP installs a webhook on the repos you choose. Every push automatically adds to your build log — no manual steps. Connect the BIP MCP to Claude Code and it silently logs task summaries after each session, even on days with no commits.</p>
     <p>From the dashboard, hit "Generate summary" and BIP produces an AI-written entry from your day's commits and Claude Code activity. Review it, edit if needed, and publish to your public profile.</p>
@@ -129,7 +137,7 @@
   </div>
 
   <!-- Key decisions -->
-  <div class="case-section fade-up">
+  <div class="case-section fade-up" id="decisions">
     <h2>Key decisions</h2>
     <div class="decisions">
       <div class="decision">
@@ -151,7 +159,7 @@
   </div>
 
   <!-- Vision -->
-  <div class="case-section fade-up">
+  <div class="case-section fade-up" id="vision">
     <h2>Where it's going</h2>
     <p>The current version handles the capture and summarization layer. What's next:</p>
     <div class="vision-block">
@@ -185,6 +193,24 @@
     });
   }, { threshold: 0.12, rootMargin: '-4% 0px' });
   fadeUps.forEach(el => observer.observe(el));
+
+  const tocLinks = [...document.querySelectorAll('.toc a')];
+  if (tocLinks.length) {
+    const linkFor = new Map();
+    tocLinks.forEach(a => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) linkFor.set(target, a);
+    });
+    const spy = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          tocLinks.forEach(a => a.classList.remove('active'));
+          linkFor.get(entry.target)?.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-45% 0px -50% 0px' });
+    linkFor.forEach((a, target) => spy.observe(target));
+  }
 </script>
 </body>
 </html>
