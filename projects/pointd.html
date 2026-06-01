@@ -160,8 +160,8 @@
   <a href="../index.html" class="back-link">All projects</a>
 
   <nav class="toc" aria-label="Sections">
-    <a href="#demo">Demo</a>
     <a href="#problem">Problem</a>
+    <a href="#demo">Demo</a>
     <a href="#challenge">Challenge</a>
     <a href="#decisions">Decisions</a>
     <a href="#where">Where it stands</a>
@@ -196,16 +196,6 @@
   </div>
   </div>
 
-  <!-- Demo -->
-  <div class="screenshot-wrap fade-up" id="demo" style="scroll-margin-top:96px;">
-    <div class="browser-frame">
-      <video controls muted playsinline loop preload="metadata" poster="../assets/video/pointd-demo-poster.jpg">
-        <source src="../assets/video/pointd-demo.mp4" type="video/mp4">
-      </video>
-    </div>
-    <p class="screenshot-caption">Walkthrough — add your programs, then explore where your points can actually take you</p>
-  </div>
-
   <!-- Problem -->
   <div class="case-section fade-up" id="problem">
     <h2>The problem</h2>
@@ -216,6 +206,16 @@
       <cite>— Pattern from user interviews</cite>
     </blockquote>
     <p>People sit on points for years. They know they're valuable. They just never use them because the first time they try to figure out redemption, the system overwhelms them and they give up. pointd is built around a different question: not "how do I book with points?" but "where can I actually go with what I have?"</p>
+  </div>
+
+  <!-- Demo -->
+  <div class="screenshot-wrap fade-up" id="demo" style="scroll-margin-top:96px;">
+    <div class="browser-frame">
+      <video controls muted playsinline loop preload="metadata" poster="../assets/video/pointd-demo-poster.jpg">
+        <source src="../assets/video/pointd-demo.mp4" type="video/mp4">
+      </video>
+    </div>
+    <p class="screenshot-caption">Walkthrough — add your programs, then explore where your points can actually take you</p>
   </div>
 
   <!-- Screenshot: gate page -->
@@ -230,14 +230,6 @@
   <div class="case-section fade-up" id="challenge">
     <h2>The challenge</h2>
     <p>The core challenge was data. Loyalty program pricing and award availability aren't cleanly accessible: award space varies by date, program, and transfer chain, and most of it isn't exposed through reliable APIs. The current implementation combines scraping and multiple API integrations to surface live cash pricing, with award availability still an open problem. That constraint also shaped the product direction. A discovery-first model (show what's theoretically reachable with your points) made it possible to ship something useful while the harder availability data problem gets solved.</p>
-  </div>
-
-  <!-- Screenshot: explore -->
-  <div class="screenshot-wrap fade-up">
-    <div class="browser-frame">
-      <img src="../assets/screenshots/pointd-explore.png" alt="pointd explore — destinations you can reach with your points" loading="lazy">
-    </div>
-    <p class="screenshot-caption">Explore — destinations you can actually reach, surfaced from your combined balances across all programs</p>
   </div>
 
   <!-- Key decisions -->
