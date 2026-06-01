@@ -14,9 +14,9 @@
   --accent: #c95f2a;
   --accent-light: #fdf0e8;
   --accent-border: rgba(201,95,42,0.22);
-  --serif: 'DM Serif Display', Georgia, serif;
-  --sans: 'DM Sans', system-ui, sans-serif;
-  --mono: 'DM Sans', system-ui, sans-serif;
+  --serif: 'Cabinet Grotesk', system-ui, sans-serif;
+  --sans: 'General Sans', system-ui, sans-serif;
+  --mono: 'General Sans', system-ui, sans-serif;
   --r: 10px;
   --r-lg: 16px;
 }
