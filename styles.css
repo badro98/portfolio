@@ -309,6 +309,42 @@ footer {
   nav { margin-bottom: 2.5rem; }
 }
 
+/* ── More projects (case study footer) ── */
+.more-projects {
+  margin-top: 5rem;
+  padding-top: 2.5rem;
+  border-top: 0.5px solid var(--border-strong);
+}
+.more-projects .section-label { margin-bottom: 1.25rem; }
+.more-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+.more-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 18px;
+  text-decoration: none;
+  transition: border-color 0.2s ease, transform 0.15s ease;
+}
+.more-card:hover { border-color: var(--accent-border); transform: translateY(-2px); }
+.more-card-name { font-family: var(--serif); font-size: 18px; color: var(--ink); }
+.more-card-desc { font-size: 12px; line-height: 1.55; color: var(--ink-2); }
+.more-card-tag {
+  margin-top: auto;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+@media (max-width: 640px) { .more-grid { grid-template-columns: 1fr; } }
+
 /* ── Reduced motion ── */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
