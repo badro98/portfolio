@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Interview Prep Kit — Osama Badr</title>
+<meta name="description" content="Interview Prep Kit — a local-first, open-source app for prepping across multiple interviews at once. Case study by Osama Badr.">
+<!-- Open Graph -->
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Osama Badr">
+<meta property="og:title" content="Interview Prep Kit — Osama Badr">
+<meta property="og:description" content="A local-first, open-source app for prepping across multiple interviews at once. Case study.">
+<meta property="og:url" content="https://osamabadr-portfolio.pages.dev/projects/interview-prep-kit.html">
+<meta property="og:image" content="https://osamabadr-portfolio.pages.dev/assets/og-image.png">
+<meta property="og:image:width" content="2400">
+<meta property="og:image:height" content="1260">
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Interview Prep Kit — Osama Badr">
+<meta name="twitter:description" content="A local-first, open-source app for prepping across multiple interviews at once.">
+<meta name="twitter:image" content="https://osamabadr-portfolio.pages.dev/assets/og-image.png">
+<link rel="icon" type="image/png" href="../assets/avatar-wave-v2.png">
+<link rel="preconnect" href="https://api.fontshare.com">
+<link rel="preconnect" href="https://cdn.fontshare.com" crossorigin>
+<link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@700,800&f[]=general-sans@300,400,500,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css">
+<style>
+.case-hero { margin-bottom: 1.5rem; }
+.case-eyebrow { font-family: var(--mono); font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-3); margin-bottom: 1rem; }
+.case-hero h1 { font-family: var(--serif); font-size: clamp(32px, 5vw, 52px); line-height: 1.1; letter-spacing: -0.02em; font-weight: 800; color: var(--ink); margin-bottom: 0; }
+.case-hero p { font-size: 16px; line-height: 1.75; color: var(--ink-2); max-width: 560px; }
+.case-meta { display: flex; gap: 2rem; flex-wrap: wrap; padding: 0.75rem 0; border-bottom: 0.5px solid var(--border); margin: 0.75rem 0 0; }
+.meta-item { display: flex; flex-direction: column; gap: 3px; }
+.meta-label { font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-3); }
+.meta-value { font-size: 13px; color: var(--ink); font-weight: 500; }
+.case-section { margin-bottom: 3.5rem; }
+.case-section h2 { font-family: var(--serif); font-size: 26px; font-weight: 700; color: var(--ink); margin-bottom: 1rem; }
+.case-section p { font-size: 15px; line-height: 1.8; color: var(--ink-2); margin-bottom: 1rem; max-width: 640px; }
+.case-section p:last-child { margin-bottom: 0; }
+.decisions { display: flex; flex-direction: column; gap: 1.5rem; margin-top: 1.5rem; }
+.decision { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r); padding: 24px; }
+.decision-num { font-family: var(--mono); font-size: 10px; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 6px; }
+.decision strong { display: block; font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 8px; }
+.decision p { font-size: 13px; color: var(--ink-2); line-height: 1.65; margin: 0; max-width: 100%; }
+.screenshot-wrap { margin: 2.5rem 0; }
+.screenshot-caption { margin-top: 10px; font-size: 12px; font-family: var(--mono); color: var(--ink-3); }
+.screenshot-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 2.5rem 0; }
+.stack { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 1rem; }
+.stack-tag { font-family: var(--mono); font-size: 11px; color: var(--ink-2); background: var(--surface-2); padding: 4px 10px; border-radius: 4px; border: 1px solid var(--border); }
+/* Stats callout */
+.meta-callout { background: var(--surface-2); border: 1px solid var(--border); border-radius: var(--r); padding: 20px 24px; margin: 1.5rem 0; display: flex; gap: 2rem; flex-wrap: wrap; }
+.meta-callout-item { display: flex; flex-direction: column; gap: 4px; }
+.meta-callout-num { font-family: var(--serif); font-size: 28px; color: var(--ink); }
+.meta-callout-label { font-size: 12px; color: var(--ink-3); font-family: var(--mono); }
+/* Postmortem callout */
+.postmortem {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--border-strong);
+  border-radius: 0 var(--r) var(--r) 0;
+  padding: 22px 24px;
+  margin: 2rem 0;
+}
+.postmortem-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--ink-3);
+  margin-bottom: 8px;
+}
+.postmortem p { font-size: 13px; color: var(--ink-2); line-height: 1.7; margin: 0; max-width: 100%; }
+.postmortem code {
+  font-family: var(--mono);
+  font-size: 12px;
+  background: var(--surface-2);
+  padding: 1px 5px;
+  border-radius: 3px;
+}
+/* Feature table */
+.feature-table { width: 100%; border-collapse: collapse; margin-top: 1.25rem; font-size: 13px; }
+.feature-table th {
+  text-align: left;
+  font-family: var(--mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--ink-3);
+  font-weight: 400;
+  padding: 0 0 8px;
+  border-bottom: 0.5px solid var(--border-strong);
+}
+.feature-table td { padding: 10px 0; border-bottom: 0.5px solid var(--border); color: var(--ink-2); line-height: 1.6; vertical-align: top; }
+.feature-table td:first-child { color: var(--ink); font-weight: 500; width: 130px; padding-right: 1.5rem; }
+.feature-table tr:last-child td { border-bottom: none; }
+@media (max-width: 580px) { .screenshot-grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <nav>
+    <a href="../index.html" class="nav-name">Osama Badr</a>
+    <div class="nav-links">
+      <a href="../about.html">About</a>
+      <a href="mailto:osabadr@gmail.com">Contact</a>
+    </div>
+  </nav>
+
+  <a href="../index.html" class="back-link">All projects</a>
+
+  <nav class="toc" aria-label="Sections">
+    <a href="#problem">Problem</a>
+    <a href="#first">First version</a>
+    <a href="#broke">What broke</a>
+    <a href="#decisions">Decisions</a>
+    <a href="#how">How it works</a>
+    <a href="#where">Where it stands</a>
+  </nav>
+
+  <div class="case-hero-layout fade-up">
+  <div class="case-hero">
+    <p class="case-eyebrow">Project · Open Source</p>
+    <div class="case-hero-title-row">
+      <h1>Interview Prep Kit</h1>
+      <div class="case-hero-badges">
+        <a href="https://github.com/badro98/interview-prep-kit" target="_blank" rel="noopener noreferrer" style="font-family:var(--mono);font-size:12px;color:var(--ink-3);text-decoration:none;border-bottom:0.5px solid var(--border-strong);padding-bottom:1px;">GitHub ↗</a>
+      </div>
+    </div>
+    <p>A local-first app for prepping across multiple interviews at once. It reads your resume and each job description, then generates stage-by-stage prep docs, a behavioral flashcard deck, and an audio coach that scores how you actually answer out loud. You bring your own API key, and nothing leaves your machine.</p>
+    <div class="case-pills" style="margin-top:1rem;margin-bottom:0.75rem;">
+      <span class="case-pill">Open Source</span>
+      <span class="case-pill">AI</span>
+      <span class="case-pill">Developer Tools</span>
+    </div>
+    <div class="case-meta">
+      <div class="meta-item"><span class="meta-label">Role</span><span class="meta-value">Solo — design, build, QA</span></div>
+      <div class="meta-item"><span class="meta-label">Started</span><span class="meta-value">Jun 2026</span></div>
+      <div class="meta-item"><span class="meta-label">Status</span><span class="meta-value">Open source · MIT</span></div>
+      <div class="meta-item"><span class="meta-label">Stack</span><span class="meta-value">React, Vite, Express, Gemini API</span></div>
+    </div>
+  </div>
+
+  <div class="case-hero-img">
+    <div class="browser-frame">
+      <img src="../assets/screenshots/ipk-prep-docs.png" alt="Interview Prep Kit — prep docs with the job switcher open" loading="eager">
+    </div>
+  </div>
+  </div>
+
+  <!-- Problem -->
+  <div class="case-section fade-up" id="problem">
+    <h2>The problem</h2>
+    <p>I was interviewing for several roles at once and my prep was scattered across four places: notes in Google Docs, practice questions in a Claude thread, job descriptions in tabs, and stories I kept rewriting from scratch. Every session started the same way, re-explaining which company I was interviewing with and hoping I was in the right project.</p>
+    <p>The actual problem wasn't note-taking. It was grounding. Good prep depends on the model knowing your real experience and the real job posting at the same time, and I was rebuilding that context by hand every single time.</p>
+  </div>
+
+  <!-- First version -->
+  <div class="case-section fade-up" id="first">
+    <h2>The first version</h2>
+    <p>I built the first version in under 24 hours in Cursor, the night before an interview. One job, hardcoded into a config file. Context files on disk. Prep docs generated by pasting a prompt into an AI IDE and committing the output.</p>
+    <p>It worked. I used it for that interview and it was better than what I had been doing. But it was a tool with exactly one user and exactly one job in it.</p>
+  </div>
+
+  <!-- What broke -->
+  <div class="case-section fade-up" id="broke">
+    <h2>What broke</h2>
+    <p>Two things broke at the same time.</p>
+    <p>First, I had three live interviews running in parallel and the app could only hold one. Everything lived in flat browser keys with no namespace, so a second job would have overwritten the first: one flashcard deck, one set of prep docs, one advisor history. Prep for Company A and prep for Company B were the same storage.</p>
+    <p>Second, when I went to open-source it, the setup instructions were "clone the repo, edit a config file, then run a prompt inside Cursor or Claude Code to generate your docs." That's a fine workflow if you already live in an AI IDE. It excludes everyone else, and it meant the first five minutes of using the app were spent editing JavaScript instead of prepping.</p>
+    <p>So the real question was: how do you turn a personal tool into something a stranger can use in five minutes, without adding a backend, without asking for an account, and without anyone's resume leaving their own machine?</p>
+  </div>
+
+  <!-- Key decisions -->
+  <div class="case-section fade-up" id="decisions">
+    <h2>Key decisions</h2>
+    <div class="decisions">
+      <div class="decision">
+        <p class="decision-num">Decision 01</p>
+        <strong>Browser storage, not a server</strong>
+        <p>A server-backed version would have been easier to build and would have killed the main promise. The whole pitch is that your resume and interview notes stay on your machine, and the moment there's a database there's a thing to trust. IndexedDB and localStorage behave identically on localhost and on a static host, so the app stays deployable without ever gaining a backend. Everything goes through one storage adapter module, so if cross-device sync is ever worth it, it slots in behind that interface instead of touching every feature.</p>
+      </div>
+      <div class="decision">
+        <p class="decision-num">Decision 02</p>
+        <strong>Migration before features</strong>
+        <p>The first PR shipped no visible features. It moved every flat storage key into a job namespace and wrote a versioned migration for it. I was running my own live prep data in this app while rebuilding it, so a migration bug meant losing real work the week of real interviews. The migration is idempotent, non-destructive, and keeps the old keys until the new write is confirmed. Boring, and the reason nothing was lost.</p>
+      </div>
+      <div class="decision">
+        <p class="decision-num">Decision 03</p>
+        <strong>One profile, attached by reference</strong>
+        <p>Your resume and stories don't change per job, but the tailoring does. So the profile lives once and each job attaches the entries it needs by reference, meaning an edit to your resume propagates everywhere automatically. When a job needs a tailored version, "detach and edit" copies the content into that job and breaks the link. Same pattern as an override on a base config, applied to prep material.</p>
+      </div>
+      <div class="decision">
+        <p class="decision-num">Decision 04</p>
+        <strong>Generation in the app, not in an AI IDE</strong>
+        <p>The original flow required an AI coding assistant to write your prep docs. I moved generation into an onboarding wizard: name, profile, job, stages, attach context, generate. For anyone without an API key, paste mode copies the assembled prompt to your clipboard and takes the reply back, so the app still works with nothing but a browser and a chat window. The old prompt-driven path stayed in the README as a power-user route rather than the default.</p>
+      </div>
+      <div class="decision">
+        <p class="decision-num">Decision 05</p>
+        <strong>Five small PRs, QA'd like production</strong>
+        <p>The rebuild touched storage, routing, onboarding, settings, and docs. I split it into five stacked PRs, each under 20 files, and ran my own qa-agent against every one before merging. The repo had zero tests when this started and 110 by the end, covering the storage adapter, the migration, profile attach/detach, and context assembly. That's the part I'd point at in an interview: not that the app works, but that I treated a side project like something that could break someone's week.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- What went wrong -->
+  <div class="postmortem fade-up">
+    <div class="postmortem-label">What went wrong</div>
+    <p>Worth recording: merging the stack itself broke. Running <code>gh pr merge --delete-branch</code> on a base branch made GitHub <strong>close</strong> the child PR instead of retargeting it, because the branch it was based on no longer existed. Recovery meant recreating the deleted branch at its old head, reopening the PR, retargeting it to main, then deleting the branch again. The fix for the rest of the stack was to merge without deleting, retarget the next PR explicitly, then clean up. A pipeline problem, not a code problem, which is usually where these live.</p>
+  </div>
+
+  <!-- Screenshots -->
+  <div class="screenshot-grid fade-up">
+    <div>
+      <div class="browser-frame">
+        <img src="../assets/screenshots/ipk-onboarding.png" alt="Interview Prep Kit onboarding — editing the interview stage list" loading="lazy">
+      </div>
+      <p class="screenshot-caption" style="margin-top:8px">Onboarding — stages are edited in the app, not in a config file</p>
+    </div>
+    <div>
+      <div class="browser-frame">
+        <img src="../assets/screenshots/ipk-flashcards.png" alt="Interview Prep Kit flashcards — behavioral deck with confidence scoring" loading="lazy">
+      </div>
+      <p class="screenshot-caption" style="margin-top:8px">Flashcards — answer by typing or out loud, then get coached on it</p>
+    </div>
+  </div>
+
+  <!-- How it works -->
+  <div class="case-section fade-up" id="how">
+    <h2>How it works</h2>
+    <p>Six surfaces, all scoped to whichever job you have active. Switching jobs swaps every one of them.</p>
+    <table class="feature-table">
+      <thead>
+        <tr><th>Surface</th><th>What it does</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Prep Docs</td><td>One doc per interview stage, editable and regeneratable on demand</td></tr>
+        <tr><td>Flashcards</td><td>Behavioral deck with AI coaching on the answer you actually gave</td></tr>
+        <tr><td>Audio</td><td>Record an answer, transcribe it, score structure and delivery</td></tr>
+        <tr><td>Advisor</td><td>Multi-turn chat that proposes new flashcards and context updates</td></tr>
+        <tr><td>Context</td><td>Paste, upload markdown or PDF, or pull a job description from a URL</td></tr>
+        <tr><td>Jobs</td><td>Switch between jobs; each keeps its own docs, deck, history, and recordings</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Where it stands -->
+  <div class="case-section fade-up" id="where">
+    <h2>Where it stands</h2>
+    <p>Public, MIT licensed, and runnable in about two minutes with a free Gemini key. There's a sample setup with demo data so you can see the whole flow before entering anything real.</p>
+    <div class="meta-callout">
+      <div class="meta-callout-item"><span class="meta-callout-num">12</span><span class="meta-callout-label">Merged PRs</span></div>
+      <div class="meta-callout-item"><span class="meta-callout-num">110</span><span class="meta-callout-label">Tests</span></div>
+      <div class="meta-callout-item"><span class="meta-callout-num">MIT</span><span class="meta-callout-label">Open source</span></div>
+    </div>
+    <p>Deliberately unfinished: server-side transcription still falls back to the config's default job rather than the active one, there's no component-level test coverage, and I haven't put a hosted version up. All three are known and written down rather than discovered later.</p>
+    <p>I'm still using it. Every interview I run through it surfaces something the last version handled badly, which is the only reason it keeps getting better.</p>
+  </div>
+
+  <section class="more-projects fade-up">
+    <div class="section-label">More projects</div>
+    <div class="more-grid">
+      <a class="more-card" href="pointd.html">
+        <span class="more-card-name">pointd</span>
+        <span class="more-card-desc">A travel rewards optimizer that shows where your points can take you, across every program.</span>
+        <span class="more-card-tag">Travel · Rewards</span>
+      </a>
+      <a class="more-card" href="qa-agent.html">
+        <span class="more-card-name">QA-Agent</span>
+        <span class="more-card-desc">Runs on every PR and flags test-coverage gaps before they merge.</span>
+        <span class="more-card-tag">QA · AI Tooling</span>
+      </a>
+      <a class="more-card" href="ux-gap.html">
+        <span class="more-card-name">UX Gap Detection</span>
+        <span class="more-card-desc">A multi-bot pipeline that catches the UX issues automation misses.</span>
+        <span class="more-card-tag">QA · AI Tooling</span>
+      </a>
+    </div>
+  </section>
+
+  <footer>
+    <span class="footer-name">Osama Badr</span>
+    <div class="footer-links">
+      <a href="https://linkedin.com/in/obadr" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      <a href="https://github.com/badro98" target="_blank" rel="noopener noreferrer">GitHub</a>
+    </div>
+  </footer>
+
+</div>
+<script>
+  const fadeUps = [...document.querySelectorAll('.fade-up')];
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        const idx = fadeUps.indexOf(entry.target);
+        entry.target.style.animationDelay = `${idx * 0.08}s`;
+        entry.target.classList.add('in-view');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '-4% 0px' });
+  fadeUps.forEach(el => observer.observe(el));
+
+  const tocLinks = [...document.querySelectorAll('.toc a')];
+  if (tocLinks.length) {
+    const linkFor = new Map();
+    tocLinks.forEach(a => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) linkFor.set(target, a);
+    });
+    const spy = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          tocLinks.forEach(a => a.classList.remove('active'));
+          linkFor.get(entry.target)?.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-45% 0px -50% 0px' });
+    linkFor.forEach((a, target) => spy.observe(target));
+  }
+</script>
+</body>
+</html>
