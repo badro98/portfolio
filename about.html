@@ -520,8 +520,10 @@ nav:not(.toc) {
         <div class="pills">
           <span class="pill hi">AI agent development</span>
           <span class="pill hi">Agentic workflow design</span>
+          <span class="pill hi">Agentic e2e test execution</span>
           <span class="pill">Prompt engineering</span>
-          <span class="pill">Self-healing test suites</span>
+          <span class="pill">Agent tooling &amp; skill packaging</span>
+          <span class="pill">Vision-based UI verification</span>
           <span class="pill">LLM-assisted bug fixing</span>
         </div>
       </div>
@@ -533,6 +535,9 @@ nav:not(.toc) {
           <span class="pill">Cross-platform mobile</span>
           <span class="pill">Exploratory testing</span>
           <span class="pill">Regression QA</span>
+          <span class="pill">Root-cause analysis</span>
+          <span class="pill">Design-system compliance</span>
+          <span class="pill">Accessibility &amp; localization</span>
         </div>
       </div>
       <div class="skill-card">
@@ -541,8 +546,21 @@ nav:not(.toc) {
           <span class="pill">Python</span>
           <span class="pill">JavaScript</span>
           <span class="pill">SQL</span>
+          <span class="pill">GraphQL</span>
+          <span class="pill">Bash</span>
           <span class="pill">GitHub Actions</span>
           <span class="pill">CI/CD</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-title">Test infrastructure</div>
+        <div class="pills">
+          <span class="pill hi">CI / batch orchestration</span>
+          <span class="pill">Feature-flag systems</span>
+          <span class="pill">Service identity &amp; token auth</span>
+          <span class="pill">Mobile device farms</span>
+          <span class="pill">Emulators &amp; simulators</span>
+          <span class="pill">Artifact build-and-pin pipelines</span>
         </div>
       </div>
       <div class="skill-card">
@@ -552,6 +570,15 @@ nav:not(.toc) {
           <span class="pill">Release reporting</span>
           <span class="pill">Stakeholder alignment</span>
           <span class="pill">Dogfooding programs</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-title">Quality analytics</div>
+        <div class="pills">
+          <span class="pill">Quality analytics &amp; reporting</span>
+          <span class="pill">Distributed SQL query engines</span>
+          <span class="pill">Data-warehouse analytics</span>
+          <span class="pill">Dashboarding platforms</span>
         </div>
       </div>
     </div>
@@ -728,6 +755,33 @@ nav:not(.toc) {
         <div class="tl-company">Meta · Reality Labs · Burlingame, CA</div>
         <div class="tl-card">
 
+          <div class="card-sublabel ai">Test automation &amp; infrastructure</div>
+          <div class="ach-block">
+            <div class="ach-title">AI-agent-driven end-to-end test suite</div>
+            <div class="wshr">
+              <span class="wl">What</span><span class="wv">Designed, consolidated, and maintains the automated end-to-end regression suite for a consumer mobile app on Android and iOS, executed by AI test agents across real devices, emulators, and simulators</span>
+              <span class="wl">Scale</span><span class="wv"><strong>~250 test jobs per day</strong> across two platform configurations; hundreds of distinct test cases</span>
+              <span class="wl">How</span><span class="wv">Declarative agentic test cases, Python orchestration, shared vs. platform-specific case hierarchy, CI batch scheduling, automated verdict recording</span>
+              <span class="wl">Result</span><span class="wv">Replaced a large share of manual regression passes; every case triaged into product bug, test drift, or infrastructure block</span>
+            </div>
+          </div>
+          <div class="ach-block">
+            <div class="ach-title">Root-caused a platform-wide test authentication failure</div>
+            <div class="wshr">
+              <span class="wl">What</span><span class="wv">Traced a long-standing "access denied" failure that was silently blocking a large share of the iOS automated suite — through the account-provisioning service, application-identifier mapping, and token scoping, down to a single incorrect constant</span>
+              <span class="wl">How</span><span class="wv">Token decoding and diagnostic scripting, API tracing, cross-platform code-path comparison, and verification of the build-and-pin deployment model to prove exactly when the fix went live</span>
+              <span class="wl">Result</span><span class="wv">Restored blocked coverage — and the same analysis disproved a reported quality regression as sampling variance rather than a real product change</span>
+            </div>
+          </div>
+          <div class="ach-block">
+            <div class="ach-title">Test-account provisioning infrastructure</div>
+            <div class="wshr">
+              <span class="wl">What</span><span class="wv">Extended the test-account provisioning service to support feature-flag enrollment by default, minor/youth account pairs, non-interactive service-context creation, and propagation-aware waits</span>
+              <span class="wl">How</span><span class="wv">Python service work, feature-flag enrollment APIs, service-identity credential handling, retry and propagation logic to remove flakiness</span>
+              <span class="wl">Result</span><span class="wv">Unblocked whole categories of previously untestable coverage — age-restricted flows, parental-control flows, and onboarding paths</span>
+            </div>
+          </div>
+
           <div class="card-sublabel ai">AI-Native QA transition</div>
           <div class="ach-block">
             <div class="ach-title">Manual → AI-native testing: full transition</div>
@@ -768,8 +822,8 @@ nav:not(.toc) {
           <div class="ach-block">
             <div class="ach-title">VR Engagement oncall and release readiness</div>
             <div class="wshr">
-              <span class="wl">What</span><span class="wv">Primary QA oncall and release gatekeeper for the VR companion app on iOS and Android</span>
-              <span class="wl">Scale</span><span class="wv"><strong>490+ oncall-tagged bugs</strong> across 10+ product areas; 5+ major release signoffs; ~3 years oncall</span>
+              <span class="wl">What</span><span class="wv">Primary QA oncall and release gatekeeper for the VR companion app on iOS and Android — triaging incoming defects, verifying launch-blocking and highest-severity fixes, rerouting mistriaged reports, and signing off releases</span>
+              <span class="wl">Scale</span><span class="wv"><strong>6,000+ distinct defects</strong> worked across six years and roughly 180 releases — 900+ personally owned to closure, 850+ filed, and 4,500+ triaged, reproduced, or fix-verified for other engineers. 2,300+ were high-severity or emergency priority</span>
               <span class="wl">Result</span><span class="wv"><strong>20% reduction</strong> in mis-triaged issues; <strong>40% reduction</strong> in production bugs in Meta Horizon Mobile</span>
             </div>
           </div>
@@ -778,6 +832,8 @@ nav:not(.toc) {
             <span class="tag hi">AI agent development</span>
             <span class="tag hi">Agentic workflows</span>
             <span class="tag hi">Test automation</span>
+            <span class="tag hi">Test infrastructure</span>
+            <span class="tag">Root-cause analysis</span>
             <span class="tag">Release readiness</span>
             <span class="tag">Cross-platform QA</span>
             <span class="tag">iOS + Android</span>
