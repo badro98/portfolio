@@ -171,7 +171,7 @@
     <div class="case-hero-title-row">
       <h1>UX Gap Detection</h1>
     </div>
-    <p>A multi-bot pipeline that finds the UX issues automated testing misses — running continuously on every test pass, deduplicating against known bugs, and filing verified issues automatically.</p>
+    <p>A multi-bot pipeline that finds the UX issues automated testing misses. It runs on every test pass, deduplicates against known bugs, and verifies what survives in simulator, so reviewers only see net-new issues that have already been reproduced.</p>
     <div class="case-pills" style="margin-top:1rem;margin-bottom:0.75rem;">
       <span class="case-pill">QA</span>
       <span class="case-pill">AI Tooling</span>
@@ -210,7 +210,7 @@
       <div class="diag-arrow accent"><svg viewBox="0 0 20 8"><line x1="0" y1="4" x2="15" y2="4"/><polyline points="11,1 16,4 11,7"/></svg></div>
       <div class="diag-node">
         <div class="diag-circle accent"><svg viewBox="0 0 24 24"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></div>
-        <span class="diag-label accent">Auto<br>filed</span>
+        <span class="diag-label accent">Human<br>review</span>
       </div>
     </div>
     <div class="diag-status">Active · 2 apps</div>
@@ -246,8 +246,8 @@
       </div>
       <div class="decision">
         <p class="decision-num">Decision 03</p>
-        <strong>Auto-file with a human review gate</strong>
-        <p>Issues are filed automatically but reviewed before being assigned. This keeps the output trustworthy — a fully autonomous pipeline that silently files noise is worse than no pipeline. The review gate stays until confidence is high enough to remove it for specific issue types.</p>
+        <strong>Propose, don't auto-act</strong>
+        <p>The original design filed confirmed issues automatically. Engineering pushed back: a pipeline that writes into their queue without a human in the loop is a trust problem before it's a tooling problem, and they were right. I pulled auto-filing and repositioned the pipeline around what it was actually best at, which was deduplication and simulator verification. It now hands reviewers a short list of net-new issues that have already been reproduced, instead of filing on their behalf. Less autonomous, considerably more used.</p>
       </div>
     </div>
   </div>
@@ -290,12 +290,7 @@
 
       <div class="pd-row">
         <div class="pd-icon-wrap"><div class="pd-icon accent"><svg viewBox="0 0 24 24"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></div></div>
-        <div class="pd-body"><div class="pd-num">Step 05</div><div class="pd-name">Auto-file &amp; triage</div><div class="pd-desc">Confirmed issues are filed automatically — title, reproduction steps, and severity pre-populated. Filed to the correct product area on my behalf</div></div>
-      </div>
-
-      <div class="pd-row">
-        <div class="pd-icon-wrap"><div class="pd-icon"><svg viewBox="0 0 24 24"><path d="M20 7H4a2 2 0 00-2 2v6a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg></div></div>
-        <div class="pd-body"><div class="pd-num">Step 06</div><div class="pd-name">Review &amp; assign</div><div class="pd-desc">Filed issues are reviewed and assigned for prioritization. Working toward full autonomous triage — manual review currently required for edge cases and account-gated flows</div></div>
+        <div class="pd-body"><div class="pd-num">Step 05</div><div class="pd-name">Package for review</div><div class="pd-desc">Verified issues are packaged with title, reproduction steps, and severity pre-populated, then routed to the right product area for a human to file and assign</div></div>
       </div>
 
     </div>
@@ -307,7 +302,7 @@
     <p>Started with one app and a few features. Now covers two apps with a full feature suite. The pipeline has been running for around two months — long enough to validate the approach and start tuning accuracy.</p>
     <div class="meta-callout">
       <div class="meta-callout-item"><span class="meta-callout-num">2</span><span class="meta-callout-label">Apps covered</span></div>
-      <div class="meta-callout-item"><span class="meta-callout-num">6</span><span class="meta-callout-label">Pipeline steps</span></div>
+      <div class="meta-callout-item"><span class="meta-callout-num">5</span><span class="meta-callout-label">Pipeline steps</span></div>
       <div class="meta-callout-item"><span class="meta-callout-num">~2mo</span><span class="meta-callout-label">In production</span></div>
     </div>
   </div>
