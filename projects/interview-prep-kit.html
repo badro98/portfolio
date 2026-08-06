@@ -52,31 +52,6 @@
 .meta-callout-item { display: flex; flex-direction: column; gap: 4px; }
 .meta-callout-num { font-family: var(--serif); font-size: 28px; color: var(--ink); }
 .meta-callout-label { font-size: 12px; color: var(--ink-3); font-family: var(--mono); }
-/* Postmortem callout */
-.postmortem {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-left: 3px solid var(--border-strong);
-  border-radius: 0 var(--r) var(--r) 0;
-  padding: 22px 24px;
-  margin: 2rem 0;
-}
-.postmortem-label {
-  font-family: var(--mono);
-  font-size: 10px;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--ink-3);
-  margin-bottom: 8px;
-}
-.postmortem p { font-size: 13px; color: var(--ink-2); line-height: 1.7; margin: 0; max-width: 100%; }
-.postmortem code {
-  font-family: var(--mono);
-  font-size: 12px;
-  background: var(--surface-2);
-  padding: 1px 5px;
-  border-radius: 3px;
-}
 /* Feature table */
 .feature-table { width: 100%; border-collapse: collapse; margin-top: 1.25rem; font-size: 13px; }
 .feature-table th {
@@ -165,10 +140,8 @@
   <!-- What broke -->
   <div class="case-section fade-up" id="broke">
     <h2>What broke</h2>
-    <p>Two things broke at the same time.</p>
-    <p>First, I had three live interviews running in parallel and the app could only hold one. Everything lived in flat browser keys with no namespace, so a second job would have overwritten the first: one flashcard deck, one set of prep docs, one advisor history. Prep for Company A and prep for Company B were the same storage.</p>
-    <p>Second, when I went to open-source it, the setup instructions were "clone the repo, edit a config file, then run a prompt inside Cursor or Claude Code to generate your docs." That's a fine workflow if you already live in an AI IDE. It excludes everyone else, and it meant the first five minutes of using the app were spent editing JavaScript instead of prepping.</p>
-    <p>So the real question was: how do you turn a personal tool into something a stranger can use in five minutes, without adding a backend, without asking for an account, and without anyone's resume leaving their own machine?</p>
+    <p>I had three live interviews running in parallel and the app could only hold one. Everything lived in flat browser keys with no namespace, so a second job would have overwritten the first: one flashcard deck, one set of prep docs, one advisor history. Prep for Company A and prep for Company B were the same storage.</p>
+    <p>Fixing that meant more than adding a dropdown. Every feature read and wrote global state, so a job had to become a first-class thing the entire app was scoped to — and the change had to land without losing the prep I was actively using that week.</p>
   </div>
 
   <!-- Key decisions -->
@@ -178,7 +151,7 @@
       <div class="decision">
         <p class="decision-num">Decision 01</p>
         <strong>Browser storage, not a server</strong>
-        <p>A server-backed version would have been easier to build and would have killed the main promise. The whole pitch is that your resume and interview notes stay on your machine, and the moment there's a database there's a thing to trust. IndexedDB and localStorage behave identically on localhost and on a static host, so the app stays deployable without ever gaining a backend. Everything goes through one storage adapter module, so if cross-device sync is ever worth it, it slots in behind that interface instead of touching every feature.</p>
+        <p>A server-backed version would have been easier to build and would have killed the main promise. The whole pitch is that your resume and interview notes stay on your machine, and the moment there's a database there's a thing to trust. IndexedDB and localStorage behave identically on localhost and on a static host, so the same build runs on a laptop or behind a static host with no server at all. Everything goes through one storage adapter module, so if cross-device sync is ever worth it, it slots in behind that interface instead of touching every feature.</p>
       </div>
       <div class="decision">
         <p class="decision-num">Decision 02</p>
@@ -197,16 +170,10 @@
       </div>
       <div class="decision">
         <p class="decision-num">Decision 05</p>
-        <strong>Five small PRs, QA'd like production</strong>
-        <p>The rebuild touched storage, routing, onboarding, settings, and docs. I split it into five stacked PRs, each under 20 files, and ran my own qa-agent against every one before merging. The repo had zero tests when this started and 110 by the end, covering the storage adapter, the migration, profile attach/detach, and context assembly. That's the part I'd point at in an interview: not that the app works, but that I treated a side project like something that could break someone's week.</p>
+        <strong>Treat a side project like production</strong>
+        <p>The rebuild touched storage, routing, onboarding, and settings at once, in an app I was depending on that same week. So it shipped in small reviewable slices rather than one big change, with my own qa-agent run over each before it merged. The repo had no tests when this started; it has a suite now covering the storage adapter, the migration, profile attach and detach, and context assembly. That's the part I'd point at in an interview: not that the app works, but that I treated a side project like something that could break someone's week.</p>
       </div>
     </div>
-  </div>
-
-  <!-- What went wrong -->
-  <div class="postmortem fade-up">
-    <div class="postmortem-label">What went wrong</div>
-    <p>Worth recording: merging the stack itself broke. Running <code>gh pr merge --delete-branch</code> on a base branch made GitHub <strong>close</strong> the child PR instead of retargeting it, because the branch it was based on no longer existed. Recovery meant recreating the deleted branch at its old head, reopening the PR, retargeting it to main, then deleting the branch again. The fix for the rest of the stack was to merge without deleting, retarget the next PR explicitly, then clean up. A pipeline problem, not a code problem, which is usually where these live.</p>
   </div>
 
   <!-- Screenshots -->
@@ -249,11 +216,13 @@
     <h2>Where it stands</h2>
     <p>Public, MIT licensed, and runnable in about two minutes with a free Gemini key. There's a sample setup with demo data so you can see the whole flow before entering anything real.</p>
     <div class="meta-callout">
-      <div class="meta-callout-item"><span class="meta-callout-num">12</span><span class="meta-callout-label">Merged PRs</span></div>
+      <div class="meta-callout-item"><span class="meta-callout-num">6</span><span class="meta-callout-label">Surfaces</span></div>
       <div class="meta-callout-item"><span class="meta-callout-num">110</span><span class="meta-callout-label">Tests</span></div>
       <div class="meta-callout-item"><span class="meta-callout-num">MIT</span><span class="meta-callout-label">Open source</span></div>
     </div>
-    <p>Deliberately unfinished: server-side transcription still falls back to the config's default job rather than the active one, there's no component-level test coverage, and I haven't put a hosted version up. All three are known and written down rather than discovered later.</p>
+    <p>What's next is a hosted version on its own domain — make an account, add your resume and the job you're chasing, and start prepping. No cloning, no terminal, no API key of your own. Right now the people who benefit most from this are the ones least likely to clone a repo to get it, and that's the wrong filter.</p>
+    <p>Local-first doesn't go away. It's the reason the app is worth handing your resume to, and running it entirely on your own machine stays supported. Hosting is about removing the setup, not the guarantee.</p>
+    <p>Deliberately unfinished: server-side transcription still falls back to the config's default job rather than the active one, and there's no component-level test coverage. Both are known and written down rather than discovered later.</p>
     <p>I'm still using it. Every interview I run through it surfaces something the last version handled badly, which is the only reason it keeps getting better.</p>
   </div>
 
