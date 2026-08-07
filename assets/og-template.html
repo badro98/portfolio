@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>OG image template</title>
+<!--
+  Source for assets/og-image.png (2400x1260).
+  Regenerate after changing the hero copy or the project list — the PNG is
+  what link previews show, and it does NOT pick up meta-tag edits.
+
+  Render:  node scripts/render-og.mjs
+-->
+<link rel="preconnect" href="https://api.fontshare.com">
+<link rel="preconnect" href="https://cdn.fontshare.com" crossorigin>
+<link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@700,800&f[]=general-sans@300,400,500,600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #f4f2ed;
+    --surface-2: #eceae4;
+    --ink: #1c1b18;
+    --ink-2: #5a5850;
+    --border: rgba(28,27,24,0.1);
+    --accent: #c95f2a;
+    --serif: 'Cabinet Grotesk', system-ui, sans-serif;
+    --sans: 'General Sans', system-ui, sans-serif;
+  }
+  html, body { width: 2400px; height: 1260px; }
+  body {
+    background: var(--bg);
+    font-family: var(--sans);
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+  }
+  .accent-bar {
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 30px;
+    background: var(--accent);
+  }
+  .card { padding: 0 180px; width: 100%; }
+
+  .intro { display: flex; align-items: center; gap: 30px; margin-bottom: 76px; }
+  .avatar-wrap { position: relative; width: 156px; height: 156px; flex-shrink: 0; }
+  .avatar {
+    width: 156px; height: 156px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 7px solid #fff;
+    box-shadow: 0 0 0 3px var(--border);
+  }
+  .avatar img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    object-position: 62% 18%;
+    transform: scale(1.2);
+    transform-origin: 62% 18%;
+    display: block;
+  }
+  .avatar-dot {
+    position: absolute;
+    bottom: 6px; right: 6px;
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    background: #22c55e;
+    border: 6px solid #fff;
+  }
+  .intro span { font-size: 48px; color: var(--ink-2); font-weight: 400; }
+
+  h1 {
+    font-family: var(--serif);
+    font-size: 180px;
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.025em;
+    color: var(--ink);
+    margin-bottom: 54px;
+  }
+  .sub {
+    font-size: 50px;
+    line-height: 1.45;
+    color: var(--ink-2);
+    max-width: 1640px;
+    margin-bottom: 86px;
+  }
+  .pills { display: flex; gap: 26px; }
+  .pill {
+    font-size: 41px;
+    font-weight: 500;
+    color: var(--ink);
+    background: var(--surface-2);
+    border: 2px solid var(--border);
+    border-radius: 999px;
+    padding: 20px 44px;
+    white-space: nowrap;
+  }
+</style>
+</head>
+<body>
+  <div class="accent-bar"></div>
+  <div class="card">
+    <div class="intro">
+      <div class="avatar-wrap">
+        <div class="avatar"><img src="avatar-wave-v2.png" alt=""></div>
+        <span class="avatar-dot"></span>
+      </div>
+      <span>Hi, I'm Osama</span>
+    </div>
+    <h1>Osama Badr</h1>
+    <p class="sub">Senior QA &amp; Product Ops at Meta Reality Labs. I own what happens between a user hitting a problem and an engineer fixing it.</p>
+    <div class="pills">
+      <span class="pill">pointd</span>
+      <span class="pill">Interview Prep Kit</span>
+      <span class="pill">QA-Agent</span>
+    </div>
+  </div>
+</body>
+</html>
